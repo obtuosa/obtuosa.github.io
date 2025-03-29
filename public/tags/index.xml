@@ -5,6 +5,40 @@
     <link>https://obtuosa.github.io/tags/</link>
     <description>Recent content in Tags on Obtuosa</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language><atom:link href="https://obtuosa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 30 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://obtuosa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cybersecurity</title>
+      <link>https://obtuosa.github.io/tags/cybersecurity/</link>
+      <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://obtuosa.github.io/tags/cybersecurity/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Picklerick</title>
+      <link>https://obtuosa.github.io/tags/picklerick/</link>
+      <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://obtuosa.github.io/tags/picklerick/</guid>
+      
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Tryhackme</title>
+      <link>https://obtuosa.github.io/tags/tryhackme/</link>
+      <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
+      
+      <guid>https://obtuosa.github.io/tags/tryhackme/</guid>
+      
+      <description></description>
+      
+    </item>
+    
   </channel>
 </rss>
