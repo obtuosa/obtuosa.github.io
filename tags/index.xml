@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Obtuosa</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://obtuosa.github.io/tags/</link>
     <description>Recent content in Tags on Obtuosa</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://obtuosa.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cybersecurity</title>
-      <link>http://localhost:1313/tags/cybersecurity/</link>
+      <link>https://obtuosa.github.io/tags/cybersecurity/</link>
       <pubDate>Wed, 23 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/cybersecurity/</guid>
+      <guid>https://obtuosa.github.io/tags/cybersecurity/</guid>
       
       <description></description>
       
@@ -20,10 +20,10 @@
     
     <item>
       <title>Easyctf</title>
-      <link>http://localhost:1313/tags/easyctf/</link>
+      <link>https://obtuosa.github.io/tags/easyctf/</link>
       <pubDate>Wed, 23 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/easyctf/</guid>
+      <guid>https://obtuosa.github.io/tags/easyctf/</guid>
       
       <description></description>
       
@@ -31,10 +31,10 @@
     
     <item>
       <title>Osi</title>
-      <link>http://localhost:1313/tags/osi/</link>
+      <link>https://obtuosa.github.io/tags/osi/</link>
       <pubDate>Wed, 23 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/osi/</guid>
+      <guid>https://obtuosa.github.io/tags/osi/</guid>
       
       <description></description>
       
@@ -42,10 +42,10 @@
     
     <item>
       <title>Tryhackme</title>
-      <link>http://localhost:1313/tags/tryhackme/</link>
+      <link>https://obtuosa.github.io/tags/tryhackme/</link>
       <pubDate>Wed, 23 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/tryhackme/</guid>
+      <guid>https://obtuosa.github.io/tags/tryhackme/</guid>
       
       <description></description>
       
@@ -53,10 +53,10 @@
     
     <item>
       <title>Cyber-Attack-Lifecycle</title>
-      <link>http://localhost:1313/tags/cyber-attack-lifecycle/</link>
+      <link>https://obtuosa.github.io/tags/cyber-attack-lifecycle/</link>
       <pubDate>Sun, 22 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/cyber-attack-lifecycle/</guid>
+      <guid>https://obtuosa.github.io/tags/cyber-attack-lifecycle/</guid>
       
       <description></description>
       
@@ -64,10 +64,10 @@
     
     <item>
       <title>Valley</title>
-      <link>http://localhost:1313/tags/valley/</link>
+      <link>https://obtuosa.github.io/tags/valley/</link>
       <pubDate>Sun, 22 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/valley/</guid>
+      <guid>https://obtuosa.github.io/tags/valley/</guid>
       
       <description></description>
       
@@ -75,10 +75,10 @@
     
     <item>
       <title>Picklerick</title>
-      <link>http://localhost:1313/tags/picklerick/</link>
+      <link>https://obtuosa.github.io/tags/picklerick/</link>
       <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tags/picklerick/</guid>
+      <guid>https://obtuosa.github.io/tags/picklerick/</guid>
       
       <description></description>
       

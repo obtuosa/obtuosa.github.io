@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tryhackme on Obtuosa</title>
-    <link>http://localhost:1313/tags/tryhackme/</link>
+    <link>https://obtuosa.github.io/tags/tryhackme/</link>
     <description>Recent content in Tryhackme on Obtuosa</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/tryhackme/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://obtuosa.github.io/tags/tryhackme/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Easy CTF - Uma breve jornada de exploração com base no modelo OSI</title>
-      <link>http://localhost:1313/posts/easy-ctf/</link>
+      <link>https://obtuosa.github.io/posts/easy-ctf/</link>
       <pubDate>Wed, 23 Oct 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/easy-ctf/</guid>
+      <guid>https://obtuosa.github.io/posts/easy-ctf/</guid>
       
       <description>&lt;h1 id=&#34;easy-ctf---uma-breve-jornada-de-exploração-com-base-no-modelo-osi&#34;&gt;Easy CTF - Uma breve jornada de exploração com base no modelo OSI&lt;/h1&gt;
 &lt;p&gt;Quando se está estudando sobre fundamentos de redes, entendendo sobre o modelo OSI, arquitetura TCP/IP e etc., na mente fica o grande questionamento de como assimilar esses conceitos no cotidiano ou pelo menos de uma forma clara sobre seu funcionamento . E é por isso que esse texto irá trabalhar com essa assimilação usando a máquina &lt;a href=&#34;https://tryhackme.com/r/room/easyctf&#34;&gt;&lt;strong&gt;Easy CTF&lt;/strong&gt;&lt;/a&gt;, uma simples lab, que nesse momento irá ajudar a trabalhar um pouco sobre como operam as camadas e as interações que ocorrem entre elas no modelo OSI.&lt;/p&gt;</description>
@@ -21,10 +21,10 @@
     
     <item>
       <title>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</title>
-      <link>http://localhost:1313/posts/maquina-valley/</link>
+      <link>https://obtuosa.github.io/posts/maquina-valley/</link>
       <pubDate>Sun, 22 Sep 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/maquina-valley/</guid>
+      <guid>https://obtuosa.github.io/posts/maquina-valley/</guid>
       
       <description>&lt;h1 id=&#34;máquina-valley-do-tryhackme--e-o-ciclo-de-vida-de-um-ciberataque&#34;&gt;Máquina valley do TryhackMe  e o ciclo de vida de um ciberataque&lt;/h1&gt;
 &lt;p&gt;Quando se pensa em um ciberataque podemos imaginar principalmente sobre a metodologia utilizada por um determinado atacante. Desta maneira, traçar os passos que foram adotados até suceder o ataque é muito importante, se questionando sobre &lt;strong&gt;o que o atacante faria?&lt;/strong&gt; diante por exemplo de uma aplicação web, que é justamente o nosso alvo exemplo. O principal objetivo desse texto é dissecar o processo até o encontro das flags da hacking lab, mas assimilando com os conceitos de &lt;a href=&#34;https://www.iacpcybercenter.org/resource-center/what-is-cyber-crime/cyber-attack-lifecycle/&#34;&gt;&lt;strong&gt;Cyber Attack Lifecycle&lt;/strong&gt;&lt;/a&gt;, já que podemos observar como o nosso atacante poderia operar nesse contexto. Logo, a ideia é trazer essa pequena percepção de um ciberataque do mundo real, mas de maneira bem &lt;strong&gt;simples&lt;/strong&gt; e é claro que de &lt;strong&gt;maneira legal&lt;/strong&gt;, com a room &lt;a href=&#34;https://tryhackme.com/r/room/valleype&#34;&gt;&lt;strong&gt;Valley&lt;/strong&gt;&lt;/a&gt;, da plataforma TryHackMe.&lt;/p&gt;</description>
@@ -33,10 +33,10 @@
     
     <item>
       <title>Desafio Pickle Rick - TryHackMe</title>
-      <link>http://localhost:1313/posts/desafio-pickle-rick/</link>
+      <link>https://obtuosa.github.io/posts/desafio-pickle-rick/</link>
       <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/posts/desafio-pickle-rick/</guid>
+      <guid>https://obtuosa.github.io/posts/desafio-pickle-rick/</guid>
       
       <description>&lt;h1 id=&#34;desafio-pickle-rick---tryhackme&#34;&gt;Desafio Pickle Rick - TryHackMe&lt;/h1&gt;
 &lt;p&gt;Este texto tem como objetivo apresentar a forma como eu, Obtuosa, uma jovem &lt;strong&gt;iniciante&lt;/strong&gt; em cibersegurança,  resolvi o desafio com tema de Rick e Morty intitulado &lt;a href=&#34;https://tryhackme.com/r/room/picklerick&#34;&gt;&lt;strong&gt;Pickle Rick&lt;/strong&gt;&lt;/a&gt;, da plataforma &lt;a href=&#34;https://tryhackme.com/&#34;&gt;&lt;strong&gt;TryHackMe&lt;/strong&gt;&lt;/a&gt;, em um servidor da Web, no qual a finalidade é encontrar três ingredientes que possam ajudar o famoso personagem Rick, da série animada Rick e Morty, a produzir uma poção que o transforme novamente em humano, pois o mesmo se encontra transformado em um picles e sendo o conhecidíssimo Pickle Rick!&lt;/p&gt;</description>
