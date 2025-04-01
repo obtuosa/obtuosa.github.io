@@ -1,6 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Obtuosa</title><link>https://obtuosa.github.io/pages/</link><description>Recent content in Pages on Obtuosa</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><atom:link href="https://obtuosa.github.io/pages/index.xml" rel="self" type="application/rss+xml"/><item><title>Sobre</title><link>https://obtuosa.github.io/pages/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://obtuosa.github.io/pages/about/</guid><description>&lt;img src="https://obtuosa.github.io/assets/images/ruby.jpeg" class="about-banner" alt="Banner Obtuosa">
-## Seja bem-vindo(a)
-Talvez seja um pouco complexo de iniciar ou falar sobre a minha persona Obtuosa e que isso atravessa diversas caminhos e perspectivas do que venho trilhando em minha vida. Quando pensei em seguir caminho em TI, sem muita exatidão sobre por onde começar, já havia me decidido que iria trancar meu curso de letras, apesar da escrita até hoje estar comigo e fazer parte da minha vida e principalmente de como expresso enquanto ser humano.
-&lt;hr>
-&lt;h3 id="início-de-jornada">Início de jornada&lt;/h3>
-&lt;p>Acredito que TI sempre fez parte de mim, tanto no princípio dos jogos que adorava e sempre fiquei curiosa sobre o desenvolvimento, principalmente mmorpgs, mas diria que o despertar desse desejo já foi bem tardio. Na época, eu me sentia um tanto quanto desgostosa com a forma com que a minha licenciatura estava indo e isso me gerou uma grande inquietude no processo e nisso, acabei decidindo em 2023 que iria iniciar a jornada, mas não tinha até então um ponto específico. Depois de uma grande reviravolta em minha vida, foi quando abracei uma bolsa de estudos concedida pela Cubos Academy e foi então quando oficialmente tomei a iniciativa de começar a estudar, além de ter pessoas incríveis que sempre acreditaram no meu potencial e isso me fez não desistir. Isso permanece até os dias de hoje, até porque vejo como uma transformação de disciplina e força de vontade.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on Obtuosa</title>
+    <link>http://localhost:1313/pages/</link>
+    <description>Recent content in Pages on Obtuosa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language><atom:link href="http://localhost:1313/pages/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sobre</title>
+      <link>http://localhost:1313/pages/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/pages/about/</guid>
+      
+      <description>&lt;img src=&#34;http://localhost:1313/assets/images/ruby.jpeg&#34; class=&#34;about-banner&#34; alt=&#34;Banner Obtuosa&#34;&gt;
+## Seja bem-vindo(a) 
+Talvez seja um pouco  complexo de iniciar ou falar sobre a minha persona Obtuosa e que isso atravessa diversas caminhos e perspectivas do que venho trilhando em minha vida. Quando pensei em seguir caminho em TI, sem muita exatidão sobre por onde começar, já havia me decidido que iria trancar meu curso de letras, apesar da escrita até hoje estar comigo e fazer parte da minha vida e principalmente de como expresso enquanto ser humano.
+&lt;hr&gt;
+&lt;h3 id=&#34;início-de-jornada&#34;&gt;Início de jornada&lt;/h3&gt;
+&lt;p&gt;Acredito que TI sempre fez parte de mim, tanto no princípio dos jogos que adorava e sempre fiquei curiosa sobre o desenvolvimento, principalmente mmorpgs, mas diria que o despertar desse desejo já foi bem tardio. Na época, eu me sentia um tanto quanto desgostosa com a forma com que a minha licenciatura estava indo e isso me gerou uma grande inquietude no processo e nisso, acabei decidindo em 2023 que iria iniciar a jornada, mas não tinha até então um ponto específico. Depois de uma grande reviravolta em minha vida, foi quando abracei uma bolsa de estudos concedida pela Cubos Academy e foi então quando oficialmente tomei a iniciativa de começar a estudar, além de ter pessoas incríveis que sempre acreditaram no meu potencial e isso me fez não desistir. Isso permanece até os dias de hoje, até porque vejo como uma transformação de disciplina e força de vontade.&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>
