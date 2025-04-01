@@ -50,8 +50,12 @@
       
       <guid>http://localhost:1313/pages/about/</guid>
       
-      <description>&lt;h2 id=&#34;seja-bem-vindoa&#34;&gt;Seja bem-vindo(a)&lt;/h2&gt;
-&lt;p&gt;Talvez seja um pouco  complexo de iniciar ou falar sobre a minha persona Obtuosa e que isso atravessa diversas caminhos e perspectivas do que venho trilhando em minha vida. Quando pensei em seguir caminho em TI, sem muita exatidão sobre por onde começar, já havia me decidido que iria trancar meu curso de letras, apesar da escrita até hoje estar comigo e fazer parte da minha vida e principalmente de como expresso enquanto ser humano.&lt;/p&gt;</description>
+      <description>&lt;img src=&#34;http://localhost:1313/assets/images/ruby.jpeg&#34; class=&#34;about-banner&#34; alt=&#34;Banner Obtuosa&#34;&gt;
+## Seja bem-vindo(a) 
+Talvez seja um pouco  complexo de iniciar ou falar sobre a minha persona Obtuosa e que isso atravessa diversas caminhos e perspectivas do que venho trilhando em minha vida. Quando pensei em seguir caminho em TI, sem muita exatidão sobre por onde começar, já havia me decidido que iria trancar meu curso de letras, apesar da escrita até hoje estar comigo e fazer parte da minha vida e principalmente de como expresso enquanto ser humano.
+&lt;hr&gt;
+&lt;h3 id=&#34;início-de-jornada&#34;&gt;Início de jornada&lt;/h3&gt;
+&lt;p&gt;Acredito que TI sempre fez parte de mim, tanto no princípio dos jogos que adorava e sempre fiquei curiosa sobre o desenvolvimento, principalmente mmorpgs, mas diria que o despertar desse desejo já foi bem tardio. Na época, eu me sentia um tanto quanto desgostosa com a forma com que a minha licenciatura estava indo e isso me gerou uma grande inquietude no processo e nisso, acabei decidindo em 2023 que iria iniciar a jornada, mas não tinha até então um ponto específico. Depois de uma grande reviravolta em minha vida, foi quando abracei uma bolsa de estudos concedida pela Cubos Academy e foi então quando oficialmente tomei a iniciativa de começar a estudar, além de ter pessoas incríveis que sempre acreditaram no meu potencial e isso me fez não desistir. Isso permanece até os dias de hoje, até porque vejo como uma transformação de disciplina e força de vontade.&lt;/p&gt;</description>
       
     </item>
     
