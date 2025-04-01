@@ -2,11 +2,13 @@
 
 [![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue)](https://obtuosa.github.io)
 
-Um repositório voltado para o meu blog pessoal que foi desenvolvido com o Hugo e hospedado com o GitHub Pages.
+A repository for my personal blog that was developed with Hugo and hosted with GitHub Pages.
 
-## Projeto
-- **Tema**: Hugo Blog Awesome (com algumas modificações).
-- **Conteúdo**: Textos sobre cibersegurança, aprendizados e reflexões pessoais.
-- **Funcionalidades**:
-  - Modo claro/escuro.
-  - Compatível com dispositivos móveis.
+## Project
+- **Theme**: Hugo Blog Awesome (with some modifications).
+- **Content**: Texts on cybersecurity, learnings and personal reflections.
+- **Features**:
+  - Light/Dark mode.
+  - Compatible with mobile devices.
+
+  
