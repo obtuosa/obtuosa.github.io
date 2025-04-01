@@ -1,23 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Picklerick on Obtuosa</title>
-    <link>http://localhost:1313/tags/picklerick/</link>
-    <description>Recent content in Picklerick on Obtuosa</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Fri, 30 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/picklerick/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Desafio Pickle Rick - TryHackMe</title>
-      <link>http://localhost:1313/posts/desafio-pickle-rick/</link>
-      <pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/desafio-pickle-rick/</guid>
-      
-      <description>&lt;h1 id=&#34;desafio-pickle-rick---tryhackme&#34;&gt;Desafio Pickle Rick - TryHackMe&lt;/h1&gt;
-&lt;p&gt;Este texto tem como objetivo apresentar a forma como eu, Obtuosa, uma jovem &lt;strong&gt;iniciante&lt;/strong&gt; em cibersegurança,  resolvi o desafio com tema de Rick e Morty intitulado &lt;a href=&#34;https://tryhackme.com/r/room/picklerick&#34;&gt;&lt;strong&gt;Pickle Rick&lt;/strong&gt;&lt;/a&gt;, da plataforma &lt;a href=&#34;https://tryhackme.com/&#34;&gt;&lt;strong&gt;TryHackMe&lt;/strong&gt;&lt;/a&gt;, em um servidor da Web, no qual a finalidade é encontrar três ingredientes que possam ajudar o famoso personagem Rick, da série animada Rick e Morty, a produzir uma poção que o transforme novamente em humano, pois o mesmo se encontra transformado em um picles e sendo o conhecidíssimo Pickle Rick!&lt;/p&gt;</description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Picklerick on Obtuosa</title><link>https://obtuosa.github.io/tags/picklerick/</link><description>Recent content in Picklerick on Obtuosa</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Fri, 30 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://obtuosa.github.io/tags/picklerick/index.xml" rel="self" type="application/rss+xml"/><item><title>Desafio Pickle Rick - TryHackMe</title><link>https://obtuosa.github.io/posts/desafio-pickle-rick/</link><pubDate>Fri, 30 Aug 2024 00:00:00 +0000</pubDate><guid>https://obtuosa.github.io/posts/desafio-pickle-rick/</guid><description>&lt;h1 id="desafio-pickle-rick---tryhackme">Desafio Pickle Rick - TryHackMe&lt;/h1>
+&lt;p>Este texto tem como objetivo apresentar a forma como eu, Obtuosa, uma jovem &lt;strong>iniciante&lt;/strong> em cibersegurança, resolvi o desafio com tema de Rick e Morty intitulado &lt;a href="https://tryhackme.com/r/room/picklerick">&lt;strong>Pickle Rick&lt;/strong>&lt;/a>, da plataforma &lt;a href="https://tryhackme.com/">&lt;strong>TryHackMe&lt;/strong>&lt;/a>, em um servidor da Web, no qual a finalidade é encontrar três ingredientes que possam ajudar o famoso personagem Rick, da série animada Rick e Morty, a produzir uma poção que o transforme novamente em humano, pois o mesmo se encontra transformado em um picles e sendo o conhecidíssimo Pickle Rick!&lt;/p></description></item></channel></rss>

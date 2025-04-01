@@ -1,23 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Valley on Obtuosa</title>
-    <link>http://localhost:1313/tags/valley/</link>
-    <description>Recent content in Valley on Obtuosa</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-gb</language>
-    <lastBuildDate>Sun, 22 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/valley/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</title>
-      <link>http://localhost:1313/posts/maquina-valley/</link>
-      <pubDate>Sun, 22 Sep 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/posts/maquina-valley/</guid>
-      
-      <description>&lt;h1 id=&#34;máquina-valley-do-tryhackme--e-o-ciclo-de-vida-de-um-ciberataque&#34;&gt;Máquina valley do TryhackMe  e o ciclo de vida de um ciberataque&lt;/h1&gt;
-&lt;p&gt;Quando se pensa em um ciberataque podemos imaginar principalmente sobre a metodologia utilizada por um determinado atacante. Desta maneira, traçar os passos que foram adotados até suceder o ataque é muito importante, se questionando sobre &lt;strong&gt;o que o atacante faria?&lt;/strong&gt; diante por exemplo de uma aplicação web, que é justamente o nosso alvo exemplo. O principal objetivo desse texto é dissecar o processo até o encontro das flags da hacking lab, mas assimilando com os conceitos de &lt;a href=&#34;https://www.iacpcybercenter.org/resource-center/what-is-cyber-crime/cyber-attack-lifecycle/&#34;&gt;&lt;strong&gt;Cyber Attack Lifecycle&lt;/strong&gt;&lt;/a&gt;, já que podemos observar como o nosso atacante poderia operar nesse contexto. Logo, a ideia é trazer essa pequena percepção de um ciberataque do mundo real, mas de maneira bem &lt;strong&gt;simples&lt;/strong&gt; e é claro que de &lt;strong&gt;maneira legal&lt;/strong&gt;, com a room &lt;a href=&#34;https://tryhackme.com/r/room/valleype&#34;&gt;&lt;strong&gt;Valley&lt;/strong&gt;&lt;/a&gt;, da plataforma TryHackMe.&lt;/p&gt;</description>
-      
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Valley on Obtuosa</title><link>https://obtuosa.github.io/tags/valley/</link><description>Recent content in Valley on Obtuosa</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Sun, 22 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://obtuosa.github.io/tags/valley/index.xml" rel="self" type="application/rss+xml"/><item><title>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</title><link>https://obtuosa.github.io/posts/maquina-valley/</link><pubDate>Sun, 22 Sep 2024 00:00:00 +0000</pubDate><guid>https://obtuosa.github.io/posts/maquina-valley/</guid><description>&lt;h1 id="máquina-valley-do-tryhackme--e-o-ciclo-de-vida-de-um-ciberataque">Máquina valley do TryhackMe e o ciclo de vida de um ciberataque&lt;/h1>
+&lt;p>Quando se pensa em um ciberataque podemos imaginar principalmente sobre a metodologia utilizada por um determinado atacante. Desta maneira, traçar os passos que foram adotados até suceder o ataque é muito importante, se questionando sobre &lt;strong>o que o atacante faria?&lt;/strong> diante por exemplo de uma aplicação web, que é justamente o nosso alvo exemplo. O principal objetivo desse texto é dissecar o processo até o encontro das flags da hacking lab, mas assimilando com os conceitos de &lt;a href="https://www.iacpcybercenter.org/resource-center/what-is-cyber-crime/cyber-attack-lifecycle/">&lt;strong>Cyber Attack Lifecycle&lt;/strong>&lt;/a>, já que podemos observar como o nosso atacante poderia operar nesse contexto. Logo, a ideia é trazer essa pequena percepção de um ciberataque do mundo real, mas de maneira bem &lt;strong>simples&lt;/strong> e é claro que de &lt;strong>maneira legal&lt;/strong>, com a room &lt;a href="https://tryhackme.com/r/room/valleype">&lt;strong>Valley&lt;/strong>&lt;/a>, da plataforma TryHackMe.&lt;/p></description></item></channel></rss>
