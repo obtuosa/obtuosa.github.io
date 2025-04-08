@@ -6,7 +6,20 @@
     <description>Recent content in Home on Obtuosa</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Wed, 23 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 08 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CVE-2024-36042: Bypass de Autenticação no Silverpeas e Relação com OWASP Top 10</title>
+      <link>http://localhost:1313/posts/cve-2024-36042/</link>
+      <pubDate>Tue, 08 Apr 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/cve-2024-36042/</guid>
+      
+      <description>&lt;h1 id=&#34;cve-2024-36042--bypass-de-autenticação-no-silverpeas-e-relação-com-owasp-top-10&#34;&gt;CVE-2024-36042:  Bypass de Autenticação no Silverpeas e Relação com OWASP Top 10&lt;/h1&gt;
+&lt;p&gt;A princípio esse texto é um embrionário da minha apresentação realizada na reunião 0x04 do &lt;a href=&#34;https://axesec.cc/events/2025-03-23-meeting/&#34;&gt;Axé Sec&lt;/a&gt;, uma comunidade de cibersegurança com uma baita iniciativa foda na Bahia e que nasceu a partir do &lt;a href=&#34;https://raulhc.cc/&#34;&gt;Raul Hacker Club&lt;/a&gt;. Inclusive, vale muito a pena dar uma olhada nesse propósito para incentivar a cultura hacking! (Depois diga que não avisei hein).&lt;/p&gt;
+&lt;p&gt;Além disso, também foi realizada uma apresentação dessa proposta alinhada ao OWASP Top 10 na &lt;a href=&#34;https://www.instagram.com/donasecurity/&#34;&gt;Donas Security&lt;/a&gt;, um coletivo muitíssimo importante que traz um ambiente seguro de construção e contribuições muito significativas para as mulheres baianas de Salvador com foco não só em Cibersegurança (apesar de ser o princípio), mas com ideias e insights para levar para vida! Um grande abraço para Rebeca ;), Mayara, Gab, Gio, Marcela e a todas as meninas que fazem parte desse processo tão lindo que é a Donas Security s2!&lt;/p&gt;</description>
+      
+    </item>
+    
     <item>
       <title>Easy CTF - Uma breve jornada de exploração com base no modelo OSI</title>
       <link>http://localhost:1313/posts/easy-ctf/</link>
@@ -47,13 +60,13 @@
     </item>
     
     <item>
-      <title>Sobre</title>
+      <title>Whoami?</title>
       <link>http://localhost:1313/pages/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/pages/about/</guid>
       
-      <description>&lt;p&gt;&lt;img src=&#34;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/chev5cuc77pcgsgy22ck.jpeg&#34; alt=&#34;Ed&#34;&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/f5sol93gknvz29snaf6s.png&#34; alt=&#34;Ed!&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;seja-bem-vindoa&#34;&gt;Seja bem-vindo(a)&lt;/h2&gt;
 &lt;p&gt;Talvez seja um pouco  complexo de iniciar ou falar sobre a minha persona Obtuosa e que isso atravessa diversas caminhos e perspectivas do que venho trilhando em minha vida. Quando pensei em seguir caminho em TI, sem muita exatidão sobre por onde começar, já havia me decidido que iria trancar meu curso de letras, apesar da escrita até hoje estar comigo e fazer parte da minha vida e principalmente de como expresso enquanto ser humano.&lt;/p&gt;</description>
       
