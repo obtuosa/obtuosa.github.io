@@ -106,5 +106,16 @@
       
     </item>
     
+    <item>
+      <title>Me</title>
+      <link>http://localhost:1313/tags/me/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/me/</guid>
+      
+      <description></description>
+      
+    </item>
+    
   </channel>
 </rss>
