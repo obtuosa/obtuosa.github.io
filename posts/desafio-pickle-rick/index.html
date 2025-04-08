@@ -1,337 +1,39 @@
-<!DOCTYPE html>
-<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="content-type" content="text/html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title itemprop="name">Desafio Pickle Rick - TryHackMe | Obtuosa</title>
-<meta property="og:title" content="Desafio Pickle Rick - TryHackMe | Obtuosa" />
-<meta name="twitter:title" content="Desafio Pickle Rick - TryHackMe | Obtuosa" />
-<meta itemprop="name" content="Desafio Pickle Rick - TryHackMe | Obtuosa" />
-<meta name="application-name" content="Desafio Pickle Rick - TryHackMe | Obtuosa" />
-<meta property="og:site_name" content="Obtuosa" />
-
-<meta name="description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe">
-<meta itemprop="description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe" />
-<meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe" />
-<meta name="twitter:description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe" />
-
-<meta property="og:locale" content="en-gb" />
-<meta name="language" content="en-gb" />
-
-  <link rel="alternate" hreflang="en-gb" href="http://localhost:1313/posts/desafio-pickle-rick/" title="English" />
-
-
-<meta itemprop="image" content="http://localhost:1313/images/picklerick.png" />
-<meta property="og:image" content="http://localhost:1313/images/picklerick.png" />
-<meta name="twitter:image" content="http://localhost:1313/images/picklerick.png" />
-<meta name="twitter:image:src" content="http://localhost:1313/images/picklerick.png" />
-
-
-    
-    
-    
-
-    <meta property="og:type" content="article" />
-    <meta property="og:article:published_time" content=2024-08-30T00:00:00Z />
-    <meta property="article:published_time" content=2024-08-30T00:00:00Z />
-    <meta property="og:url" content="http://localhost:1313/posts/desafio-pickle-rick/" />
-
-    
-    <meta property="og:article:author" content="" />
-    <meta property="article:author" content="" />
-    <meta name="author" content="" />
-    
-    
-
-    
-
-    <script defer type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Article",
-        "headline": "Desafio Pickle Rick - TryHackMe",
-        "author": {
-        "@type": "Person",
-        "name": ""
-        },
-        "datePublished": "2024-08-30",
-        "description": "Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe",
-        "wordCount":  1323 ,
-        "mainEntityOfPage": "True",
-        "dateModified": "2024-08-30",
-        "image": {
-        "@type": "imageObject",
-        "url": "http:\/\/localhost:1313\/images\/picklerick.png"
-        },
-        "publisher": {
-        "@type": "Organization",
-        "name": "Obtuosa"
-        }
-    }
-    </script>
-
-
-<meta name="generator" content="Hugo 0.145.0">
-
-    
-    <meta property="og:url" content="http://localhost:1313/posts/desafio-pickle-rick/">
-  <meta property="og:site_name" content="Obtuosa">
-  <meta property="og:title" content="Desafio Pickle Rick - TryHackMe">
-  <meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe">
-  <meta property="og:locale" content="en_gb">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-08-30T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-08-30T00:00:00+00:00">
-    <meta property="article:tag" content="Picklerick">
-    <meta property="article:tag" content="Tryhackme">
-    <meta property="article:tag" content="Cybersecurity">
-
-
-    
-    
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Desafio Pickle Rick - TryHackMe">
-  <meta name="twitter:description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe">
-
-    
-
-    
-
-    <link rel="canonical" href="http://localhost:1313/posts/desafio-pickle-rick/">
-    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
-    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
-
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
-    <link rel="shortcut icon" href="/favicon.ico">
-
-
-
-
-<link rel="manifest" href="http://localhost:1313/site.webmanifest">
-
-<meta name="msapplication-config" content="/browserconfig.xml">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="theme-color" content="#434648">
-
-    
-    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
-
-    
-    
-
-</head>
-<body data-theme = "dark" class="notransition">
-
-<script src="/js/theme.js"></script>
-
-<div class="navbar" role="navigation">
-    <nav class="menu" aria-label="Main Navigation">
-        <a href="http://localhost:1313/" class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
-viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
-stroke-linejoin="round" class="feather feather-home">
-<title>Home</title>
-<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-<polyline points="9 22 9 12 15 12 15 22"></polyline>
-</svg>
-        </a>
-        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
-        <label for="menu-trigger">
-            <span class="menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
-            </span>
-        </label>
-    
-        <div class="trigger">
-            <ul class="trigger-container">
-                
-                
-                <li>
-                    <a class="menu-link " href="/">
-                        Início
-                    </a>
-                    
-                </li>
-                
-                <li>
-                    <a class="menu-link active" href="/posts/">
-                        Posts
-                    </a>
-                    
-                </li>
-                
-                <li>
-                    <a class="menu-link " href="/pages/about/">
-                        Whoami
-                    </a>
-                    
-                </li>
-                
-                <li class="menu-separator">
-                    <span>|</span>
-                </li>
-                
-                
-            </ul>
-            <a id="mode" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
-<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
-<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
-            </a>
-        </div>
-    </nav>
-</div>
-
-<div class="wrapper post">
-    <main class="page-content" aria-label="Content">
-        <article>
-            <header class="header">
-                <h1 class="header-title">Desafio Pickle Rick - TryHackMe</h1>
-                
-                
-                
-                <div class="post-meta">
-                    <time datetime="2024-08-30T00:00:00&#43;00:00" itemprop="datePublished"> 30 Aug 2024 </time>
-                </div>
-                
-            </header>
-            
-            <div class="page-content">
-                <p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/m9n5tz7xq20juo7vzlfa.png" alt="Pickle Rick"></p>
-<h1 id="desafio-pickle-rick---tryhackme">Desafio Pickle Rick - TryHackMe</h1>
-<p>Este texto tem como objetivo apresentar a forma como eu, Obtuosa, uma jovem <strong>iniciante</strong> em cibersegurança,  resolvi o desafio com tema de Rick e Morty intitulado <a href="https://tryhackme.com/r/room/picklerick"><strong>Pickle Rick</strong></a>, da plataforma <a href="https://tryhackme.com/"><strong>TryHackMe</strong></a>, em um servidor da Web, no qual a finalidade é encontrar três ingredientes que possam ajudar o famoso personagem Rick, da série animada Rick e Morty, a produzir uma poção que o transforme novamente em humano, pois o mesmo se encontra transformado em um picles e sendo o conhecidíssimo Pickle Rick!</p>
-<h2 id="introdução">Introdução</h2>
-<p>Antes de começarmos o processo quanto a máquina Pickle Rick, é importante ressaltar algumas informações, mesmo que breves sobre o que seria o <strong>TryHackMe</strong> e as famosas <strong>máquinas de hacking</strong> (Hacking Machines).</p>
-<p><strong>TryHackMe</strong> é uma plataforma online, no qual o objetivo central é lhe ajudar a aprender sobre cibersegurança, usando exercícios práticos e &ldquo;laboratórios&rdquo;, tudo isso pelo navegador.
-<strong>Máquinas de hacking</strong> ou as famosas Hacking machines são os ambientes virtuais utilizados pelos usuários, para aprimorar suas habilidades em hacking e entendimento na área de cibersegurança. Nelas é possível participar de cenários de ataques e também vulnerabilidades, em que os usuários possam usar de seu conhecimento e técnicas de exploração, de maneira principalmente legal e segura. Logo, o desafio Pickle Rick é justamente uma máquina de hacking, com foco em buscar vulnerabilidades até seu propósito final.</p>
-<h2 id="reconhecimento">Reconhecimento</h2>
-<p>Após essas breves informações definidas, será feita a trajetória que salvou Rick!</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0ed4ebsbq4krhafhubdd.png" alt="Tela de início da Máquina virtual Pickle Rick do TryHackMe"></p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/esh4nrj49414wemu42pm.png" alt="Tela inicial do alvo, com uma mensagem de pedido de ajuda do Rick para o Morty"></p>
-<p>Ao adentrar a tela de desafio, uma das ações que foram realizadas foi justamente a  inspeção no código e verificar a forma com que o HTML do alvo estava estruturado e logo de cara tivemos o acesso a informação sobre o username do Rick, no final do código, em formato de comentário.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j5pib6bn3pf08fw3ptqr.jpeg" alt="Informações sobre a estrutura html do alvo"></p>
-<p>Com isso, foi traçado os principais objetivos nesse primeiro momento, tendo em vista que o username na inspeção do html significaria que teríamos uma tela de login e a necessidade de uma senha para efetivar por completo esse acesso ao alvo. Entretanto, ao tentar encontrar a tela de login em um primeiro momento, não foi realizado com tanta facilidade e um dos principais focos foi justamente buscar essa tela de login e principalmente, entender qual a linguagem de programação que estaria realizando as funcionalidades deste site.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7lqi242r2ai4gjur5vds.png" alt="Imagem de não encontrado ao acessar /login"></p>
-<p>Deste modo, decorreu a busca de informações sobre qual seria  essa linguagem por trás dos panos e uma das ideias foi justamente a utilização do comando <a href="https://www.hostinger.com.br/tutoriais/comando-curl-linux">curl</a>.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4ubuskis9op3c0prwp0i.png" alt="Requisição usando comando curl">
-O alvo utiliza Ubuntu para rodar o servidor Web Apache. Porém,  não foi possível obter uma informação mais precisa sobre qual seria a linguagem utilizada pelo alvo através do curl. Deste modo, o head do próprio html do site possuía o diretório <a href="https://developers.vnda.com.br/docs/pasta-assets">/assets/</a>, que tem como foco o armazenamento de mídia, fontes, etc., de um site ou aplicação web.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2yhji2g80651f0rxsdme.png" alt="Informação do head contendo a pasta /assets"></p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/558etoiezqvnzizs2qx2.png" alt="Pasta /assets com informações de conteúdos estáticos, etc, do alvo "></p>
-<p>Apesar das informações presentes, não foi possível encontrar (sob o olhar de uma pessoa que está iniciando) informações referentes a linguagem usada.
-A forma operada logicamente foi justamente introduzir .php no final e com isso o acesso a tela de /login.php. Isso foi puramente achismo, tendo em vista que utilizar uma ferramenta de busca de diretórios tornaria o processo mais prático, porém, o objetivo aqui é tentar realizar manualmente e aprimorar as noções no decorrer, sem depender de ferramentas para isso.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kdbfmkcsrdnb1tr37zne.png" alt="Tela de login com username e password"></p>
-<p>Com  a confirmação de que usam <a href="https://www.php.net/manual/pt_BR/intro-whatis.php">PHP</a> e para além disso, o acesso ao diretório /login.php. Entretanto, faltava a senha e se tem o diretório /assets, poderia também ter o <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=pt-br">/robots.txt</a>, que gerencia quais diretórios podem ser vasculhados em um respectivo site. A senha do R1ckRul3s estava justamente no /robots.txt.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xc12hisefglgh9ekfp6n.png" alt="Diretório /robots.txt contendo a senha do usuário"></p>
-<h2 id="exploração">Exploração</h2>
-<p>A tela inicial após o login tem um painel de comandos, e a informação anterior de que o servidor rodava em Ubuntu trouxe a conclusão de que podemos usar os próprios comandos do terminal e além disso, ter acesso aos diretórios completos do alvo. No inspecionar desta tela, tem uma dica interessante, uma frase codificada em <a href="https://marquesfernandes.com/self/o-que-e-base64-para-que-serve-e-como-funciona/">Base64</a>, no comentário do html.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/80xr7xj2sj1g5ob8w56z.png" alt="Tela inicial com painel de comandos"></p>
-<p>O comando <a href="https://www.freecodecamp.org/portuguese/news/o-comando-ls-do-linux-como-listar-arquivos-em-um-diretorio-e-flags-de-opcao/">ls</a> lista os arquivos e os diretórios, além do comando <a href="https://guialinux.uniriotec.br/cd/">cd</a> para navegar entre os diretórios do terminal.</p>
-<p>O primeiro ingrediente é localizado usando ls, no painel de comando e é intitulado <strong>Sup3rS3cretPickl3Ingred.txt</strong>. Como dica para você, caso tenha interesse, é que pode ser usado tanto o  <a href="https://www.certificacaolinux.com.br/comando-linux-pwd/">pwd</a> para localizar o diretório atual em conjunto com o <a href="https://guialinux.uniriotec.br/less/">less</a> para ler o arquivo txt, quanto também digitar diretamente no URL, que terá a resposta do primeiro ingrediente. Lembrando que &ldquo;hipoteticamente&rdquo; o comando <a href="https://www.hostinger.com.br/tutoriais/comando-cat-linux">cat</a> está desabilitado, junto com o <a href="https://www.certificacaolinux.com.br/comando-nano-no-linux-editor-de-texto-guia-basico/">nano</a>, <a href="https://dev.to/nfo94/comandos-basicos-do-vim-e-configuracoes-uteis-gkn">vim</a>, <a href="https://guialinux.uniriotec.br/more/">more</a>, etc.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls -la
-</span></span><span class="line"><span class="cl">total <span class="m">40</span>
-</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> root   root   <span class="m">4096</span> Feb <span class="m">10</span>  <span class="m">2019</span> .
-</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">3</span> root   root   <span class="m">4096</span> Feb <span class="m">10</span>  <span class="m">2019</span> ..
-</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> ubuntu ubuntu   <span class="m">17</span> Feb <span class="m">10</span>  <span class="m">2019</span> Sup3rS3cretPickl3Ingred.txt
-</span></span><span class="line"><span class="cl">drwxrwxr-x <span class="m">2</span> ubuntu ubuntu <span class="m">4096</span> Feb <span class="m">10</span>  <span class="m">2019</span> assets
-</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> ubuntu ubuntu   <span class="m">54</span> Feb <span class="m">10</span>  <span class="m">2019</span> clue.txt
-</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> ubuntu ubuntu <span class="m">1105</span> Feb <span class="m">10</span>  <span class="m">2019</span> denied.php
-</span></span><span class="line"><span class="cl">-rwxrwxrwx <span class="m">1</span> ubuntu ubuntu <span class="m">1062</span> Feb <span class="m">10</span>  <span class="m">2019</span> index.html
-</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> ubuntu ubuntu <span class="m">1438</span> Feb <span class="m">10</span>  <span class="m">2019</span> login.php
-</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> ubuntu ubuntu <span class="m">2044</span> Feb <span class="m">10</span>  <span class="m">2019</span> portal.php
-</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> ubuntu ubuntu   <span class="m">17</span> Feb <span class="m">10</span>  <span class="m">2019</span> robots.txt
-</span></span></code></pre></div><p><strong>Nota</strong>: Caso você tente acessar outras opções do menu, além do Commands, terá seu acesso negado, por não ser o verdadeiro Rick.</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k0f6axu2d5gyeueapkj2.png" alt="Comando ls -la lista arquivos e diretórios presentes"></p>
-<p>O segundo ingrediente é um pouco mais difícil de localizar, pois para ter acesso é necessário averiguar os diretórios e subdiretórios. Neste caso, a dica que pode ser dada é a combinação dos comandos cd e ls, para que você tenha acesso a listagem de arquivos e diretórios. Lembra da dica da frase da tela inicial, que estava codificada em Base64? É exatamente esse o pensamento, explorar o máximo de diretórios possíveis. Caso continue tendo dificuldades, a dica maior é focar no diretório /home, pois é lá que estará a resposta.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ../../../home/rick<span class="p">;</span>ls -la
-</span></span><span class="line"><span class="cl">second ingredients
-</span></span></code></pre></div><p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3d22e8hcvdrga5ehtmt2.png" alt="Segundo ingrediente na pasta do usuário rick">
-<strong>Nota</strong>: Como acessar um arquivo com  espaços? pode ser usando o próprio less  com aspas ou com barra invertida.</p>
-<p>Por fim e não menos importante, o terceiro ingrediente se encontra em um arquivo oculto em um dos perfis, por isso é interessante usar o comando -ls juntamente com o -a, para ter acesso a arquivos ocultos. Este arquivo contém os registros dos comandos que o usuário utilizou no terminal, ou seja, de acordo com o perfil terá o acesso aos comandos executados e consequentemente o último ingrediente.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ../../../home/ubuntu<span class="p">;</span>ls -la
-</span></span><span class="line"><span class="cl">total <span class="m">44</span>
-</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">5</span> ubuntu ubuntu <span class="m">4096</span> Jul <span class="m">11</span> 10:37 .
-</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">4</span> root   root   <span class="m">4096</span> Feb <span class="m">10</span>  <span class="m">2019</span> ..
-</span></span><span class="line"><span class="cl">-rw------- <span class="m">1</span> ubuntu ubuntu  <span class="m">769</span> Jul <span class="m">11</span> 11:18 .bash_history
-</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> ubuntu ubuntu  <span class="m">220</span> Aug <span class="m">31</span>  <span class="m">2015</span> .bash_logout
-</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> ubuntu ubuntu <span class="m">3771</span> Aug <span class="m">31</span>  <span class="m">2015</span> .bashrc
-</span></span><span class="line"><span class="cl">drwx------ <span class="m">3</span> ubuntu ubuntu <span class="m">4096</span> Jul <span class="m">11</span> 10:39 .cache
-</span></span><span class="line"><span class="cl">drwx------ <span class="m">3</span> ubuntu ubuntu <span class="m">4096</span> Jul <span class="m">11</span> 10:37 .gnupg
-</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> ubuntu ubuntu  <span class="m">655</span> May <span class="m">16</span>  <span class="m">2017</span> .profile
-</span></span><span class="line"><span class="cl">drwx------ <span class="m">2</span> ubuntu ubuntu <span class="m">4096</span> Feb <span class="m">10</span>  <span class="m">2019</span> .ssh
-</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> ubuntu ubuntu    <span class="m">0</span> Feb <span class="m">10</span>  <span class="m">2019</span> .sudo_as_admin_successful
-</span></span><span class="line"><span class="cl">-rw------- <span class="m">1</span> ubuntu ubuntu <span class="m">4267</span> Feb <span class="m">10</span>  <span class="m">2019</span> .viminfo
-</span></span></code></pre></div><p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/settu94sqtbknuy8ukr3.png" alt="Listagem de arquivos e diretórios ocultos do perfil ubuntu">
-<strong>Nota</strong>: Para acessar o arquivo oculto, é importante usar o sudo para ter acesso privilegiado junto com o less.</p>
-<h2 id="conclusão">Conclusão</h2>
-<p>Portanto, através da máquina Pickle Rick foi possível compreender um pouco mais sobre a estrutura do html e um pouco sobre PHP, alguns diretórios que são comuns de encontrar como o /assets e o próprio /robots.txt. Para além disso, noções referentes aos comandos linux como cd, ls, less, pwd, etc.  Por consequência, ter um olhar mais prático sobre web hacking, tendo em vista que é de suma importância compreender as bases de conhecimento em cibersegurança para conseguir realizar o desafio. As informações contidas aqui são apenas uma das formas possíveis de resolver o problema, tem muitas outras possbilidades e você também pode ter a sua, não se apegue apenas a uma perspectiva e caso você queira pontuar sobre algo, trazer sua forma de resolução, debater sobre algo ou alguma afirmação equivocada da minha parte, sinta-se a vontade, estamos aqui para somar e aprender. Lembre-se, a educação é a maior fonte de transformação, não desista!</p>
-<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jxwm3bg86954ab28wv3a.gif" alt="Rick dando legal"></p>
-
-            </div>
-        </article></main>
-</div>
-<footer class="footer">
-    <span class="footer_item"> </span>
-    &nbsp;
-
-    <div class="footer_social-icons">
-<a href="https://github.com/obtuosa" target="_blank" rel="noopener noreferrer me"
-    title="Github">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round">
-    <path
-        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-    </path>
-</svg>
-</a>
-<a href="/index.xml" target="_blank" rel="noopener noreferrer me"
-    title="Rss">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 11a9 9 0 0 1 9 9" />
-    <path d="M4 4a16 16 0 0 1 16 16" />
-    <circle cx="5" cy="19" r="1" />
-</svg>
-</a>
-</div>
-    <small class="footer_copyright">
-        © 2025 .
-        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
-    </small>
-</footer><a href="#" title="Go to top" id="totop">
-    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
-    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
-</svg>
-
-</a>
-
-
-    
-
-
-
-
-    
-    
-        
-    
-
-    
-    
-        
-    
-
-
-
-    
-    <script async src="http://localhost:1313/js/main.js" ></script>
-
-    
-
-</body>
-</html>
+<!doctype html><html lang=en-gb><head><meta charset=utf-8><meta http-equiv=content-type content="text/html"><meta name=viewport content="width=device-width,initial-scale=1"><title itemprop=name>Desafio Pickle Rick - TryHackMe | Obtuosa</title>
+<meta property="og:title" content="Desafio Pickle Rick - TryHackMe | Obtuosa"><meta name=twitter:title content="Desafio Pickle Rick - TryHackMe | Obtuosa"><meta itemprop=name content="Desafio Pickle Rick - TryHackMe | Obtuosa"><meta name=application-name content="Desafio Pickle Rick - TryHackMe | Obtuosa"><meta property="og:site_name" content="Obtuosa"><meta name=description content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe"><meta itemprop=description content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe"><meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe"><meta name=twitter:description content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe"><meta property="og:locale" content="en-gb"><meta name=language content="en-gb"><link rel=alternate hreflang=en-gb href=https://obtuosa.github.io/posts/desafio-pickle-rick/ title=English><meta itemprop=image content="https://obtuosa.github.io/images/picklerick.png"><meta property="og:image" content="https://obtuosa.github.io/images/picklerick.png"><meta name=twitter:image content="https://obtuosa.github.io/images/picklerick.png"><meta name=twitter:image:src content="https://obtuosa.github.io/images/picklerick.png"><meta property="og:type" content="article"><meta property="og:article:published_time" content=2024-08-30T00:00:00Z><meta property="article:published_time" content=2024-08-30T00:00:00Z><meta property="og:url" content="https://obtuosa.github.io/posts/desafio-pickle-rick/"><meta property="og:article:author" content><meta property="article:author" content><meta name=author content><script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Desafio Pickle Rick - TryHackMe","author":{"@type":"Person","name":""},"datePublished":"2024-08-30","description":"Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe","wordCount":1323,"mainEntityOfPage":"True","dateModified":"2024-08-30","image":{"@type":"imageObject","url":"https:\/\/obtuosa.github.io\/images\/picklerick.png"},"publisher":{"@type":"Organization","name":"Obtuosa"}}</script><meta name=generator content="Hugo 0.145.0"><meta property="og:url" content="https://obtuosa.github.io/posts/desafio-pickle-rick/"><meta property="og:site_name" content="Obtuosa"><meta property="og:title" content="Desafio Pickle Rick - TryHackMe"><meta property="og:description" content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe"><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-08-30T00:00:00+00:00"><meta property="article:modified_time" content="2024-08-30T00:00:00+00:00"><meta property="article:tag" content="Picklerick"><meta property="article:tag" content="Tryhackme"><meta property="article:tag" content="Cybersecurity"><meta name=twitter:card content="summary"><meta name=twitter:title content="Desafio Pickle Rick - TryHackMe"><meta name=twitter:description content="Um texto com o objetivo de apresentar a resolução da lab Pickle Rick do TryHackMe"><link rel=canonical href=https://obtuosa.github.io/posts/desafio-pickle-rick/><link href=/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css rel=stylesheet><link href=/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css rel=stylesheet><link rel=apple-touch-icon sizes=180x180 href=/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/icons/favicon-16x16.png><link rel=mask-icon href=/icons/safari-pinned-tab.svg><link rel="shortcut icon" href=/favicon.ico><link rel=manifest href=https://obtuosa.github.io/site.webmanifest><meta name=msapplication-config content="/browserconfig.xml"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#434648"><link rel=icon type=image/svg+xml href=/icons/favicon.svg></head><body data-theme=dark class=notransition><script src=/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script><div class=navbar role=navigation><nav class=menu aria-label="Main Navigation"><a href=https://obtuosa.github.io/ class=logo><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><title>Home</title><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+</a><input type=checkbox id=menu-trigger class=menu-trigger>
+<label for=menu-trigger><span class=menu-icon><svg width="25" height="25" stroke="currentcolor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7H3.40726"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M.5 12.5V1.5c0-.552285.447715-1 1-1h11C13.0523.5 13.5.947715 13.5 1.5v11C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C.947715 13.5.5 13.0523.5 12.5z"/></svg></span></label><div class=trigger><ul class=trigger-container><li><a class=menu-link href=/>Início</a></li><li><a class="menu-link active" href=/posts/>Posts</a></li><li><a class=menu-link href=/pages/about/>Whoami</a></li><li class=menu-separator><span>|</span></li></ul><a id=mode href=#><svg class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg><svg class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></a></div></nav></div><div class="wrapper post"><main class=page-content aria-label=Content><article><header class=header><h1 class=header-title>Desafio Pickle Rick - TryHackMe</h1><div class=post-meta><time datetime=2024-08-30T00:00:00+00:00 itemprop=datePublished>30 Aug 2024</time></div></header><div class=page-content><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/m9n5tz7xq20juo7vzlfa.png alt="Pickle Rick"></p><h1 id=desafio-pickle-rick---tryhackme>Desafio Pickle Rick - TryHackMe</h1><p>Este texto tem como objetivo apresentar a forma como eu, Obtuosa, uma jovem <strong>iniciante</strong> em cibersegurança, resolvi o desafio com tema de Rick e Morty intitulado <a href=https://tryhackme.com/r/room/picklerick><strong>Pickle Rick</strong></a>, da plataforma <a href=https://tryhackme.com/><strong>TryHackMe</strong></a>, em um servidor da Web, no qual a finalidade é encontrar três ingredientes que possam ajudar o famoso personagem Rick, da série animada Rick e Morty, a produzir uma poção que o transforme novamente em humano, pois o mesmo se encontra transformado em um picles e sendo o conhecidíssimo Pickle Rick!</p><h2 id=introdução>Introdução</h2><p>Antes de começarmos o processo quanto a máquina Pickle Rick, é importante ressaltar algumas informações, mesmo que breves sobre o que seria o <strong>TryHackMe</strong> e as famosas <strong>máquinas de hacking</strong> (Hacking Machines).</p><p><strong>TryHackMe</strong> é uma plataforma online, no qual o objetivo central é lhe ajudar a aprender sobre cibersegurança, usando exercícios práticos e &ldquo;laboratórios&rdquo;, tudo isso pelo navegador.
+<strong>Máquinas de hacking</strong> ou as famosas Hacking machines são os ambientes virtuais utilizados pelos usuários, para aprimorar suas habilidades em hacking e entendimento na área de cibersegurança. Nelas é possível participar de cenários de ataques e também vulnerabilidades, em que os usuários possam usar de seu conhecimento e técnicas de exploração, de maneira principalmente legal e segura. Logo, o desafio Pickle Rick é justamente uma máquina de hacking, com foco em buscar vulnerabilidades até seu propósito final.</p><h2 id=reconhecimento>Reconhecimento</h2><p>Após essas breves informações definidas, será feita a trajetória que salvou Rick!</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0ed4ebsbq4krhafhubdd.png alt="Tela de início da Máquina virtual Pickle Rick do TryHackMe"></p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/esh4nrj49414wemu42pm.png alt="Tela inicial do alvo, com uma mensagem de pedido de ajuda do Rick para o Morty"></p><p>Ao adentrar a tela de desafio, uma das ações que foram realizadas foi justamente a inspeção no código e verificar a forma com que o HTML do alvo estava estruturado e logo de cara tivemos o acesso a informação sobre o username do Rick, no final do código, em formato de comentário.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/j5pib6bn3pf08fw3ptqr.jpeg alt="Informações sobre a estrutura html do alvo"></p><p>Com isso, foi traçado os principais objetivos nesse primeiro momento, tendo em vista que o username na inspeção do html significaria que teríamos uma tela de login e a necessidade de uma senha para efetivar por completo esse acesso ao alvo. Entretanto, ao tentar encontrar a tela de login em um primeiro momento, não foi realizado com tanta facilidade e um dos principais focos foi justamente buscar essa tela de login e principalmente, entender qual a linguagem de programação que estaria realizando as funcionalidades deste site.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7lqi242r2ai4gjur5vds.png alt="Imagem de não encontrado ao acessar /login"></p><p>Deste modo, decorreu a busca de informações sobre qual seria essa linguagem por trás dos panos e uma das ideias foi justamente a utilização do comando <a href=https://www.hostinger.com.br/tutoriais/comando-curl-linux>curl</a>.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/4ubuskis9op3c0prwp0i.png alt="Requisição usando comando curl">
+O alvo utiliza Ubuntu para rodar o servidor Web Apache. Porém, não foi possível obter uma informação mais precisa sobre qual seria a linguagem utilizada pelo alvo através do curl. Deste modo, o head do próprio html do site possuía o diretório <a href=https://developers.vnda.com.br/docs/pasta-assets>/assets/</a>, que tem como foco o armazenamento de mídia, fontes, etc., de um site ou aplicação web.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2yhji2g80651f0rxsdme.png alt="Informação do head contendo a pasta /assets"></p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/558etoiezqvnzizs2qx2.png alt="Pasta /assets com informações de conteúdos estáticos, etc, do alvo "></p><p>Apesar das informações presentes, não foi possível encontrar (sob o olhar de uma pessoa que está iniciando) informações referentes a linguagem usada.
+A forma operada logicamente foi justamente introduzir .php no final e com isso o acesso a tela de /login.php. Isso foi puramente achismo, tendo em vista que utilizar uma ferramenta de busca de diretórios tornaria o processo mais prático, porém, o objetivo aqui é tentar realizar manualmente e aprimorar as noções no decorrer, sem depender de ferramentas para isso.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/kdbfmkcsrdnb1tr37zne.png alt="Tela de login com username e password"></p><p>Com a confirmação de que usam <a href=https://www.php.net/manual/pt_BR/intro-whatis.php>PHP</a> e para além disso, o acesso ao diretório /login.php. Entretanto, faltava a senha e se tem o diretório /assets, poderia também ter o <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=pt-br">/robots.txt</a>, que gerencia quais diretórios podem ser vasculhados em um respectivo site. A senha do R1ckRul3s estava justamente no /robots.txt.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xc12hisefglgh9ekfp6n.png alt="Diretório /robots.txt contendo a senha do usuário"></p><h2 id=exploração>Exploração</h2><p>A tela inicial após o login tem um painel de comandos, e a informação anterior de que o servidor rodava em Ubuntu trouxe a conclusão de que podemos usar os próprios comandos do terminal e além disso, ter acesso aos diretórios completos do alvo. No inspecionar desta tela, tem uma dica interessante, uma frase codificada em <a href=https://marquesfernandes.com/self/o-que-e-base64-para-que-serve-e-como-funciona/>Base64</a>, no comentário do html.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/80xr7xj2sj1g5ob8w56z.png alt="Tela inicial com painel de comandos"></p><p>O comando <a href=https://www.freecodecamp.org/portuguese/news/o-comando-ls-do-linux-como-listar-arquivos-em-um-diretorio-e-flags-de-opcao/>ls</a> lista os arquivos e os diretórios, além do comando <a href=https://guialinux.uniriotec.br/cd/>cd</a> para navegar entre os diretórios do terminal.</p><p>O primeiro ingrediente é localizado usando ls, no painel de comando e é intitulado <strong>Sup3rS3cretPickl3Ingred.txt</strong>. Como dica para você, caso tenha interesse, é que pode ser usado tanto o <a href=https://www.certificacaolinux.com.br/comando-linux-pwd/>pwd</a> para localizar o diretório atual em conjunto com o <a href=https://guialinux.uniriotec.br/less/>less</a> para ler o arquivo txt, quanto também digitar diretamente no URL, que terá a resposta do primeiro ingrediente. Lembrando que &ldquo;hipoteticamente&rdquo; o comando <a href=https://www.hostinger.com.br/tutoriais/comando-cat-linux>cat</a> está desabilitado, junto com o <a href=https://www.certificacaolinux.com.br/comando-nano-no-linux-editor-de-texto-guia-basico/>nano</a>, <a href=https://dev.to/nfo94/comandos-basicos-do-vim-e-configuracoes-uteis-gkn>vim</a>, <a href=https://guialinux.uniriotec.br/more/>more</a>, etc.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ls -la
+</span></span><span class=line><span class=cl>total <span class=m>40</span>
+</span></span><span class=line><span class=cl>drwxr-xr-x <span class=m>3</span> root   root   <span class=m>4096</span> Feb <span class=m>10</span>  <span class=m>2019</span> .
+</span></span><span class=line><span class=cl>drwxr-xr-x <span class=m>3</span> root   root   <span class=m>4096</span> Feb <span class=m>10</span>  <span class=m>2019</span> ..
+</span></span><span class=line><span class=cl>-rwxr-xr-x <span class=m>1</span> ubuntu ubuntu   <span class=m>17</span> Feb <span class=m>10</span>  <span class=m>2019</span> Sup3rS3cretPickl3Ingred.txt
+</span></span><span class=line><span class=cl>drwxrwxr-x <span class=m>2</span> ubuntu ubuntu <span class=m>4096</span> Feb <span class=m>10</span>  <span class=m>2019</span> assets
+</span></span><span class=line><span class=cl>-rwxr-xr-x <span class=m>1</span> ubuntu ubuntu   <span class=m>54</span> Feb <span class=m>10</span>  <span class=m>2019</span> clue.txt
+</span></span><span class=line><span class=cl>-rwxr-xr-x <span class=m>1</span> ubuntu ubuntu <span class=m>1105</span> Feb <span class=m>10</span>  <span class=m>2019</span> denied.php
+</span></span><span class=line><span class=cl>-rwxrwxrwx <span class=m>1</span> ubuntu ubuntu <span class=m>1062</span> Feb <span class=m>10</span>  <span class=m>2019</span> index.html
+</span></span><span class=line><span class=cl>-rwxr-xr-x <span class=m>1</span> ubuntu ubuntu <span class=m>1438</span> Feb <span class=m>10</span>  <span class=m>2019</span> login.php
+</span></span><span class=line><span class=cl>-rwxr-xr-x <span class=m>1</span> ubuntu ubuntu <span class=m>2044</span> Feb <span class=m>10</span>  <span class=m>2019</span> portal.php
+</span></span><span class=line><span class=cl>-rwxr-xr-x <span class=m>1</span> ubuntu ubuntu   <span class=m>17</span> Feb <span class=m>10</span>  <span class=m>2019</span> robots.txt
+</span></span></code></pre></div><p><strong>Nota</strong>: Caso você tente acessar outras opções do menu, além do Commands, terá seu acesso negado, por não ser o verdadeiro Rick.</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k0f6axu2d5gyeueapkj2.png alt="Comando ls -la lista arquivos e diretórios presentes"></p><p>O segundo ingrediente é um pouco mais difícil de localizar, pois para ter acesso é necessário averiguar os diretórios e subdiretórios. Neste caso, a dica que pode ser dada é a combinação dos comandos cd e ls, para que você tenha acesso a listagem de arquivos e diretórios. Lembra da dica da frase da tela inicial, que estava codificada em Base64? É exatamente esse o pensamento, explorar o máximo de diretórios possíveis. Caso continue tendo dificuldades, a dica maior é focar no diretório /home, pois é lá que estará a resposta.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> ../../../home/rick<span class=p>;</span>ls -la
+</span></span><span class=line><span class=cl>second ingredients
+</span></span></code></pre></div><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3d22e8hcvdrga5ehtmt2.png alt="Segundo ingrediente na pasta do usuário rick">
+<strong>Nota</strong>: Como acessar um arquivo com espaços? pode ser usando o próprio less com aspas ou com barra invertida.</p><p>Por fim e não menos importante, o terceiro ingrediente se encontra em um arquivo oculto em um dos perfis, por isso é interessante usar o comando -ls juntamente com o -a, para ter acesso a arquivos ocultos. Este arquivo contém os registros dos comandos que o usuário utilizou no terminal, ou seja, de acordo com o perfil terá o acesso aos comandos executados e consequentemente o último ingrediente.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> ../../../home/ubuntu<span class=p>;</span>ls -la
+</span></span><span class=line><span class=cl>total <span class=m>44</span>
+</span></span><span class=line><span class=cl>drwxr-xr-x <span class=m>5</span> ubuntu ubuntu <span class=m>4096</span> Jul <span class=m>11</span> 10:37 .
+</span></span><span class=line><span class=cl>drwxr-xr-x <span class=m>4</span> root   root   <span class=m>4096</span> Feb <span class=m>10</span>  <span class=m>2019</span> ..
+</span></span><span class=line><span class=cl>-rw------- <span class=m>1</span> ubuntu ubuntu  <span class=m>769</span> Jul <span class=m>11</span> 11:18 .bash_history
+</span></span><span class=line><span class=cl>-rw-r--r-- <span class=m>1</span> ubuntu ubuntu  <span class=m>220</span> Aug <span class=m>31</span>  <span class=m>2015</span> .bash_logout
+</span></span><span class=line><span class=cl>-rw-r--r-- <span class=m>1</span> ubuntu ubuntu <span class=m>3771</span> Aug <span class=m>31</span>  <span class=m>2015</span> .bashrc
+</span></span><span class=line><span class=cl>drwx------ <span class=m>3</span> ubuntu ubuntu <span class=m>4096</span> Jul <span class=m>11</span> 10:39 .cache
+</span></span><span class=line><span class=cl>drwx------ <span class=m>3</span> ubuntu ubuntu <span class=m>4096</span> Jul <span class=m>11</span> 10:37 .gnupg
+</span></span><span class=line><span class=cl>-rw-r--r-- <span class=m>1</span> ubuntu ubuntu  <span class=m>655</span> May <span class=m>16</span>  <span class=m>2017</span> .profile
+</span></span><span class=line><span class=cl>drwx------ <span class=m>2</span> ubuntu ubuntu <span class=m>4096</span> Feb <span class=m>10</span>  <span class=m>2019</span> .ssh
+</span></span><span class=line><span class=cl>-rw-r--r-- <span class=m>1</span> ubuntu ubuntu    <span class=m>0</span> Feb <span class=m>10</span>  <span class=m>2019</span> .sudo_as_admin_successful
+</span></span><span class=line><span class=cl>-rw------- <span class=m>1</span> ubuntu ubuntu <span class=m>4267</span> Feb <span class=m>10</span>  <span class=m>2019</span> .viminfo
+</span></span></code></pre></div><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/settu94sqtbknuy8ukr3.png alt="Listagem de arquivos e diretórios ocultos do perfil ubuntu">
+<strong>Nota</strong>: Para acessar o arquivo oculto, é importante usar o sudo para ter acesso privilegiado junto com o less.</p><h2 id=conclusão>Conclusão</h2><p>Portanto, através da máquina Pickle Rick foi possível compreender um pouco mais sobre a estrutura do html e um pouco sobre PHP, alguns diretórios que são comuns de encontrar como o /assets e o próprio /robots.txt. Para além disso, noções referentes aos comandos linux como cd, ls, less, pwd, etc. Por consequência, ter um olhar mais prático sobre web hacking, tendo em vista que é de suma importância compreender as bases de conhecimento em cibersegurança para conseguir realizar o desafio. As informações contidas aqui são apenas uma das formas possíveis de resolver o problema, tem muitas outras possbilidades e você também pode ter a sua, não se apegue apenas a uma perspectiva e caso você queira pontuar sobre algo, trazer sua forma de resolução, debater sobre algo ou alguma afirmação equivocada da minha parte, sinta-se a vontade, estamos aqui para somar e aprender. Lembre-se, a educação é a maior fonte de transformação, não desista!</p><p><img src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jxwm3bg86954ab28wv3a.gif alt="Rick dando legal"></p></div></article></main></div><footer class=footer><span class=footer_item></span>&nbsp;<div class=footer_social-icons><a href=https://github.com/obtuosa target=_blank rel="noopener noreferrer me" title=Github><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
+</a><a href=/index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div><small class=footer_copyright>© 2025 .
+Powered by <a href=https://github.com/hugo-sid/hugo-blog-awesome target=_blank rel=noopener>Hugo blog awesome</a>.</small></footer><a href=# title="Go to top" id=totop><svg width="48" height="48" fill="currentcolor" stroke="currentcolor" viewBox="0 96 960 960"><path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197z"/></svg>
+</a><script src=https://obtuosa.github.io/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30+lSNuSkl4QXuNyy8="></script></body></html>
