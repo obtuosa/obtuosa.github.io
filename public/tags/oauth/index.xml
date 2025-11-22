@@ -1,1 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Oauth on Obtuosa</title><link>http://localhost:1313/tags/oauth/</link><description>Recent content in Oauth on Obtuosa</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Sun, 06 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/oauth/index.xml" rel="self" type="application/rss+xml"/><item><title>O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0</title><link>http://localhost:1313/posts/fluxos_oauth/</link><pubDate>Sun, 06 Jul 2025 00:00:00 +0000</pubDate><guid>http://localhost:1313/posts/fluxos_oauth/</guid><description>O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 na segurança de Aplicações Web Resumo As aplicações web modernas enfrentam alguns desafios gradativos quanto a sua segurança, em virtude das integrações com serviços de autorização externos, como o protocolo OAuth 2.0 (Open Authorization), que se tornam cada vez mais comuns. Este texto tem propósito de investigar como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Oauth on Obtuosa</title>
+    <link>https://obtuosa.github.io/tags/oauth/</link>
+    <description>Recent content in Oauth on Obtuosa</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 06 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://obtuosa.github.io/tags/oauth/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0</title>
+      <link>https://obtuosa.github.io/posts/fluxos_oauth/</link>
+      <pubDate>Sun, 06 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>https://obtuosa.github.io/posts/fluxos_oauth/</guid>
+      
+      <description>O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0 na segurança de Aplicações Web Resumo As aplicações web modernas enfrentam alguns desafios gradativos quanto a sua segurança, em virtude das integrações com serviços de autorização externos, como o protocolo OAuth 2.0 (Open Authorization), que se tornam cada vez mais comuns. Este texto tem propósito de investigar como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

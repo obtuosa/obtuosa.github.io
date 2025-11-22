@@ -1,20 +1,322 @@
-<!doctype html><html lang=en-gb><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset=utf-8><meta http-equiv=content-type content="text/html"><meta name=viewport content="width=device-width,initial-scale=1"><title itemprop=name>Ubuntu "quebrou" pós-atualização? Reflexões e uma possível resolução! | Obtuosa</title>
-<meta property="og:title" content='Ubuntu "quebrou" pós-atualização?  Reflexões e uma possível resolução! | Obtuosa'><meta name=twitter:title content='Ubuntu "quebrou" pós-atualização?  Reflexões e uma possível resolução! | Obtuosa'><meta itemprop=name content='Ubuntu "quebrou" pós-atualização?  Reflexões e uma possível resolução! | Obtuosa'><meta name=application-name content='Ubuntu "quebrou" pós-atualização?  Reflexões e uma possível resolução! | Obtuosa'><meta property="og:site_name" content="Obtuosa"><meta name=description content="Um processo de investigação sobre um problema com o ubuntu"><meta itemprop=description content="Um processo de investigação sobre um problema com o ubuntu"><meta property="og:description" content="Um processo de investigação sobre um problema com o ubuntu"><meta name=twitter:description content="Um processo de investigação sobre um problema com o ubuntu"><meta property="og:locale" content="en-gb"><meta name=language content="en-gb"><link rel=alternate hreflang=en-gb href=http://localhost:1313/posts/ubuntu/ title=English><meta itemprop=image content="http://localhost:1313/images/ubuntu.png"><meta property="og:image" content="http://localhost:1313/images/ubuntu.png"><meta name=twitter:image content="http://localhost:1313/images/ubuntu.png"><meta name=twitter:image:src content="http://localhost:1313/images/ubuntu.png"><meta property="og:type" content="article"><meta property="og:article:published_time" content=2025-05-05T00:00:00Z><meta property="article:published_time" content=2025-05-05T00:00:00Z><meta property="og:url" content="http://localhost:1313/posts/ubuntu/"><meta property="og:article:author" content><meta property="article:author" content><meta name=author content><script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Ubuntu \"quebrou\" pós-atualização?  Reflexões e uma possível resolução!","author":{"@type":"Person","name":""},"datePublished":"2025-05-05","description":"Um processo de investigação sobre um problema com o ubuntu","wordCount":1103,"mainEntityOfPage":"True","dateModified":"2025-05-05","image":{"@type":"imageObject","url":"http:\/\/localhost:1313\/images\/ubuntu.png"},"publisher":{"@type":"Organization","name":"Obtuosa"}}</script><meta name=generator content="Hugo 0.131.0"><meta property="og:url" content="http://localhost:1313/posts/ubuntu/"><meta property="og:site_name" content="Obtuosa"><meta property="og:title" content='Ubuntu "quebrou" pós-atualização?  Reflexões e uma possível resolução!'><meta property="og:description" content="Um processo de investigação sobre um problema com o ubuntu"><meta property="og:locale" content="en_gb"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-05-05T00:00:00+00:00"><meta property="article:modified_time" content="2025-05-05T00:00:00+00:00"><meta property="article:tag" content="Analise"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Kernel"><meta name=twitter:card content="summary"><meta name=twitter:title content='Ubuntu "quebrou" pós-atualização?  Reflexões e uma possível resolução!'><meta name=twitter:description content="Um processo de investigação sobre um problema com o ubuntu"><link rel=canonical href=http://localhost:1313/posts/ubuntu/><link href=/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css rel=stylesheet><link href=/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css rel=stylesheet><link rel=apple-touch-icon sizes=180x180 href=/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/icons/favicon-16x16.png><link rel=mask-icon href=/icons/safari-pinned-tab.svg><link rel="shortcut icon" href=/favicon.ico><link rel=manifest href=http://localhost:1313/site.webmanifest><meta name=msapplication-config content="/browserconfig.xml"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#434648"><link rel=icon type=image/svg+xml href=/icons/favicon.svg></head><body data-theme=dark class=notransition><script src=/js/theme.js></script><div class=navbar role=navigation><nav class=menu aria-label="Main Navigation"><a href=http://localhost:1313/ class=logo><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><title>Home</title><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-</a><input type=checkbox id=menu-trigger class=menu-trigger>
-<label for=menu-trigger><span class=menu-icon><svg width="25" height="25" stroke="currentcolor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7H3.40726"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M.5 12.5V1.5c0-.552285.447715-1 1-1h11C13.0523.5 13.5.947715 13.5 1.5v11C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C.947715 13.5.5 13.0523.5 12.5z"/></svg></span></label><div class=trigger><ul class=trigger-container><li><a class=menu-link href=/>Início</a></li><li><a class="menu-link active" href=/posts/>Posts</a></li><li><a class=menu-link href=/pages/about/>Whoami</a></li><li class=menu-separator><span>|</span></li></ul><a id=mode href=#><svg class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg><svg class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></a></div></nav></div><div class="wrapper post"><main class=page-content aria-label=Content><article><header class=header><h1 class=header-title>Ubuntu "quebrou" pós-atualização? Reflexões e uma possível resolução!</h1><div class=post-meta><time datetime=2025-05-05T00:00:00+00:00 itemprop=datePublished>5 May 2025</time></div></header><div class=page-content><p><img alt=Ubuntu src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jxewzt84mv6k1b6zuwom.png></p><p>Essa semana eu estava tentando instalar World of Warcraft na minha distro do Linux para jogar, no entanto, por questão automática acabei dando um <strong>sudo apt upgrade</strong> de maneira direta sem pestanejar, e nesse processo algo ocorreu e fez com que o sistema tivesse um tipo de pane ao reinicializar, com a seguinte mensagem:
-<img alt=Linux src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ccwuikwl6c0qitd93ie3.jpeg></p><h4 id=oh-não-alguma-coisa-está-errada-ocorreu-um-problema-e-o-sistema-não-pôde-ser-recuperado-por-favor-entre-em-contato-com-um-administrador-de-sistemas>Oh não! Alguma coisa está errada. Ocorreu um problema e o sistema não pôde ser recuperado. Por favor, entre em contato com um administrador de sistemas.</h4><p>E aí o desespero bateu legal, porque veio o receio do sistema ter corrompido, algo ter sido afetado e que não pudesse ser revertido. Com tudo isso, seria muito chato ter que formatar e reconfigurar toda a distro com as ferramentas que já utilizava. Entretanto, durante a busca pelos fóruns da vida consegui encontrar um tópico que me ajudou muito no processo lá no<a href=https://plus.diolinux.com.br/t/sistema-com-pane-para-inicializar-e-nao-inicializa-recuperar-sistema-ubuntu-22-04/62797/3]>Diolinux</a> e aqui seria mais uma forma de pensar nas possibilidades que poderiam ter causado esse problema e a resolução caso alguém acabe passando por isso, porque não capturei ou busquei os logs da situação devido ao desespero do momento, para que fosse possível ter uma melhor exatidão do que aconteceu.</p><h2 id=linux>Linux</h2><p>Antes de mais nada é importante revisarmos sobre a arquitetura do sistema Linux e basicamente como ele funciona.
-De maneira direta e informação de amplo acesso, Linux é um SO (Sistema Operacional) de código aberto e é bastante utilizado para servidores e data centers, dispositivos pessoais, dispositivos IoT, etc. Nele existem alguns componentes principais que fazem parte do seu funcionamento e merecem ser mencionados.</p><ul><li><strong>Hardware</strong>: A parte física que já tenhos conhecimento sobre, tal qual o processador, a memória RAM, disco rídigo, etc.</li><li><strong>Kernel</strong>: É o coração do Linux, e é a partir desse núcleo que iremos pensar no que ocasionou esse pane no sistema ou apenas presumir uma possibilidade. Será mais aprofundado posteriormente.</li><li><strong>Shell</strong>: A interface entre o usuário e o kernel, tanto sendo linha de comando (terminal) quanto interface gráfica (GUI).</li><li><strong>Aplicativos e Utilitários</strong>: Nesse caso são os programas utilizados pelo usuário, como editores de texto, navegadores, etc. e os utilitários são as ferramentas do sistema como ls, grep, etc.</li><li><strong>Bibliotecas do Sistema</strong>: Para que os aplicativos funcionem é necessário de funções especiais para acessar os recursos do sistema e garantir a funcionalidade desses aplicativos e utilitários.</li><li><strong>Daemons</strong>: São serviços que funcionam em segundo plano para tarefas. Esses processos não necessitam da interação com o usuário.</li></ul><h2 id=kernel>Kernel</h2><p>Como foi dito de maneira breve mais acima, o kernel é o núcleo do SO Linux, com isso é o coração responsável por realizar o gerenciamento de recursos de hardware, processos, os sistemas de arquivos e também a comunicação entre software e hardware. Então de maneira geral, tudo vai acabar perpassando pelo núcleo, e essa falha que ocorreu na atualização ubuntu passa pelo kernel.
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução! | Obtuosa</title>
+<meta property="og:title" content="Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução! | Obtuosa" />
+<meta name="twitter:title" content="Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução! | Obtuosa" />
+<meta itemprop="name" content="Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução! | Obtuosa" />
+<meta name="application-name" content="Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução! | Obtuosa" />
+<meta property="og:site_name" content="Obtuosa" />
+
+<meta name="description" content="Um processo de investigação sobre um problema com o ubuntu">
+<meta itemprop="description" content="Um processo de investigação sobre um problema com o ubuntu" />
+<meta property="og:description" content="Um processo de investigação sobre um problema com o ubuntu" />
+<meta name="twitter:description" content="Um processo de investigação sobre um problema com o ubuntu" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+  <link rel="alternate" hreflang="en-gb" href="https://obtuosa.github.io/posts/ubuntu/" title="English" />
+
+
+<meta itemprop="image" content="https://obtuosa.github.io/images/ubuntu.png" />
+<meta property="og:image" content="https://obtuosa.github.io/images/ubuntu.png" />
+<meta name="twitter:image" content="https://obtuosa.github.io/images/ubuntu.png" />
+<meta name="twitter:image:src" content="https://obtuosa.github.io/images/ubuntu.png" />
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2025-05-05T00:00:00Z />
+    <meta property="article:published_time" content=2025-05-05T00:00:00Z />
+    <meta property="og:url" content="https://obtuosa.github.io/posts/ubuntu/" />
+
+    
+    <meta property="og:article:author" content="" />
+    <meta property="article:author" content="" />
+    <meta name="author" content="" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Ubuntu \"quebrou\" pós-atualização?  Reflexões e uma possível resolução!",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2025-05-05",
+        "description": "Um processo de investigação sobre um problema com o ubuntu",
+        "wordCount":  1103 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2025-05-05",
+        "image": {
+        "@type": "imageObject",
+        "url": "https:\/\/obtuosa.github.io\/images\/ubuntu.png"
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Obtuosa"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.131.0">
+
+    
+    <meta property="og:url" content="https://obtuosa.github.io/posts/ubuntu/">
+  <meta property="og:site_name" content="Obtuosa">
+  <meta property="og:title" content="Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução!">
+  <meta property="og:description" content="Um processo de investigação sobre um problema com o ubuntu">
+  <meta property="og:locale" content="en_gb">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-05-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-05-05T00:00:00+00:00">
+    <meta property="article:tag" content="Analise">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Kernel">
+
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução!">
+  <meta name="twitter:description" content="Um processo de investigação sobre um problema com o ubuntu">
+
+    
+
+    
+
+    <link rel="canonical" href="https://obtuosa.github.io/posts/ubuntu/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://obtuosa.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+  
+
+
+    
+
+</head>
+<body data-theme = "dark" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://obtuosa.github.io/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+    
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Início
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        Whoami
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Ubuntu &#34;quebrou&#34; pós-atualização?  Reflexões e uma possível resolução!</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-05-05T00:00:00&#43;00:00" itemprop="datePublished"> 5 May 2025 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <p><img alt="Ubuntu" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/jxewzt84mv6k1b6zuwom.png"></p>
+<p>Essa semana eu estava tentando instalar World of Warcraft na minha distro do Linux para jogar, no entanto, por questão automática acabei dando um <strong>sudo apt upgrade</strong> de maneira direta sem pestanejar, e nesse processo algo ocorreu e fez com que o sistema tivesse um tipo de pane ao reinicializar, com a seguinte mensagem:
+<img alt="Linux" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ccwuikwl6c0qitd93ie3.jpeg"></p>
+<h4 id="oh-não-alguma-coisa-está-errada-ocorreu-um-problema-e-o-sistema-não-pôde-ser-recuperado-por-favor-entre-em-contato-com-um-administrador-de-sistemas">Oh não! Alguma coisa está errada. Ocorreu um problema e o sistema não pôde ser recuperado. Por favor, entre em contato com um administrador de sistemas.</h4>
+<p>E aí o desespero bateu legal, porque veio o receio do sistema ter corrompido, algo ter sido afetado e que não pudesse ser revertido. Com tudo isso, seria muito chato ter que formatar e reconfigurar toda a distro com as ferramentas que já utilizava. Entretanto, durante a busca pelos fóruns da vida consegui encontrar  um tópico que me ajudou muito no processo lá no<a href="https://plus.diolinux.com.br/t/sistema-com-pane-para-inicializar-e-nao-inicializa-recuperar-sistema-ubuntu-22-04/62797/3]">Diolinux</a> e aqui seria mais uma forma de pensar nas possibilidades que poderiam ter causado esse problema e a resolução caso alguém acabe passando por isso, porque não capturei ou busquei os logs da situação devido ao desespero do momento, para que fosse possível ter uma melhor exatidão do que aconteceu.</p>
+<h2 id="linux">Linux</h2>
+<p>Antes de mais nada é importante revisarmos sobre a arquitetura do sistema Linux e basicamente como ele funciona.
+De maneira direta e informação de amplo acesso, Linux é um SO (Sistema Operacional) de código aberto e é bastante utilizado para servidores e data centers, dispositivos pessoais, dispositivos IoT, etc. Nele existem alguns componentes principais que fazem parte do seu funcionamento e merecem ser mencionados.</p>
+<ul>
+<li><strong>Hardware</strong>: A parte física que já tenhos conhecimento sobre, tal qual o processador, a memória RAM, disco rídigo, etc.</li>
+<li><strong>Kernel</strong>:  É o coração do Linux, e é a partir desse núcleo que iremos pensar no que ocasionou esse pane no sistema ou apenas presumir uma possibilidade. Será mais aprofundado posteriormente.</li>
+<li><strong>Shell</strong>:  A interface entre o usuário e o kernel, tanto sendo linha de comando (terminal) quanto interface gráfica (GUI).</li>
+<li><strong>Aplicativos e Utilitários</strong>: Nesse caso são os programas utilizados pelo usuário, como editores de texto, navegadores, etc. e os utilitários são as  ferramentas do sistema como ls, grep, etc.</li>
+<li><strong>Bibliotecas do Sistema</strong>: Para que os aplicativos funcionem é necessário de funções especiais para acessar os recursos do sistema e garantir a funcionalidade desses aplicativos e utilitários.</li>
+<li><strong>Daemons</strong>:  São serviços que funcionam em segundo plano para tarefas. Esses processos não necessitam da interação com o usuário.</li>
+</ul>
+<h2 id="kernel">Kernel</h2>
+<p>Como foi dito de maneira breve mais acima, o kernel é o núcleo do SO Linux, com isso é o coração responsável por realizar o gerenciamento de recursos de hardware, processos, os sistemas de arquivos e também a comunicação entre software e hardware. Então de maneira geral, tudo vai acabar perpassando pelo núcleo, e essa falha que ocorreu na atualização ubuntu passa pelo kernel.
 Por ser o pilar central, o kernel tem seu espaço privilegiado chamado kernel space, enquanto os aplicativos rodam em modo não-privilegiado (user space). O usuário inicia um aplicativo e faz com que esse aplicativo use o system calls (syscalls), que são as portas controladas pelo kernel para que seja possível acessar os recursos que são gerenciados por ele. Portanto, o app vai utilizar (normalmente) a biblioteca padrão C, para que possa converter os seus processos em operações syscalls. Se durante essa chamada ocorrer algum tipo de falha, seja algum problema nas biblioteca, permissões ou até mesmo problemas no sistema, isso pode desencadear eventos críticos que vão desde uma falha mais simples até o sistema crashar.
-<img alt=Fluxo src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qz5766m0rmudaq1b0qmz.png></p><h3 id=glibc-corrompida-ou-incompatível>Glibc corrompida ou incompatível</h3><p>Aqui seria mais achismo do que tudo, justamente porque não foi possível conseguir o acesso aos logs da data específica, pois quando lembrei dessa possibilidade já tinha se passado alguns dias e já não tinha mais informações no <strong>/var/log</strong>, apenas os mais recentes.
-Nesse caso, talvez poderia ter sido a glibc (biblioteca padrão C) que acabou ficando incompatível ou corrompida com a atualização da distro Ubuntu e ocasionou essa falha no sistema, já que é importante para o funcionamento do ecossistema Linux e acabou entrando em colapso por não ser compatível com a atualização mais recente e gerando incompatibilidade quando tudo foi atualizado.</p><p><img alt=Fluxo src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1bt9bozk980bdwhp6qlu.png>O glibc incompatível ou corrompido geraria uma falha na tradução que acaba sendo rejeitada pelo kernel e o sistema &ldquo;crasha&rdquo;.</p><h2 id=resolução-do-problema>Resolução do problema</h2><p>O primeiro ponto ao aparecer a mensagem de Oh não! Alguma coisa está errada, é reiniciar e dar ctrl + fn (em caso de não estar ativado) + alt + f3 no modo recuperação nas opções avançadas da distro e ter acesso as versões antigas, já que é onde teria acesso a feramenta para reparar o sistema no modo recuperação e usar essas teclas dá acesso a um terminal e possibilidade de executar alguns comandos.</p><h4 id=gerenciador-de-boot-e-ir-para-opções-avançadas>Gerenciador de boot e ir para opções avançadas</h4><p><img alt="GNU Linux" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ijxqbt6pzit2ekkbmjz1.jpeg></p><h4 id=seguir-na-opção-de-recovery-mode>Seguir na opção de recovery mode</h4><p><img alt="recovery mode" src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gvgv3f0i5goxeixl29mn.jpeg></p><h4 id=atalho-para-abrir-um-terminal>Atalho para abrir um terminal</h4><p><img alt=Atalho src=https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hhbk1m9goisrdr0kgo0x.jpeg></p><h4 id=comandos>Comandos</h4><pre tabindex=0><code>1. sudo apt update &amp;&amp; sudo apt dist-upgrade
+<img alt="Fluxo" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/qz5766m0rmudaq1b0qmz.png"></p>
+<h3 id="glibc-corrompida-ou-incompatível">Glibc corrompida ou incompatível</h3>
+<p>Aqui seria mais achismo do que tudo, justamente porque não foi possível conseguir o acesso aos logs da data específica, pois quando lembrei dessa possibilidade já tinha se passado alguns dias e já não tinha mais informações no <strong>/var/log</strong>, apenas os mais recentes.
+Nesse caso, talvez poderia ter sido a glibc (biblioteca padrão C) que acabou ficando incompatível ou corrompida com a atualização da distro Ubuntu e ocasionou essa falha no sistema, já que é importante para o funcionamento do ecossistema Linux e acabou entrando em colapso por não ser compatível com a atualização mais recente e gerando incompatibilidade quando tudo foi atualizado.</p>
+<p><img alt="Fluxo" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/1bt9bozk980bdwhp6qlu.png">O glibc incompatível ou corrompido geraria uma falha na tradução que acaba sendo rejeitada pelo kernel e o sistema &ldquo;crasha&rdquo;.</p>
+<h2 id="resolução-do-problema">Resolução do problema</h2>
+<p>O primeiro ponto ao aparecer a mensagem de Oh não! Alguma coisa está errada, é reiniciar e dar ctrl + fn (em caso de não estar ativado) + alt + f3 no modo recuperação nas opções avançadas da distro e ter acesso as versões antigas, já que é onde teria acesso a feramenta para reparar o sistema no modo recuperação e usar essas teclas dá acesso a um terminal e possibilidade de executar alguns comandos.</p>
+<h4 id="gerenciador-de-boot-e-ir-para-opções-avançadas">Gerenciador de boot e ir para opções avançadas</h4>
+<p><img alt="GNU Linux" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ijxqbt6pzit2ekkbmjz1.jpeg"></p>
+<h4 id="seguir-na-opção-de-recovery-mode">Seguir na opção de recovery mode</h4>
+<p><img alt="recovery mode" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gvgv3f0i5goxeixl29mn.jpeg"></p>
+<h4 id="atalho-para-abrir-um-terminal">Atalho para abrir um terminal</h4>
+<p><img alt="Atalho" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/hhbk1m9goisrdr0kgo0x.jpeg"></p>
+<h4 id="comandos">Comandos</h4>
+<pre tabindex="0"><code>1. sudo apt update &amp;&amp; sudo apt dist-upgrade
 2. sudo dpkg --configure -a
 3. sudo apt --fix-broken install
 4. sudo apt update &amp;&amp; sudo apt dist-upgrade
 5. sudo apt clean &amp;&amp; sudo apt autoremove
 6. sudo reboot now
-</code></pre><p>Sem especificar cada passo, essa sequência assim que o terminal aparecer e for realizado o login vai justamente atualizar, reparar as dependências, limpar o sistema e por fim reiniciar, assim conseguindo resolver os problemas causados pós atualização. Com enfase principalmente no <strong>sudo apt &ndash;fix-broken install</strong>, que realiza essa correção dos pacotes que foram corrompidos ou tiveram algum tipo de problema quanto a isso e seguindo a lógica de atualizar tudo pós realização desses reparos.</p><h2 id=conclusão>Conclusão</h2><p>O princípio é apenas de buscar uma possível solução, mas sem ser uma verdade absoluta, justamente por serem diversas variáveis nesse processo que culminaram nesse crash do sistema. Porém, o fluxo de ideias é usar essas pequenas situações para compreender alguns entendimentos e buscar conhecimento sobre o que está sendo feito, não só apenas de realizar os comandos no automático e quem sabe ajudar alguém que acabe passando por essa situação.
-Agradecimentos principalmente ao fórum do <strong>Diolinux</strong> que me ajudou muito e em compreender que não é legal atualizar o sistema assim diretamente para uma versão que não está estável ;).
-Em caso de erros, dúvidas, questionamentos, etc., sempre estarei aberta a ouvir e debater sobre, porque o importante é aprender.</p><h3 id=referências-bibliográficas>Referências bibliográficas</h3><p><strong>DIOLINUX.</strong> Sistema com pane para inicializar e não inicializa – recuperar sistema Ubuntu 22.04. <strong>Diolinux Plus</strong>, 2023. Disponível em: <a href=https://plus.diolinux.com.br/t/sistema-com-pane-para-inicializar-e-nao-inicializa-recuperar-sistema-ubuntu-22-04/62797>https://plus.diolinux.com.br/t/sistema-com-pane-para-inicializar-e-nao-inicializa-recuperar-sistema-ubuntu-22-04/62797</a>.</p><p><strong>DYER, Bill.</strong> Linux Daemons: Understanding and Managing These Background Processes. <strong>It&rsquo;s FOSS</strong>, [2023]. Disponível em: <a href=https://itsfoss.com/linux-daemons/>https://itsfoss.com/linux-daemons/</a>.</p><p><strong>LINUX MAN-PAGES.</strong> syscalls(2) - Linux manual page. <strong>man7.org</strong>, [2025]. Disponível em: <a href=https://www.man7.org/linux/man-pages/man2/syscalls.2.html>https://www.man7.org/linux/man-pages/man2/syscalls.2.html</a>.</p><p><strong>WIKIPEDIA.</strong> User space and kernel space. <strong>Wikipedia</strong>, [2025]. Disponível em: <a href=https://en.wikipedia.org/wiki/User_space_and_kernel_space>https://en.wikipedia.org/wiki/User_space_and_kernel_space</a>.</p></div></article></main></div><footer class=footer><span class=footer_item></span>&nbsp;<div class=footer_social-icons><a href=https://github.com/obtuosa target=_blank rel="noopener noreferrer me" title=Github><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg>
-</a><a href=/index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div><small class=footer_copyright>© 2025 .
-Powered by <a href=https://github.com/hugo-sid/hugo-blog-awesome target=_blank rel=noopener>Hugo blog awesome</a>.</small></footer><a href=# title="Go to top" id=totop><svg width="48" height="48" fill="currentcolor" stroke="currentcolor" viewBox="0 96 960 960"><path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197z"/></svg>
-</a><script async src=http://localhost:1313/js/main.js></script></body></html>
+</code></pre><p>Sem especificar cada passo, essa sequência assim que o terminal aparecer e for realizado o login vai justamente atualizar, reparar as dependências, limpar o sistema e por fim reiniciar, assim conseguindo resolver os problemas causados pós atualização. Com enfase principalmente no <strong>sudo apt &ndash;fix-broken install</strong>, que realiza essa correção dos pacotes que foram corrompidos ou tiveram algum tipo de problema quanto a isso e seguindo a lógica de atualizar tudo pós realização desses reparos.</p>
+<h2 id="conclusão">Conclusão</h2>
+<p>O princípio é apenas de buscar uma possível solução, mas sem ser uma verdade absoluta, justamente por serem diversas variáveis nesse processo que culminaram nesse crash do sistema. Porém, o fluxo de ideias é usar essas pequenas situações para compreender alguns entendimentos e buscar conhecimento sobre o que está sendo feito, não só apenas de realizar os comandos no automático e quem sabe ajudar alguém que acabe passando por essa situação.
+Agradecimentos principalmente ao fórum do <strong>Diolinux</strong> que me ajudou muito e  em compreender que não é legal atualizar o sistema assim diretamente para uma versão que não está estável ;).
+Em caso de erros, dúvidas, questionamentos, etc., sempre estarei aberta a ouvir e debater sobre, porque o importante é aprender.</p>
+<h3 id="referências-bibliográficas">Referências bibliográficas</h3>
+<p><strong>DIOLINUX.</strong> Sistema com pane para inicializar e não inicializa – recuperar sistema Ubuntu 22.04. <strong>Diolinux Plus</strong>, 2023. Disponível em: <a href="https://plus.diolinux.com.br/t/sistema-com-pane-para-inicializar-e-nao-inicializa-recuperar-sistema-ubuntu-22-04/62797">https://plus.diolinux.com.br/t/sistema-com-pane-para-inicializar-e-nao-inicializa-recuperar-sistema-ubuntu-22-04/62797</a>.</p>
+<p><strong>DYER, Bill.</strong> Linux Daemons: Understanding and Managing These Background Processes. <strong>It&rsquo;s FOSS</strong>, [2023]. Disponível em: <a href="https://itsfoss.com/linux-daemons/">https://itsfoss.com/linux-daemons/</a>.</p>
+<p><strong>LINUX MAN-PAGES.</strong> syscalls(2) - Linux manual page. <strong>man7.org</strong>, [2025]. Disponível em: <a href="https://www.man7.org/linux/man-pages/man2/syscalls.2.html">https://www.man7.org/linux/man-pages/man2/syscalls.2.html</a>.</p>
+<p><strong>WIKIPEDIA.</strong> User space and kernel space. <strong>Wikipedia</strong>, [2025]. Disponível em: <a href="https://en.wikipedia.org/wiki/User_space_and_kernel_space">https://en.wikipedia.org/wiki/User_space_and_kernel_space</a>.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/obtuosa" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="/index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script src="https://obtuosa.github.io/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
