@@ -20,6 +20,8 @@ de dar commit + push.
 
 import json
 import html
+import mimetypes
+import struct
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -43,6 +45,7 @@ PAGE_TEMPLATE = """<!doctype html>
   <meta property="og:title" content="{title}" />
   <meta property="og:description" content="{description}" />
   <meta property="og:url" content="{url}" />
+  <meta property="og:locale" content="pt_BR" />
 {og_image_tags}
   <!-- Twitter Card -->
   <meta name="twitter:card" content="{twitter_card}" />
@@ -121,6 +124,44 @@ def esc(value):
     return html.escape(value or "", quote=True)
 
 
+def _jpeg_size(f):
+    f.seek(2)
+    while True:
+        marker = f.read(2)
+        if len(marker) < 2 or marker[0] != 0xFF:
+            return None
+        if marker[1] in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7,
+                          0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
+            f.read(3)
+            h, w = struct.unpack(">HH", f.read(4))
+            return w, h
+        seg_len_bytes = f.read(2)
+        if len(seg_len_bytes) < 2:
+            return None
+        seg_len = struct.unpack(">H", seg_len_bytes)[0]
+        f.seek(seg_len - 2, 1)
+
+
+def get_image_size(path: Path):
+    """Retorna (width, height) para PNG/JPEG/GIF locais, ou None se não
+    conseguir determinar (imagem remota, formato não suportado, etc.)."""
+    try:
+        with open(path, "rb") as f:
+            head = f.read(32)
+            if head.startswith(b"\x89PNG\r\n\x1a\n"):
+                w, h = struct.unpack(">II", head[16:24])
+                return w, h
+            if head[0:2] == b"\xff\xd8":
+                f.seek(0)
+                return _jpeg_size(f)
+            if head[0:6] in (b"GIF87a", b"GIF89a"):
+                w, h = struct.unpack("<HH", head[6:10])
+                return w, h
+    except (OSError, struct.error):
+        return None
+    return None
+
+
 def build():
     config = json.loads(CONFIG_JSON.read_text(encoding="utf-8"))
     base_url = config.get("baseUrl", "").rstrip("/")
@@ -150,11 +191,27 @@ def build():
         url = f"{base_url}/posts/{slug}/"
 
         if image:
-            image_url = image if image.startswith("http") else f"{base_url}/posts/images/{image}"
+            is_remote = image.startswith("http")
+            image_url = image if is_remote else f"{base_url}/posts/images/{image}"
+
             og_image_tags = (
                 f'  <meta property="og:image" content="{esc(image_url)}" />\n'
                 f'  <meta property="og:image:alt" content="{esc(title)}" />\n'
             )
+
+            if not is_remote:
+                local_path = POSTS_DIR / "images" / image
+                size = get_image_size(local_path)
+                if size:
+                    w, h = size
+                    og_image_tags += (
+                        f'  <meta property="og:image:width" content="{w}" />\n'
+                        f'  <meta property="og:image:height" content="{h}" />\n'
+                    )
+                mime, _ = mimetypes.guess_type(image)
+                if mime:
+                    og_image_tags += f'  <meta property="og:image:type" content="{mime}" />\n'
+
             twitter_image_tag = f'  <meta name="twitter:image" content="{esc(image_url)}" />\n'
             twitter_card = "summary_large_image"
         else:
