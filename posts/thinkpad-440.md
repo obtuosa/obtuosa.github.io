@@ -1,0 +1,17 @@
+
+![Thinkpad T440](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p7sewdvw6zsw6pypx3qm.png)
+
+## Introdução
+Durante a última semana me foi dada uma pequena missão de analisar um notebook  que não estava mais ligando e possivelmente para a pessoa já não teria mais o que fazer em relação ao laptop, mas nesse caso houve uma forma de resolver esse pequeno problema de uma maneira bem simples, apesar de parecer mais um caso de "notebook morto". Porque basicamente nem o led ligava, a ventoinha ficava estática, totalmente em silêncio.
+As etapas do processo serão bem breves e apenas intrumentos básicos foram usados como: chave phillips e um pincel de limpeza 
+## Diagnóstico
+![Notebook](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dv723im87r8rkpha88vy.jpeg)Ao abrir o notebook, o mesmo  aparentava não  ter nenhum tipo de avaria referente a placa-mãe, sem qualquer tipo de oxidação nesse tipo de situação. Assim foi necessário realizar as primeiras etapas de verificações, já que em uma inspeção visual não era mostrado algo que fosse relevante visualmente, seja de conectores, algum tipo de dano na placa, etc.
+O primeiro ponto foi ter realizado a troca da bateria CMOS, que não ocasionou em nenhum tipo de resposta da máquina, o mesmo permaneceu com o problema e não houve nenhum tipo de mudança (algo que fosse diferente do normal naquele momento).
+O segundo ponto foi a limpeza da memória RAM, o que não refletiu em algum resultado significativo, assim como a troca da placa wifi do notebook. Além disso, também foi feita  a troca do conector do carregador do notebook, o que ainda que não fosse uma possibilidade, já que possivelmente era algo voltado para a bateria, não custou nada tentar, mas permaneceu do mesmo jeito sem qualquer mudança tangível.
+O diagnóstico foi oficializado com a front battery, que é justamente a bateria interna localizada sob o touchpad do notebook, que é diferente da bateria removível que fica na parte de trás e de cima do notebook. 
+### Front Battery
+
+![Front Battery](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8ojpkqo39apbg7xvcsb2.jpeg)Essa bateria fornece energia diretamente à placa-mãe, mesmo quando a bateria traseira está ausente ou até descarregada. Até mesmo em situações de ausência da bateria removível e sem o carregador. Tal qual como fonte primária em conjunto com a fonte de alimentação (o próprio carregador). Então de maneira bem resumida mesmo com a bateria traseira e carregador, o notebook não estava ligando, talvez por estar "queimada", o que impedia o funcionamento mesmo com a placa-mãe ok.
+## Resolução do problema
+A tratativa dessa situação foi de substituição da front battery, assim ocasionando no início imediato do notebook. O mesmo ligou e voltou a funcionar normalmente, no que ao pesquisar foi justamente um "power-on failure", que simulou um notebook morto em virtude da peça que estava danificada e assim falhando na condição de "ligar". Uma situação que pode acontecer com notebooks que possuem esse tipo de bateria interna e muitas vezes podem ser considerados sucatas, quando na verdade ainda podem ser "revividos" e ter um final feliz ;).
+![Notebook voltado a vida](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tavg3doh7n31lliiu0un.jpeg)

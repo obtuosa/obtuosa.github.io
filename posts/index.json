@@ -1,0 +1,67 @@
+[
+ {
+    "slug": "tech-academy",
+    "title": "Tech Academy WriteUp",
+    "date": "2026-02-07",
+    "tags": ["php", "node", "phar"],
+    "description":"A writeup about Tech Academy, a lab from Hacking Club",
+    "image": "tech-academy.png"
+  }, {
+    "slug": "vetores-de-ataque",
+    "title": "Análise de Vetores de Ataque em Aplicações Web",
+    "date": "2025-11-21",
+    "tags": ["mitre", "owasp", "web"],
+    "description":"Uma análise de vetores de Ataque em arquitetura de aplicações web",
+    "image": "www.png"
+  },{
+    "slug": "silverpeas",
+    "title": "CVE-2024-36042: Bypass de Autenticação no Silverpeas",
+    "date": "2025-04-08",
+    "tags": ["cve", "owasp", "cybersecurity"],
+    "description":"Uma análise do CVE 2024-36042 e sua relação com o OWASP Top 10",
+    "image": "silverpeas.png"
+  },{
+    "slug": "desafio-tempest",
+    "title": "Teste Específico de Estágio Tempest 2025.2",
+    "date": "2025-08-25",
+    "tags": ["ctf", "tempest", "writeup"],
+    "description":"A ideia desse texto é mostrar como foi o processo de resolução do Desafio proposto pela Tempest Security Intelligence no teste específico para a vaga de Estágio em Consultoria Técnica edição 2025.2.",
+    "image": "digiharp.png"
+  },{
+    "slug": "easy-ctf",
+    "title": "Easy CTF - Uma breve jornada de exploração com base no modelo OSI",
+    "date": "2024-10-23",
+    "tags": ["tryhackme", "cybersecurity", "osi"],
+    "description":"Um texto com o objetivo de apresentar a resolução da lab Easy CTF do TryHackMe pela perspectiva do modelo OSI",
+    "image": "easyctf.png"
+  },{
+    "slug": "oauth",
+    "title": "O Impacto da manipulação do parâmetro redirect_uri em fluxos OAuth 2.0",
+    "date": "2025-07-06",
+    "tags": ["oauth", "redirect_uri", "web"],
+    "description":"Como uma manipulação inadequada no parâmetro redirect_uri em aplicações que utilizam fluxos OAuth 2.0 podem comprometer a sua segurança, permitindo o roubo de códigos de autorização e a obtenção dos tokens de acesso em sistemas web",
+    "image": "oauth.png"
+  },{
+    "slug": "maquina-valley",
+    "title": "Máquina Valley do TryHackMe e o ciclo de vida de um ciberataque",
+    "date": "2024-09-22",
+    "tags": ["tryhackme", "cybersecurity", "cyber-attack-lifecycle"],
+    "description":"Um texto com o objetivo de compreender um cenário simples de ataque com uma máquina do tryhackme",
+    "image": "valley.png"
+  },
+  {
+    "slug": "thinkpad-440",
+    "title": "Thinkpad T440: Meu notebook não liga! E agora?",
+    "date": "2025-04-17",
+    "tags": ["thinkpad", "troubleshooting", "manutencao"],
+    "description":"Um processo de investigação e recuperação de um notebook T440 que não liga",
+    "image": "t440.png"
+  },{
+    "slug": "ubuntu-quebrou",
+    "title": "Ubuntu quebrou pós-atualização?  Reflexões e uma possível resolução!",
+    "date": "2025-05-05",
+    "tags": ["analise", "ubuntu", "kernel"],
+    "description": "Um processo de investigação sobre um problema com o ubuntu",
+    "image": "ubuntu.png"
+  }
+]
